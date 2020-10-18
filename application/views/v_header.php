@@ -7,10 +7,10 @@
 			<div class="logo">
 				<a data-toggle="collapse" data-target=".navbar-collapse.show" class="navbar-brand link-menu scroll-to-target" href="#mainslider">
 					<!-- Logo White Starts -->
-					<img id="logo-light" class="logo-light" src="img/logo-white.png" alt="logo-light" />
+					<img id="logo-light" class="logo-light" src="<?php echo base_url('assets/template/img/logo-white.png');?>" alt="logo-light" />
 					<!-- Logo White Ends -->
 					<!-- Logo Black Starts -->
-					<img id="logo-dark" class="logo-dark" src="img/logo-black.png" alt="logo-dark" />
+					<img id="logo-dark" class="logo-dark" src="<?php echo base_url('assets/template/img/logo-black.png');?>" alt="logo-dark" />
 					<!-- Logo Black Ends -->
 				</a>
 			</div>

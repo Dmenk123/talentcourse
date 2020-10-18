@@ -4,9 +4,9 @@
                 <div id="rev_slider_6_1" class="rev_slider fullwidthabanner" style="display:none;" data-version="5.0.7">
                     <ul>
                         <!-- SLIDE  -->
-                        <li data-index="rs-1" data-transition="fade" data-slotamount="default" data-easein="default" data-easeout="default" data-masterspeed="default" data-thumb="img/revolution-slider/content-tabs/thumb1.jpg" data-rotate="0" data-fstransition="fade" data-fsmasterspeed="1500" data-fsslotamount="7" data-saveperformance="off" data-title="WE ARE SALIMO" data-param1="May 24, 2015" data-description="">
+                        <li data-index="rs-1" data-transition="fade" data-slotamount="default" data-easein="default" data-easeout="default" data-masterspeed="default" data-thumb="<?php echo base_url();?>assets/images/content-tabs1.jpg" data-rotate="0" data-fstransition="fade" data-fsmasterspeed="1500" data-fsslotamount="7" data-saveperformance="off" data-title="WE ARE SALIMOOO" data-param1="May 24, 2015" data-description="">
                             <!-- MAIN IMAGE -->
-                            <img src="http://via.placeholder.com/1920x1080" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina>
+                            <img src="<?php echo base_url();?>assets/images/content-tabs1.jpg" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina>
                             <!-- LAYERS -->
 
                             <!-- LAYER NR. 1 -->
@@ -22,7 +22,7 @@
                         <!-- SLIDE  -->
                         <li data-index="rs-2" data-transition="fade" data-slotamount="default" data-easein="default" data-easeout="default" data-masterspeed="default" data-thumb="img/revolution-slider/content-tabs/thumb1.jpg" data-rotate="0" data-fstransition="fade" data-fsmasterspeed="1500" data-fsslotamount="7" data-saveperformance="off" data-title="WE ARE CREATIVE" data-param1="May 24, 2015" data-description="">
                             <!-- MAIN IMAGE -->
-                            <img src="http://via.placeholder.com/1920x1080" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina>
+                            <img src="<?php echo base_url();?>assets/images/content-tabs2.jpg" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina>
                             <!-- LAYERS -->
 
                             <!-- LAYER NR. 1 -->
@@ -38,7 +38,7 @@
                         <!-- SLIDE  -->
                         <li data-index="rs-3" data-transition="fade" data-slotamount="default" data-easein="default" data-easeout="default" data-masterspeed="default" data-thumb="img/revolution-slider/content-tabs/thumb1.jpg" data-rotate="0" data-fstransition="fade" data-fsmasterspeed="1500" data-fsslotamount="7" data-saveperformance="off" data-title="WE ARE LEADERS" data-param1="May 24, 2015" data-description="">
                             <!-- MAIN IMAGE -->
-                            <img src="http://via.placeholder.com/1920x1080" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina>
+                            <img src="<?php echo base_url();?>assets/images/content-tabs3.jpg" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina>
                             <!-- LAYERS -->
 
                             <!-- LAYER NR. 1 -->
@@ -108,7 +108,7 @@
                     </div>
                     <div class="col-md-12 col-lg-6 about-right">
 						<div class="about-right-side">
-							<img class="img-fluid" src="http://via.placeholder.com/1024x681" alt="">
+							<img class="img-fluid" src="<?php echo base_url();?>assets/images/about.jpg" alt="">
 						</div>
                     </div>
                 </div>
@@ -127,7 +127,7 @@
                     <div class="row">
                         <!-- Image Starts -->
                         <div class="col-md-12 col-lg-12 col-xl-5">
-                            <img class="img-fluid projectmanagerpicture" src="http://via.placeholder.com/424x424" alt="project manager">
+                            <img class="img-fluid projectmanagerpicture" src="<?php echo base_url();?>assets/images/projectmanager.jpg" alt="project manager">
                         </div>
                         <!-- Image Ends -->
                         <!-- Details Starts -->
@@ -377,7 +377,7 @@
                             <div class="magnific-popup-gallery">
                                 <!-- Thumbnail Starts -->
                                 <figure class="thumbnail thumbnail__portfolio">
-                                    <a class="image-wrap" href="http://via.placeholder.com/700x470" data-gal="magnific-pop-up[image]" title="Image project"><img class="img-fluid" src="http://via.placeholder.com/700x470" alt="Image Project" /><span class="zoom-icon"></span></a>
+                                    <a class="image-wrap" href="http://via.placeholder.com/700x470" data-gal="magnific-pop-up[image]" title="Image project"><img class="img-fluid" src="<?php echo base_url();?>assets/images/project-1.jpg" alt="Image Project" /><span class="zoom-icon"></span></a>
                                 </figure>
                                 <!-- Thumbnail Ends -->
                                 <!-- Caption Starts -->
@@ -392,7 +392,7 @@
                             <div class="magnific-popup-gallery">
                                 <!-- Thumbnail Starts -->
                                 <figure class="thumbnail thumbnail__portfolio">
-                                    <a class="image-wrap mfp-youtube" href="https://www.youtube.com/watch?v=0gv7OC9L2s8"><img class="img-fluid" src="http://via.placeholder.com/700x470" alt="Gallery project" /><span class="zoom-icon video-icon"></span></a>
+                                    <a class="image-wrap mfp-youtube" href="https://www.youtube.com/watch?v=0gv7OC9L2s8"><img class="img-fluid" src="<?php echo base_url();?>assets/images/project-2.jpg" alt="Gallery project" /><span class="zoom-icon video-icon"></span></a>
                                 </figure>
                                 <!-- Thumbnail Ends -->
                                 <!-- Caption Starts -->
@@ -407,7 +407,7 @@
                             <div class="magnific-popup-gallery">
                                 <!-- Thumbnail Starts -->
                                 <figure class="thumbnail thumbnail__portfolio">
-                                    <a class="image-wrap" href="http://via.placeholder.com/700x470" data-gal="magnific-pop-up[gallery]" title="Gallery project"><img class="img-fluid" src="http://via.placeholder.com/700x470" alt="Gallery project" /><span class="zoom-icon gallery-icon"></span></a>
+                                    <a class="image-wrap" href="http://via.placeholder.com/700x470" data-gal="magnific-pop-up[gallery]" title="Gallery project"><img class="img-fluid" src="<?php echo base_url();?>assets/images/project-3.jpg" alt="Gallery project" /><span class="zoom-icon gallery-icon"></span></a>
                                 </figure>
                                 <a href="http://via.placeholder.com/700x470" title="Gallery project" data-gal="magnific-pop-up[gallery]" style="display:none;"></a>
                                 <a href="http://via.placeholder.com/700x470" title="Gallery project" data-gal="magnific-pop-up[gallery]" style="display:none;"></a>
@@ -428,7 +428,7 @@
                             <div class="magnific-popup-gallery">
                                 <!-- Thumbnail Starts -->
                                 <figure class="thumbnail thumbnail__portfolio">
-                                    <a class="image-wrap" href="#" title="portfolio"><img class="img-fluid" src="http://via.placeholder.com/700x470" alt="portfolio" /><span class="zoom-icon external-icon"></span></a>
+                                    <a class="image-wrap" href="#" title="portfolio"><img class="img-fluid" src="<?php echo base_url();?>assets/images/project-4.jpg" alt="portfolio" /><span class="zoom-icon external-icon"></span></a>
                                 </figure>
                                 <!-- Thumbnail Ends -->
                                 <!-- Caption Starts -->
@@ -443,7 +443,7 @@
                             <div class="magnific-popup-gallery">
                                 <!-- Thumbnail Starts -->
                                 <figure class="thumbnail thumbnail__portfolio">
-                                    <a class="image-wrap" href="http://via.placeholder.com/700x470" data-gal="magnific-pop-up[image]" title="Image project"><img class="img-fluid" src="http://via.placeholder.com/700x470" alt="Image Project" /><span class="zoom-icon"></span></a>
+                                    <a class="image-wrap" href="http://via.placeholder.com/700x470" data-gal="magnific-pop-up[image]" title="Image project"><img class="img-fluid" src="<?php echo base_url();?>assets/images/project-5.jpg" alt="Image Project" /><span class="zoom-icon"></span></a>
                                 </figure>
                                 <!-- Thumbnail Ends -->
                                 <!-- Caption Starts -->
@@ -458,7 +458,7 @@
                             <div class="magnific-popup-gallery">
                                 <!-- Thumbnail Starts -->
                                 <figure class="thumbnail thumbnail__portfolio">
-                                    <a class="image-wrap mfp-youtube" href="https://www.youtube.com/watch?v=O_C5CN1L3Xo"><img class="img-fluid" src="http://via.placeholder.com/700x470" alt="Gallery project" /><span class="zoom-icon video-icon"></span></a>
+                                    <a class="image-wrap mfp-youtube" href="https://www.youtube.com/watch?v=O_C5CN1L3Xo"><img class="img-fluid" src="<?php echo base_url();?>assets/images/project-6.jpg" alt="Gallery project" /><span class="zoom-icon video-icon"></span></a>
                                 </figure>
                                 <!-- Thumbnail Ends -->
                                 <!-- Caption Starts -->
@@ -473,7 +473,7 @@
                             <div class="magnific-popup-gallery">
                                 <!-- Thumbnail Starts -->
                                 <figure class="thumbnail thumbnail__portfolio">
-                                    <a class="image-wrap" href="http://via.placeholder.com/700x470" data-gal="magnific-pop-up[image]" title="Image project"><img class="img-fluid" src="http://via.placeholder.com/700x470" alt="Image Project" /><span class="zoom-icon"></span></a>
+                                    <a class="image-wrap" href="http://via.placeholder.com/700x470" data-gal="magnific-pop-up[image]" title="Image project"><img class="img-fluid" src="<?php echo base_url();?>assets/images/project-7.jpg" alt="Image Project" /><span class="zoom-icon"></span></a>
                                 </figure>
                                 <!-- Thumbnail Ends -->
                                 <!-- Caption Starts -->
@@ -488,7 +488,7 @@
                             <div class="magnific-popup-gallery">
                                 <!-- Thumbnail Starts -->
                                 <figure class="thumbnail thumbnail__portfolio">
-                                    <a class="image-wrap mfp-vimeo" href="https://vimeo.com/23534361"><img class="img-fluid" src="http://via.placeholder.com/700x470" alt="Gallery project" /><span class="zoom-icon video-icon"></span></a>
+                                    <a class="image-wrap mfp-vimeo" href="https://vimeo.com/23534361"><img class="img-fluid" src="<?php echo base_url();?>assets/images/project-8.jpg" alt="Gallery project" /><span class="zoom-icon video-icon"></span></a>
                                 </figure>
                                 <!-- Thumbnail Ends -->
                                 <!-- Caption Starts -->
@@ -503,7 +503,7 @@
                             <div class="magnific-popup-gallery">
                                 <!-- Thumbnail Starts -->
                                 <figure class="thumbnail thumbnail__portfolio">
-                                    <a class="image-wrap" href="http://via.placeholder.com/700x470" data-gal="magnific-pop-up[image]" title="Image project"><img class="img-fluid" src="http://via.placeholder.com/700x470" alt="Image Project" /><span class="zoom-icon"></span></a>
+                                    <a class="image-wrap" href="http://via.placeholder.com/700x470" data-gal="magnific-pop-up[image]" title="Image project"><img class="img-fluid" src="<?php echo base_url();?>assets/images/project-9.jpg" alt="Image Project" /><span class="zoom-icon"></span></a>
                                 </figure>
                                 <!-- Thumbnail Ends -->
                                 <!-- Caption Starts -->
@@ -603,7 +603,7 @@
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <div class="team-member">
                             <!-- Team Member Picture Starts -->
-                            <a title="Maryana Mori // Manager" href="http://via.placeholder.com/480x600" data-gal="magnific-pop-up[team]" class="team-member-img-wrap"><img src="http://via.placeholder.com/480x600" alt="team member"></a>
+                            <a title="Maryana Mori // Manager" href="http://via.placeholder.com/480x600" data-gal="magnific-pop-up[team]" class="team-member-img-wrap"><img src="<?php echo base_url();?>assets/images/member1.jpg" alt="team member"></a>
                             <!-- Team Member Picture Ends -->
                             <!-- Team Member Details Starts -->
                             <div class="team-member-caption social-icons">
@@ -629,7 +629,7 @@
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <div class="team-member">
                             <!-- Team Member Picture Starts -->
-                            <a title="Marco Verratti // Co Founder" href="http://via.placeholder.com/480x600" data-gal="magnific-pop-up[team]" class="team-member-img-wrap"><img src="http://via.placeholder.com/480x600" alt="team member"></a>
+                            <a title="Marco Verratti // Co Founder" href="http://via.placeholder.com/480x600" data-gal="magnific-pop-up[team]" class="team-member-img-wrap"><img src="<?php echo base_url();?>assets/images/member2.jpg" alt="team member"></a>
                             <!-- Team Member Picture Ends -->
                             <!-- Team Member Details Starts -->
                             <div class="team-member-caption social-icons">
@@ -656,7 +656,7 @@
                         <!-- Team Member-->
                         <div class="team-member">
                             <!-- Team Member Picture Starts -->
-                            <a title="Emilia Bella // Sales Manager" href="http://via.placeholder.com/480x600" data-gal="magnific-pop-up[team]" class="team-member-img-wrap"><img src="http://via.placeholder.com/480x600" alt=""></a>
+                            <a title="Emilia Bella // Sales Manager" href="http://via.placeholder.com/480x600" data-gal="magnific-pop-up[team]" class="team-member-img-wrap"><img src="<?php echo base_url();?>assets/images/member3.jpg" alt=""></a>
                             <!-- Team Member Picture Ends -->
                             <!-- Team Member Details Starts -->
                             <div class="team-member-caption social-icons">
@@ -682,7 +682,7 @@
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <div class="team-member">
                             <!-- Team Member Picture Starts -->
-                            <a title="Antonio Conte // Director" href="http://via.placeholder.com/480x600" data-gal="magnific-pop-up[team]" class="team-member-img-wrap"><img src="http://via.placeholder.com/480x600" alt="team member"></a>
+                            <a title="Antonio Conte // Director" href="http://via.placeholder.com/480x600" data-gal="magnific-pop-up[team]" class="team-member-img-wrap"><img src="<?php echo base_url();?>assets/images/member4.jpg" alt="team member"></a>
                             <!-- Team Member Picture Ends -->
                             <!-- Team Member Details Starts -->
                             <div class="team-member-caption social-icons">
