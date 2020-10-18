@@ -1883,7 +1883,7 @@ body.dark .header.header-fixed .logo a img.logo-dark {
 
 .projectmanager {
     color: #fff;
-    background-image: url("assets/images/projectmanager-bg.jpg");
+    background-image: url("../../../assets/images/projectmanager-bg.jpg");
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -2075,7 +2075,7 @@ body.dark .header.header-fixed .logo a img.logo-dark {
 ---------------------------------------- */
 
 .testimonials {
-    background-image: url("http://via.placeholder.com/1600x650");
+    background-image: url("../../../assets/images/testimonials-bg.jpg");
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -2407,7 +2407,7 @@ body.dark .header.header-fixed .logo a img.logo-dark {
 ---------------------------------------- */
 
 .facts {
-    background-image: url("http://via.placeholder.com/1600x650");
+    background-image: url("../../../assets/images/facts-bg.jpg");
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -2445,7 +2445,7 @@ body.dark .header.header-fixed .logo a img.logo-dark {
 
 .newsletter {
     color: #fff;
-    background-image: url("http://via.placeholder.com/1600x650");
+    background-image: url("../../../assets/images/testimonials-bg.jpg");
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -2954,7 +2954,7 @@ body.blog-page article .comments-form .custom-button:before {
 
 .videopromotion {
     color: #fff;
-    background-image: url("http://via.placeholder.com/1600x650");
+    background-image: url("../../../assets/images/video-bg.jpg");
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
