@@ -115,7 +115,7 @@
 	<!-- Preloader Starts -->
     <div class="preloader" id="preloader">
         <div class="logopreloader">
-            <img src="<?= base_url('img/logo-white.png'); ?>" alt="logo-white">
+            <img src="<?= base_url('assets/images/saras.png'); ?>" alt="logo-white">
         </div>
         <div class="loader" id="loader"></div>
 	</div>

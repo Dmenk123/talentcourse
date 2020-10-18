@@ -6,50 +6,50 @@
                         <!-- SLIDE  -->
                         <li data-index="rs-1" data-transition="fade" data-slotamount="default" data-easein="default" data-easeout="default" data-masterspeed="default" data-thumb="<?php echo base_url();?>assets/images/content-tabs1.jpg" data-rotate="0" data-fstransition="fade" data-fsmasterspeed="1500" data-fsslotamount="7" data-saveperformance="off" data-title="WE ARE SALIMOOO" data-param1="May 24, 2015" data-description="">
                             <!-- MAIN IMAGE -->
-                            <img src="<?php echo base_url();?>assets/images/content-tabs1.jpg" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina>
+                            <img src="<?php echo base_url();?>assets/images/Slider1.jpg" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina>
                             <!-- LAYERS -->
 
                             <!-- LAYER NR. 1 -->
-                            <div class="tp-caption NotGeneric-Title   tp-resizeme" id="slide-24-layer-6" data-x="['left','left','left','left']" data-hoffset="['50','50','50','50']" data-y="['top','top','top','top']" data-voffset="['250','250','250','250']" data-width="none" data-height="none" data-whitespace="nowrap" data-transform_idle="o:1;" data-transform_in="opacity:0;s:500;e:Power2.easeInOut;" data-transform_out="opacity:0;s:1000;e:Power2.easeIn;s:1000;e:Power2.easeIn;" data-start="500" data-splitin="chars" data-splitout="none" data-basealign="slide" data-responsive_offset="on" data-elementdelay="0.03" style="z-index: 5; white-space: nowrap; font-size: 40px; line-height: 40px;">WE ARE SALIMO
+                            <div class="tp-caption NotGeneric-Title   tp-resizeme" id="slide-24-layer-6" data-x="['left','left','left','left']" data-hoffset="['50','50','50','50']" data-y="['top','top','top','top']" data-voffset="['250','250','250','250']" data-width="none" data-height="none" data-whitespace="nowrap" data-transform_idle="o:1;" data-transform_in="opacity:0;s:500;e:Power2.easeInOut;" data-transform_out="opacity:0;s:1000;e:Power2.easeIn;s:1000;e:Power2.easeIn;" data-start="500" data-splitin="chars" data-splitout="none" data-basealign="slide" data-responsive_offset="on" data-elementdelay="0.03" style="z-index: 5; white-space: nowrap; font-size: 40px; line-height: 40px;">SARAS DAVINA
                             </div>
 
                             <!-- LAYER NR. 2 -->
-                            <div class="tp-caption Photography-Textblock   tp-resizeme" id="slide-24-layer-8" data-x="['left','left','left','left']" data-hoffset="['50','50','50','50']" data-y="['top','top','top','top']" data-voffset="['320','320','320','320']" data-width="350" data-height="150" data-whitespace="normal" data-transform_idle="o:1;" data-transform_in="opacity:0;s:500;e:Power2.easeInOut;" data-transform_out="opacity:0;s:1000;e:Power2.easeIn;s:1000;e:Power2.easeIn;" data-start="500" data-splitin="chars" data-splitout="none" data-basealign="slide" data-responsive_offset="on" data-elementdelay="0.01" style="z-index: 7; min-width: 350px; max-width: 350px; max-width: 150px; max-width: 150px; white-space: normal; font-size: 15px; line-height: 25px;">incredibly beautiful and fully responsive One Page Bootstrap 3 Template for any type of creative web professional
+                            <div class="tp-caption Photography-Textblock   tp-resizeme" id="slide-24-layer-8" data-x="['left','left','left','left']" data-hoffset="['50','50','50','50']" data-y="['top','top','top','top']" data-voffset="['320','320','320','320']" data-width="350" data-height="150" data-whitespace="normal" data-transform_idle="o:1;" data-transform_in="opacity:0;s:500;e:Power2.easeInOut;" data-transform_out="opacity:0;s:1000;e:Power2.easeIn;s:1000;e:Power2.easeIn;" data-start="500" data-splitin="chars" data-splitout="none" data-basealign="slide" data-responsive_offset="on" data-elementdelay="0.01" style="z-index: 7; min-width: 350px; max-width: 350px; max-width: 150px; max-width: 150px; white-space: normal; font-size: 15px; line-height: 25px;">Milenial Sensual yang Meledakkan Bisnis Anda
                             </div>
                             <!-- LAYER NR. 3 -->
-                            <div class="tp-caption" data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['180','97','90','90']" data-width="none" data-height="none" data-whitespace="nowrap" data-transform_idle="o:1;" data-transform_hover="o:1;rX:0;rY:0;rZ:0;z:0;s:300;e:Power1.easeInOut;" data-style_hover="c:rgba(255, 255, 255, 1.00);bc:rgba(255, 255, 255, 1.00);" data-transform_in="y:100px;sX:1;sY:1;opacity:0;s:2000;e:Power3.easeInOut;" data-transform_out="y:50px;opacity:0;s:1000;e:Power2.easeInOut;" data-start="750" data-splitin="none" data-splitout="none" data-responsive_offset="on" data-responsive="off" style="z-index: 11; white-space: nowrap;text-transform:left;outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer;"><a href="#about" class="custom-button slider-button scroll-to-target">learn more about us</a></div>
+                            <!-- <div class="tp-caption" data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['180','97','90','90']" data-width="none" data-height="none" data-whitespace="nowrap" data-transform_idle="o:1;" data-transform_hover="o:1;rX:0;rY:0;rZ:0;z:0;s:300;e:Power1.easeInOut;" data-style_hover="c:rgba(255, 255, 255, 1.00);bc:rgba(255, 255, 255, 1.00);" data-transform_in="y:100px;sX:1;sY:1;opacity:0;s:2000;e:Power3.easeInOut;" data-transform_out="y:50px;opacity:0;s:1000;e:Power2.easeInOut;" data-start="750" data-splitin="none" data-splitout="none" data-responsive_offset="on" data-responsive="off" style="z-index: 11; white-space: nowrap;text-transform:left;outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer;"><a href="#about" class="custom-button slider-button scroll-to-target">learn more about us</a></div> -->
                         </li>
                         <!-- SLIDE  -->
                         <li data-index="rs-2" data-transition="fade" data-slotamount="default" data-easein="default" data-easeout="default" data-masterspeed="default" data-thumb="img/revolution-slider/content-tabs/thumb1.jpg" data-rotate="0" data-fstransition="fade" data-fsmasterspeed="1500" data-fsslotamount="7" data-saveperformance="off" data-title="WE ARE CREATIVE" data-param1="May 24, 2015" data-description="">
                             <!-- MAIN IMAGE -->
-                            <img src="<?php echo base_url();?>assets/images/content-tabs2.jpg" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina>
+                            <img src="<?php echo base_url();?>assets/images/Slider2.jpg" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina>
                             <!-- LAYERS -->
 
                             <!-- LAYER NR. 1 -->
-                            <div class="tp-caption NotGeneric-Title   tp-resizeme" id="slide-24-layer-66" data-x="['left','left','left','left']" data-hoffset="['50','50','50','50']" data-y="['top','top','top','top']" data-voffset="['250','250','250','250']" data-width="none" data-height="none" data-whitespace="nowrap" data-transform_idle="o:1;" data-transform_in="opacity:0;s:500;e:Power2.easeInOut;" data-transform_out="opacity:0;s:1000;e:Power2.easeIn;s:1000;e:Power2.easeIn;" data-start="500" data-splitin="chars" data-splitout="none" data-basealign="slide" data-responsive_offset="on" data-elementdelay="0.03" style="z-index: 5; white-space: nowrap; font-size: 40px; line-height: 40px;">WE ARE CREATIVE
+                            <div class="tp-caption NotGeneric-Title   tp-resizeme" id="slide-24-layer-66" data-x="['left','left','left','left']" data-hoffset="['50','50','50','50']" data-y="['top','top','top','top']" data-voffset="['250','250','250','250']" data-width="none" data-height="none" data-whitespace="nowrap" data-transform_idle="o:1;" data-transform_in="opacity:0;s:500;e:Power2.easeInOut;" data-transform_out="opacity:0;s:1000;e:Power2.easeIn;s:1000;e:Power2.easeIn;" data-start="500" data-splitin="chars" data-splitout="none" data-basealign="slide" data-responsive_offset="on" data-elementdelay="0.03" style="z-index: 5; white-space: nowrap; font-size: 40px; line-height: 40px;">SARAS DAVINA
                             </div>
 
                             <!-- LAYER NR. 2 -->
-                            <div class="tp-caption Photography-Textblock   tp-resizeme" id="slide-24-layer-88" data-x="['left','left','left','left']" data-hoffset="['50','50','50','50']" data-y="['top','top','top','top']" data-voffset="['320','320','320','320']" data-width="350" data-height="150" data-whitespace="normal" data-transform_idle="o:1;" data-transform_in="opacity:0;s:500;e:Power2.easeInOut;" data-transform_out="opacity:0;s:1000;e:Power2.easeIn;s:1000;e:Power2.easeIn;" data-start="500" data-splitin="chars" data-splitout="none" data-basealign="slide" data-responsive_offset="on" data-elementdelay="0.01" style="z-index: 7; min-width: 350px; max-width: 350px; max-width: 150px; max-width: 150px; white-space: normal; font-size: 15px; line-height: 25px;">incredibly beautiful and fully responsive One Page Bootstrap 3 Template for any type of creative web professional
+                            <div class="tp-caption Photography-Textblock   tp-resizeme" id="slide-24-layer-88" data-x="['left','left','left','left']" data-hoffset="['50','50','50','50']" data-y="['top','top','top','top']" data-voffset="['320','320','320','320']" data-width="350" data-height="150" data-whitespace="normal" data-transform_idle="o:1;" data-transform_in="opacity:0;s:500;e:Power2.easeInOut;" data-transform_out="opacity:0;s:1000;e:Power2.easeIn;s:1000;e:Power2.easeIn;" data-start="500" data-splitin="chars" data-splitout="none" data-basealign="slide" data-responsive_offset="on" data-elementdelay="0.01" style="z-index: 7; min-width: 350px; max-width: 350px; max-width: 150px; max-width: 150px; white-space: normal; font-size: 15px; line-height: 25px;">Milenial Sensual yang Meledakkan Bisnis Anda
                             </div>
                             <!-- LAYER NR. 3 -->
-                            <div class="tp-caption" data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['180','97','90','90']" data-width="none" data-height="none" data-whitespace="nowrap" data-transform_idle="o:1;" data-transform_hover="o:1;rX:0;rY:0;rZ:0;z:0;s:300;e:Power1.easeInOut;" data-style_hover="c:rgba(255, 255, 255, 1.00);bc:rgba(255, 255, 255, 1.00);" data-transform_in="y:100px;sX:1;sY:1;opacity:0;s:2000;e:Power3.easeInOut;" data-transform_out="y:50px;opacity:0;s:1000;e:Power2.easeInOut;" data-start="750" data-splitin="none" data-splitout="none" data-responsive_offset="on" data-responsive="off" style="z-index: 11; white-space: nowrap;text-transform:left;outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer;"><a href="#about" class="custom-button slider-button scroll-to-target">learn more about us</a></div>
+                            <!-- <div class="tp-caption" data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['180','97','90','90']" data-width="none" data-height="none" data-whitespace="nowrap" data-transform_idle="o:1;" data-transform_hover="o:1;rX:0;rY:0;rZ:0;z:0;s:300;e:Power1.easeInOut;" data-style_hover="c:rgba(255, 255, 255, 1.00);bc:rgba(255, 255, 255, 1.00);" data-transform_in="y:100px;sX:1;sY:1;opacity:0;s:2000;e:Power3.easeInOut;" data-transform_out="y:50px;opacity:0;s:1000;e:Power2.easeInOut;" data-start="750" data-splitin="none" data-splitout="none" data-responsive_offset="on" data-responsive="off" style="z-index: 11; white-space: nowrap;text-transform:left;outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer;"><a href="#about" class="custom-button slider-button scroll-to-target">learn more about us</a></div> -->
                         </li>
                         <!-- SLIDE  -->
                         <li data-index="rs-3" data-transition="fade" data-slotamount="default" data-easein="default" data-easeout="default" data-masterspeed="default" data-thumb="img/revolution-slider/content-tabs/thumb1.jpg" data-rotate="0" data-fstransition="fade" data-fsmasterspeed="1500" data-fsslotamount="7" data-saveperformance="off" data-title="WE ARE LEADERS" data-param1="May 24, 2015" data-description="">
                             <!-- MAIN IMAGE -->
-                            <img src="<?php echo base_url();?>assets/images/content-tabs3.jpg" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina>
+                            <img src="<?php echo base_url();?>assets/images/Slider3.jpg" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina>
                             <!-- LAYERS -->
 
                             <!-- LAYER NR. 1 -->
-                            <div class="tp-caption NotGeneric-Title   tp-resizeme" id="slide-24-layer-666" data-x="['left','left','left','left']" data-hoffset="['50','50','50','50']" data-y="['top','top','top','top']" data-voffset="['250','250','250','250']" data-width="none" data-height="none" data-whitespace="nowrap" data-transform_idle="o:1;" data-transform_in="opacity:0;s:500;e:Power2.easeInOut;" data-transform_out="opacity:0;s:1000;e:Power2.easeIn;s:1000;e:Power2.easeIn;" data-start="500" data-splitin="chars" data-splitout="none" data-basealign="slide" data-responsive_offset="on" data-elementdelay="0.03" style="z-index: 5; white-space: nowrap; font-size: 40px; line-height: 40px;">WE ARE LEADERS
+                            <div class="tp-caption NotGeneric-Title   tp-resizeme" id="slide-24-layer-666" data-x="['left','left','left','left']" data-hoffset="['50','50','50','50']" data-y="['top','top','top','top']" data-voffset="['250','250','250','250']" data-width="none" data-height="none" data-whitespace="nowrap" data-transform_idle="o:1;" data-transform_in="opacity:0;s:500;e:Power2.easeInOut;" data-transform_out="opacity:0;s:1000;e:Power2.easeIn;s:1000;e:Power2.easeIn;" data-start="500" data-splitin="chars" data-splitout="none" data-basealign="slide" data-responsive_offset="on" data-elementdelay="0.03" style="z-index: 5; white-space: nowrap; font-size: 40px; line-height: 40px;">SARAS DAVINA
                             </div>
 
                             <!-- LAYER NR. 2 -->
-                            <div class="tp-caption Photography-Textblock   tp-resizeme" id="slide-24-layer-888" data-x="['left','left','left','left']" data-hoffset="['50','50','50','50']" data-y="['top','top','top','top']" data-voffset="['320','320','320','320']" data-width="350" data-height="150" data-whitespace="normal" data-transform_idle="o:1;" data-transform_in="opacity:0;s:500;e:Power2.easeInOut;" data-transform_out="opacity:0;s:1000;e:Power2.easeIn;s:1000;e:Power2.easeIn;" data-start="500" data-splitin="chars" data-splitout="none" data-basealign="slide" data-responsive_offset="on" data-elementdelay="0.01" style="z-index: 7; min-width: 350px; max-width: 350px; max-width: 150px; max-width: 150px; white-space: normal; font-size: 15px; line-height: 25px;">incredibly beautiful and fully responsive One Page Bootstrap 3 Template for any type of creative web professional
+                            <div class="tp-caption Photography-Textblock   tp-resizeme" id="slide-24-layer-888" data-x="['left','left','left','left']" data-hoffset="['50','50','50','50']" data-y="['top','top','top','top']" data-voffset="['320','320','320','320']" data-width="350" data-height="150" data-whitespace="normal" data-transform_idle="o:1;" data-transform_in="opacity:0;s:500;e:Power2.easeInOut;" data-transform_out="opacity:0;s:1000;e:Power2.easeIn;s:1000;e:Power2.easeIn;" data-start="500" data-splitin="chars" data-splitout="none" data-basealign="slide" data-responsive_offset="on" data-elementdelay="0.01" style="z-index: 7; min-width: 350px; max-width: 350px; max-width: 150px; max-width: 150px; white-space: normal; font-size: 15px; line-height: 25px;">Milenial Sensual yang Meledakkan Bisnis Anda
                             </div>
                             <!-- LAYER NR. 3 -->
-                            <div class="tp-caption" data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['180','97','90','90']" data-width="none" data-height="none" data-whitespace="nowrap" data-transform_idle="o:1;" data-transform_hover="o:1;rX:0;rY:0;rZ:0;z:0;s:300;e:Power1.easeInOut;" data-style_hover="c:rgba(255, 255, 255, 1.00);bc:rgba(255, 255, 255, 1.00);" data-transform_in="y:100px;sX:1;sY:1;opacity:0;s:2000;e:Power3.easeInOut;" data-transform_out="y:50px;opacity:0;s:1000;e:Power2.easeInOut;" data-start="750" data-splitin="none" data-splitout="none" data-responsive_offset="on" data-responsive="off" style="z-index: 11; white-space: nowrap;text-transform:left;outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer;"><a href="#about" class="custom-button slider-button scroll-to-target">learn more about us</a></div>
+                            <!-- <div class="tp-caption" data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['180','97','90','90']" data-width="none" data-height="none" data-whitespace="nowrap" data-transform_idle="o:1;" data-transform_hover="o:1;rX:0;rY:0;rZ:0;z:0;s:300;e:Power1.easeInOut;" data-style_hover="c:rgba(255, 255, 255, 1.00);bc:rgba(255, 255, 255, 1.00);" data-transform_in="y:100px;sX:1;sY:1;opacity:0;s:2000;e:Power3.easeInOut;" data-transform_out="y:50px;opacity:0;s:1000;e:Power2.easeInOut;" data-start="750" data-splitin="none" data-splitout="none" data-responsive_offset="on" data-responsive="off" style="z-index: 11; white-space: nowrap;text-transform:left;outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer;"><a href="#about" class="custom-button slider-button scroll-to-target">learn more about us</a></div> -->
                         </li>
                     </ul>
                     <div class="tp-bannertimer tp-bottom" style="visibility: hidden !important;"></div>
@@ -91,28 +91,28 @@
                     <table width="100%" style="margin-left:20px!important;">
                         <tbody>
                             <tr>
-                                <td>1.</td>
+                                <td style="vertical-align: baseline;">1.</td>
                                 <td style="text-align:justify">Merek / bisnis yang sudah besar saja seperti pizza hut pun harus rela turun ke jalan, apalagi
                                 merek yang masih kecil dan belum dikenal oleh masyarakat.</td>
                             </tr>
                             <tr>
-                                <td>2.</td>
+                                <td style="vertical-align: baseline;">2.</td>
                                 <td style="text-align:justify">Maunya gratisan, hanya modal foto produk bagus dan main asal post-post di instagram dan
                                 facebook. Itu pun tidak disebarkan ke semua teman/followers kita.</td>
                             </tr>
                             <tr>
-                                <td>3.</td>
+                                <td style="vertical-align: baseline;">3.</td>
                                 <td style="text-align:justify">Broadcast promosi di Whatsapp, itu pun juga butuh kontak yang banyak dan juga bisa di blok
                                 karena spam.</td>
                             </tr>
                             <tr>
-                                <td>4.</td>
+                                <td style="vertical-align: baseline;">4.</td>
                                 <td style="text-align:justify">Mengadakan Giveaway terus menerus, agar banyak yg berkunjung. Iya kalau banyak yang beli,
                                 kalau hanya ingin Giveawaynya saja? Kita malah tekor sudah mengeluarkan hadiah banyak, tapi
                                 tidak ada yang beli.</td>
                             </tr>
                             <tr>
-                                <td>5.</td>
+                                <td style="vertical-align: baseline;">5.</td>
                                 <td style="text-align:justify">Sudah turun ke jalan buat jualan, upload-upload foto di semua sosial media, broadcastbroadcast ke banyak orang, sampai mengadakan Giveaway, tapi malah rugi bahkan tidak
                                 dapatkan penghasilan dan Bisnis Online tidak meledak, terancam tutup.</td>
                             </tr>
@@ -140,19 +140,19 @@
                     <br>
                     <br>
                     <div class="col-sm-12 col-md-12 col-lg-6 about-left-side">
-                        <h3 class="title-about">WE ARE <strong>SALIMO</strong></h3>
-                        <hr>
-                        <p>We are a leading company sit amet, consectetur adipisicing elit. Minus obcaecati pariatur officiis molestias eveniet harum laudantium obcaecati pariatur officiis molestias eveniet harum laudantium sed optio iste. </p>
+                        <!-- <h3 class="title-about">WE ARE <strong>SALIMO</strong></h3>
+                        <hr> -->
+                        <!-- <p>We are a leading company sit amet, consectetur adipisicing elit. Minus obcaecati pariatur officiis molestias eveniet harum laudantium obcaecati pariatur officiis molestias eveniet harum laudantium sed optio iste. </p> -->
 						<!-- Tabs Heading Starts -->
-                        <ul class="nav nav-tabs">
+                        <!-- <ul class="nav nav-tabs">
                             <li><a class="active" data-toggle="tab" href="#menu1">Our Mission</a></li>
                             <li><a data-toggle="tab" href="#menu2">Our advantages</a></li>
                             <li><a data-toggle="tab" href="#menu3">Our guarantees</a></li>
-                        </ul>
+                        </ul> -->
                         <!-- Tabs Heading Ends -->
                         <!-- Tabs Content Starts -->
                         <div class="tab-content">
-                            <div id="menu1" class="tab-pane fade in active">
+                            <!-- <div id="menu1" class="tab-pane fade in active">
                                 <p>consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in</p>
                             </div>
                             <div id="menu2" class="tab-pane fade">
@@ -160,10 +160,10 @@
                             </div>
                             <div id="menu3" class="tab-pane fade">
                                 <p>Laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
-                            </div>
+                            </div> -->
                         </div>
                         <!-- Tabs Content Ends -->
-                        <a class="custom-button scroll-to-target" href="#portfolio">Our Portfolio</a>
+                        <!-- <a class="custom-button scroll-to-target" href="#portfolio">Our Portfolio</a> -->
                     </div>
                     <div class="col-md-12 col-lg-6 about-right">
 						<div class="about-right-side">
@@ -191,16 +191,16 @@
                         <!-- Image Ends -->
                         <!-- Details Starts -->
                         <div class="col-md-12 col-lg-12 col-xl-6 offset-xl-1">
-                            <h1>Project Manager</h1>
+                            <h1>Ayo Pacaran dengan Saras Davina, kalau tidak pacaran mana mungkin bisnis anda bisa Meledak</h1>
                             <h3>Miss Katherina Hale</h3>
                             <p>
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus obcaecati pariatur officiis molestias eveniet harum laudantium sed optio iste. Iste, alias, non libero recusandae fugiat praesentium delectus inventore accusamus veniam!
                             </p>
-                            <blockquote>
+                            <!-- <blockquote>
                                 " Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia "
-                            </blockquote>
+                            </blockquote> -->
                             <!-- Social Media Starts -->
-                            <div class="social-icons">
+                            <!-- <div class="social-icons">
                                 <ul class="social">
                                     <li>
                                         <a class="twitter" href="#" title="twitter"></a>
@@ -221,7 +221,7 @@
                                         <a class="youtube" href="#" title="youtube"></a>
                                     </li>
                                 </ul>
-                            </div>
+                            </div> -->
                             <!-- Social Media Ends -->
                         </div>
                     </div>
@@ -340,7 +340,7 @@
         <!-- Services Section Ends -->
 
         <!-- Testimonials Section Starts -->
-        <section class="testimonials">
+        <section class="videopromotion">
             <div class="section-overlay">
                 <!-- Container Starts -->
                 <div class="container">
@@ -351,48 +351,13 @@
                     </div>
                     <!-- Main Heading Starts -->
                     <!-- Blockquotes Starts -->
-                    <div id="quote-carousel" class="carousel slide" data-ride="carousel">
-                        <!-- Wrapper For Sliders Starts -->
-                        <!-- Indicators Starts -->
-                        <ol class="carousel-indicators mx-auto">
-                            <li data-target="#quote-carousel" data-slide-to="0" class="active"></li>
-                            <li data-target="#quote-carousel" data-slide-to="1"></li>
-                            <li data-target="#quote-carousel" data-slide-to="2"></li>
-                        </ol>
-                        <!-- Indicators Ends -->
-                        <div class="carousel-inner">
-                            <!-- Quote #1 Starts -->
-                            <div class="carousel-item active">
-                                <blockquote>
-                                    <img class="rounded-circle img-fluid" src="http://via.placeholder.com/112x112" alt="client">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiu nt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptat</p>
-                                    <h5>Miss Elina Pool</h5>
-                                    <h6>Web Developer - Adobe</h6>
-                                </blockquote>
-                            </div>
-                            <!-- Quote #1 Ends -->
-                            <!-- Quote #2 Starts -->
-                            <div class="carousel-item">
-                                <blockquote>
-                                    <img class="rounded-circle img-fluid" src="http://via.placeholder.com/112x112" alt="client">
-                                    <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu</p>
-                                    <h5>Mr. Antoine Varane</h5>
-                                    <h6>Sales Manager - Twitter</h6>
-                                </blockquote>
-                            </div>
-                            <!-- Quote #2 Ends -->
-                            <!-- Quote #3 Starts -->
-                            <div class="carousel-item">
-                                <blockquote>
-                                    <img class="rounded-circle img-fluid" src="http://via.placeholder.com/112x112" alt="client">
-                                    <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit ess</p>
-                                    <h5>Miss Lucy Walker</h5>
-                                    <h6>Project Manager - Envato</h6>
-                                </blockquote>
-                            </div>
-                            <!-- Quote #3 Ends -->
+                    <div class="video-content">
+                        <p class="text-center">We’re developing a number of special projects if interested,<br> Don't hesitate to see the promo video</p>
+                        <!-- Video Play Starts -->
+                        <div class="magnific-popup-gallery">
+                            <div class="btn-wrapper text-center"><a class="image-wrap mfp-youtube" href="https://www.youtube.com/watch?v=0gv7OC9L2s8"></a></div>
                         </div>
-                        <!-- Wrapper For Sliders Ends -->
+                        <!-- Video Play Ends -->
                     </div>
                     <!-- Blockquotes Ends -->
                 </div>
@@ -645,7 +610,7 @@
             <div class="container">
                 <!-- Main Heading Starts -->
                 <div class="text-center top-text">
-                    <h1><span>Our</span> Team</h1>
+                    <h1><span>Our</span> Gallery</h1>
                     <h4>Keep in touch</h4>
                 </div>
                 <!-- Main Heading Ends -->
