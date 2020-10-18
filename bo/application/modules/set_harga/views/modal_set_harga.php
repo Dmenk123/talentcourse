@@ -15,6 +15,18 @@
             <input type="text" class="form-control" id="nama" name="nama" autocomplete="off">
             <span class="help-block"></span>
           </div>
+          <div class="col-12 row">
+            <div class="col-8">
+              <select class="form-control kt-select2" id="talent" name="talent" style="width: 100%;">
+                <option value="">Silahkan Pilih Talent</option>
+              </select>
+              <span class="help-block"></span>
+            </div>
+            <div class="col-4">
+              <input type="number" class="form-control" id="gigi" name="gigi" value="">   
+              <span class="help-block"></span>
+            </div>
+          </div>
           <div class="form-group">
             <label for="lbl_koderef" class="form-control-label">Kode Ref Diskon:</label>
             <input type="text" class="form-control" id="kode_ref" name="kode_ref" autocomplete="off">

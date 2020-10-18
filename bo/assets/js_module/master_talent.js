@@ -9,13 +9,13 @@ $(document).ready(function() {
     });
 
 	//datatables
-	table = $('#tabel_harga').DataTable({
+	table = $('#tabel_talent').DataTable({
 		responsive: true,
         searchDelay: 500,
         processing: true,
         serverSide: true,
 		ajax: {
-			url  : base_url + "set_harga/list_harga",
+			url  : base_url + "master_talent/list_talent",
 			type : "POST" 
 		},
 
@@ -28,36 +28,8 @@ $(document).ready(function() {
 		],
     });
     
-    $("#talent").select2({
-        // tags: true,
-        //multiple: false,
-        tokenSeparators: [',', ' '],
-        minimumInputLength: 0,
-        minimumResultsForSearch: 5,
-        ajax: {
-            url: base_url+'master_talent/get_select_talent',
-            dataType: "json",
-            type: "GET",
-            data: function (params) {
-
-                var queryParameters = {
-                    term: params.term
-                }
-                return queryParameters;
-            },
-            processResults: function (data) {
-                return {
-                    results: $.map(data, function (item) {
-                        return {
-                            text: item.text,
-                            id: item.id,
-                            kode: item.kode,
-                            html: item.html
-                        }
-                    })
-                };
-            }
-        }
+    $("#foto").change(function() {
+        readURL(this);
     });
 
     //change menu status
@@ -112,17 +84,17 @@ function add_menu()
 {
     reset_modal_form();
     save_method = 'add';
-	$('#modal_harga_form').modal('show');
-	$('#modal_title').text('Tambah Data Harga'); 
+	$('#modal_user_form').modal('show');
+	$('#modal_title').text('Tambah User Baru'); 
 }
 
-function edit_diskon(id)
+function edit_user(id)
 {
     reset_modal_form();
     save_method = 'update';
     //Ajax Load data from ajax
     $.ajax({
-        url : base_url + 'master_diskon/edit_diskon',
+        url : base_url + 'master_user/edit_user',
         type: "POST",
         dataType: "JSON",
         data : {id:id},
@@ -131,13 +103,17 @@ function edit_diskon(id)
             // data.data_menu.forEach(function(dataLoop) {
             //     $("#parent_menu").append('<option value = '+dataLoop.id+' class="append-opt">'+dataLoop.nama+'</option>');
             // });
-            $('[name="id_diskon"]').val(data.old_data.id);
-            $('[name="nama"]').val(data.old_data.nama);
-            $('[name="kode_ref"]').val(data.old_data.kode_ref_diskon);
-            $('[name="besaran"]').val(data.old_data.besaran);
-            
-            $('#modal_diskon_form').modal('show');
-	        $('#modal_title').text('Edit Diskon'); 
+            $('#div_pass_lama').css("display","block");
+            $('#div_preview_foto').css("display","block");
+            $('#div_skip_password').css("display", "block");
+            $('[name="id_user"]').val(data.old_data.id);
+            $('[name="username"]').val(data.old_data.username).attr('disabled', true);
+            $('[name="role"]').val(data.old_data.id_role);
+            $('[name="status"]').val(data.old_data.status);
+            // $("#pegawai").val(data.old_data.id_pegawai).trigger("change");
+            $('#preview_img').attr('src', 'data:image/jpeg;base64,'+data.foto_encoded);
+            $('#modal_user_form').modal('show');
+	        $('#modal_title').text('Edit User'); 
 
         },
         error: function (jqXHR, textStatus, errorThrown)
@@ -158,14 +134,14 @@ function save()
     var txtAksi;
 
     if(save_method == 'add') {
-        url = base_url + 'master_harga/add_data_harga';
-        txtAksi = 'Tambah harga';
+        url = base_url + 'master_user/add_data_user';
+        txtAksi = 'Tambah User';
     }else{
-        url = base_url + 'master_harga/update_data_harga';
-        txtAksi = 'Edit Diskon';
+        url = base_url + 'master_user/update_data_user';
+        txtAksi = 'Edit User';
     }
     
-    var form = $('#form-harga')[0];
+    var form = $('#form-user')[0];
     var data = new FormData(form);
     
     $("#btnSave").prop("disabled", true);
@@ -195,7 +171,7 @@ function save()
                 {
                     if (data.inputerror[i] != 'pegawai') {
                         $('[name="'+data.inputerror[i]+'"]').addClass('is-invalid');
-                        $('[name="'+data.inputerror[i]+'"]').next().text(data.error_string[i]).addClass('invalid-feedback');
+                        $('[name="'+data.inputerror[i]+'"]').next().text(data.error_string[i]).addClass('invalid-feedback'); //select span help-block class set text error string
                     }else{
                         //ikut style global
                         $('[name="'+data.inputerror[i]+'"]').next().next().text(data.error_string[i]).addClass('invalid-feedback-select');
@@ -217,9 +193,9 @@ function save()
     });
 }
 
-function delete_diskon(id){
+function delete_user(id){
     swalConfirmDelete.fire({
-        title: 'Hapus Data Diskon ?',
+        title: 'Hapus Data User ?',
         text: "Data Akan dihapus permanen ?",
         type: 'warning',
         showCancelButton: true,
@@ -229,13 +205,13 @@ function delete_diskon(id){
       }).then((result) => {
         if (result.value) {
             $.ajax({
-                url : base_url + 'master_diskon/delete_diskon',
+                url : base_url + 'master_user/delete_user',
                 type: "POST",
                 dataType: "JSON",
                 data : {id:id},
                 success: function(data)
                 {
-                    swalConfirm.fire('Berhasil Hapus Diskon!', data.pesan, 'success');
+                    swalConfirm.fire('Berhasil Hapus User!', data.pesan, 'success');
                     table.ajax.reload();
                 },
                 error: function (jqXHR, textStatus, errorThrown)
@@ -258,7 +234,7 @@ function delete_diskon(id){
 
 function reset_modal_form()
 {
-    $('#form-harga')[0].reset();
+    $('#form-user')[0].reset();
     $('.append-opt').remove(); 
     $('div.form-group').children().removeClass("is-invalid invalid-feedback");
     $('span.help-block').text('');
