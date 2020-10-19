@@ -143,7 +143,6 @@ function save()
         txtAksi = 'Edit Talent';
     }
     
-
     var form = $('#form-talent')[0];
     var data = new FormData(form);
     var value = CKEDITOR.instances['deskripsi'].getData()
@@ -198,9 +197,45 @@ function save()
     });
 }
 
-function delete_user(id){
+function save_detail(){
+    var form = $('#form_file_det')[0];
+    var data = new FormData(form);
+    $.ajax({
+        type: "POST",
+        enctype: 'multipart/form-data',
+        url: base_url + 'master_talent/simpan_detail_talent',
+        data: data,
+        dataType: "JSON",
+        processData: false, // false, it prevent jQuery form transforming the data into a query string
+        contentType: false, 
+        cache: false,
+        timeout: 600000,
+        success: function (data) {
+            if(data.status) {
+                swal.fire("Sukses!!", "Berhasil Menambah File Gallery", "success");
+                location.reload();
+            }else {
+                swalConfirm.fire(
+                    'Oops',
+                    'Terjadi Kesalahan',
+                    'error'
+                );
+            }
+        },
+        error: function (e) {
+            console.log("ERROR : ", e);
+            $("#btnSave").prop("disabled", false);
+            $('#btnSave').text('Simpan');
+
+            reset_modal_form();
+            $(".modal").modal('hide');
+        }
+    });
+}
+
+function delete_talent(id){
     swalConfirmDelete.fire({
-        title: 'Hapus Data User ?',
+        title: 'Hapus Data Talent ?',
         text: "Data Akan dihapus permanen ?",
         type: 'warning',
         showCancelButton: true,
@@ -210,13 +245,13 @@ function delete_user(id){
       }).then((result) => {
         if (result.value) {
             $.ajax({
-                url : base_url + 'master_user/delete_user',
+                url : base_url + 'master_talent/delete_talent',
                 type: "POST",
                 dataType: "JSON",
                 data : {id:id},
                 success: function(data)
                 {
-                    swalConfirm.fire('Berhasil Hapus User!', data.pesan, 'success');
+                    swalConfirm.fire('Berhasil Hapus Talent!', data.pesan, 'success');
                     table.ajax.reload();
                 },
                 error: function (jqXHR, textStatus, errorThrown)

@@ -70,9 +70,9 @@ class Master_talent extends CI_Controller {
 						<button class="dropdown-item" onclick="delete_talent(\''.$val->id.'\')">
 							<i class="la la-trash"></i> Hapus
 						</button>
-						<button class="dropdown-item" onclick="detail_talent(\''.$val->id.'\')">
+						<a class="button dropdown-item" href="'.base_url("master_talent/detail_talent/$val->id").'" target="_blank">
 							<i class="la la-paperclip"></i> Detail
-						</button>
+						</a>
 			';
 
 			// if ($val->status == 1) {
@@ -140,7 +140,6 @@ class Master_talent extends CI_Controller {
 
 	public function add_data_talent()
 	{
-		$this->load->library('Enkripsi');
 		$obj_date = new DateTime();
 		$timestamp = $obj_date->format('Y-m-d H:i:s');
 		$arr_valid = $this->rule_validasi();
@@ -182,7 +181,7 @@ class Master_talent extends CI_Controller {
 				$output_thumb = $this->konfigurasi_image_thumb($nama_file_foto, $gbrBukti, $id);
 				$this->image_lib->clear();
 				## replace nama file + ext
-				$namafileseo = $this->seoUrl($nama.' '.time()).'.'.$extDet;
+				$namafileseo = $namafileseo.'.'.$extDet;
 			} else {
 				$error = array('error' => $this->file_obj->display_errors());
 			}
@@ -203,7 +202,7 @@ class Master_talent extends CI_Controller {
 			'akun_tw' => $akun_tw,
 			'created_at' => $timestamp,
 			'foto'	=> 'files/img/talent_img/'.$id.'/'.$namafileseo,
-			'foto_thumb' => 'files/img/talent_img/'.$id.'/'.'thumbs'.'/'.$namafileseo
+			'foto_thumb' => 'files/img/talent_img/'.$id.'/'.'thumbs'.'/'.$output_thumb
 		];
 		
 		$insert = $this->m_talent->save($data_talent);
@@ -223,69 +222,26 @@ class Master_talent extends CI_Controller {
 
 	public function update_data_talent()
 	{
+		$obj_date = new DateTime();
 		$sesi_id_user = $this->session->userdata('id_user'); 
 		$id_user = $this->input->post('id_user');
-		$this->load->library('Enkripsi');
-		$obj_date = new DateTime();
+
 		$timestamp = $obj_date->format('Y-m-d H:i:s');
 		
-		if($this->input->post('skip_pass') != null){
-			$skip_pass = true;
-		}else{
-			$skip_pass = false;
-		}
-		
-		$arr_valid = $this->rule_validasi(true, $skip_pass);
+		$id = trim($this->input->post('id_talent'));
+		$nama = trim($this->input->post('nama'));
+		$txt_deskripsi = trim($this->input->post('txt_deskripsi'));
+		$akun_fb = trim($this->input->post('akun_fb'));
+		$akun_ig = trim($this->input->post('akun_ig'));
+		$akun_tw = trim($this->input->post('akun_tw'));
+		$namafileseo = $this->seoUrl($nama.' '.time());
 
-		if ($arr_valid['status'] == FALSE) {
-			echo json_encode($arr_valid);
-			return;
-		}
-
-		$password = trim($this->input->post('password'));
-		$repassword = trim($this->input->post('repassword'));
-		$role = $this->input->post('role');
-		$status = $this->input->post('status');
-		
-		$q = $this->m_user->get_by_id($id_user);
-		$namafileseo = $this->seoUrl($q->username.' '.time());
-
-		if($skip_pass == false) {
-			if ($password != $repassword) {
-				$data['inputerror'][] = 'password';
-				$data['error_string'][] = 'Password Tidak Cocok';
-				$data['status'] = FALSE;
-			
-				$data['inputerror'][] = 'repassword';
-				$data['error_string'][] = 'Password Tidak Cocok';
-				$data['status'] = FALSE;
-	
-				echo json_encode($data);
-				return;
-			}
-		}
-		
-		$hash_password = $this->enkripsi->enc_dec('encrypt', $password);
-		$hash_password_lama = $this->enkripsi->enc_dec('encrypt', trim($this->input->post('password_lama')));
-		$dataOld = $this->m_user->get_by_id($this->input->post('id_user'));
-		
-		if($skip_pass == false) {
-			if($hash_password_lama != $dataOld->password) {
-				$data['inputerror'][] = 'password_lama';
-				$data['error_string'][] = 'Password lama salah';
-				$data['status'] = FALSE;
-	
-				echo json_encode($data);
-				return;
-			}
-		}
-		
 		$this->db->trans_begin();
 
 		$file_mimes = ['image/png', 'image/x-citrix-png', 'image/x-png', 'image/x-citrix-jpeg', 'image/jpeg', 'image/pjpeg'];
 
 		if(isset($_FILES['foto']['name']) && in_array($_FILES['foto']['type'], $file_mimes)) {
-			$this->konfigurasi_upload_img($namafileseo);
+			$this->konfigurasi_upload_img($namafileseo, $id);
 			//get detail extension
 			$pathDet = $_FILES['foto']['name'];
 			$extDet = pathinfo($pathDet, PATHINFO_EXTENSION);
@@ -294,10 +250,10 @@ class Master_talent extends CI_Controller {
 			{
 				$gbrBukti = $this->file_obj->data();
 				$nama_file_foto = $gbrBukti['file_name'];
-				$output_thumb = $this->konfigurasi_image_thumb($nama_file_foto, $gbrBukti);
+				$output_thumb = $this->konfigurasi_image_thumb($nama_file_foto, $gbrBukti, $id);
 				$this->image_lib->clear();
 				## replace nama file + ext
-				$namafileseo = $this->seoUrl($q->username.' '.time()).'.'.$extDet;
+				$namafileseo = $namafileseo.'.'.$extDet;
 				$foto = $namafileseo;
 			} else {
 				$error = array('error' => $this->file_obj->display_errors());
@@ -307,31 +263,31 @@ class Master_talent extends CI_Controller {
 			$foto = null;
 		}
 
-		$data_user = [
-			'id_role' => $role,
-			'status' => $status,
+		$data_talent = [
+			'nama' => $nama,
+			'deskripsi' => $txt_deskripsi,
+			'akun_fb' => $akun_fb,
+			'akun_ig' => $akun_ig,
+			'akun_tw' => $akun_tw,
 			'updated_at' => $timestamp
 		];
 
-		if($skip_pass == false) {
-			$data_user['password'] = $hash_password;
-		}
-		
 		if($foto != null) {
-			$data_user['foto'] = $foto;
+			$data_talent['foto'] = 'files/img/talent_img/'.$id.'/'.$foto;
+			$data_talent['foto_thumb'] = 'files/img/talent_img/'.$id.'/'.'thumbs'.'/'.$output_thumb;
 		}
 
-		$where = ['id' => $id_user];
-		$update = $this->m_user->update($where, $data_user);
+		$where = ['id' => $id];
+		$update = $this->m_talent->update($where, $data_talent);
 
 		if ($this->db->trans_status() === FALSE){
 			$this->db->trans_rollback();
 			$data['status'] = false;
-			$data['pesan'] = 'Gagal update Master User';
+			$data['pesan'] = 'Gagal update Master Talent';
 		}else{
 			$this->db->trans_commit();
 			$data['status'] = true;
-			$data['pesan'] = 'Sukses update Master User';
+			$data['pesan'] = 'Sukses update Master Talent';
 		}
 		
 		echo json_encode($data);
@@ -341,45 +297,121 @@ class Master_talent extends CI_Controller {
 	 * Hanya melakukan softdelete saja
 	 * isi kolom updated_at dengan datetime now()
 	 */
-	public function delete_user()
+	public function delete_talent()
 	{
 		$id = $this->input->post('id');
-		$del = $this->m_user->softdelete_by_id($id);
+		$del = $this->m_talent->softdelete_by_id($id);
 		if($del) {
 			$retval['status'] = TRUE;
-			$retval['pesan'] = 'Data Master User dihapus';
+			$retval['pesan'] = 'Data Master Talent dihapus';
 		}else{
 			$retval['status'] = FALSE;
-			$retval['pesan'] = 'Data Master User dihapus';
+			$retval['pesan'] = 'Data Master Talent dihapus';
 		}
 
 		echo json_encode($retval);
 	}
 
-	public function edit_status_user($id)
+	public function detail_talent($id)
 	{
-		$input_status = $this->input->post('status');
-		// jika aktif maka di set ke nonaktif / "0"
-		$status = ($input_status == "aktif") ? $status = 0 : $status = 1;
+		$data_talent = $this->m_talent->get_by_condition("id = '$id' and deleted_at is null", true);
+		if($data_talent){
+			$id_user = $this->session->userdata('id_user'); 
+			$data_user = $this->m_user->get_detail_user($id_user);
 			
-		$input = array('status' => $status);
-
-		$where = ['id' => $id];
-
-		$this->m_user->update($where, $input);
-
-		if ($this->db->affected_rows() == '1') {
+			$url_foto = '../'.$data_talent->foto;
+			$foto = base64_encode(file_get_contents($url_foto));  
+			/**
+			 * data passing ke halaman view content
+			 */
 			$data = array(
-				'status' => TRUE,
-				'pesan' => "Status User berhasil di ubah.",
+				'title' => 'Detail Data Talent',
+				'data_user' => $data_user,
+				'data_talent' => $data_talent,
+				'foto_encode' => $foto
 			);
+
+			/**
+			 * content data untuk template
+			 * param (css : link css pada direktori assets/css_module)
+			 * param (modal : modal komponen pada modules/nama_modul/views/nama_modal)
+			 * param (js : link js pada direktori assets/js_module)
+			 */
+			$content = [
+				'css' 	=> null,
+				'modal' => null,
+				'js'	=> 'master_talent.js',
+				'view'	=> 'view_master_talent_det'
+			];
+
+			$this->template_view->load_view($content, $data);
+			
 		}else{
-			$data = array(
-				'status' => FALSE
-			);
+			return redirect('master_talent');
 		}
 
-		echo json_encode($data);
+	}
+
+	public function simpan_detail_talent()
+	{
+		$obj_date = new DateTime();
+		$id = $this->t_file_talent->get_max_id();
+		$id_talent = $this->input->post('id_talent');
+		$timestamp = $obj_date->format('Y-m-d H:i:s');
+		$data_talent = $this->m_talent->get_by_id($id_talent);
+		$namafileseo = $this->seoUrl($id.'-'.$data_talent->nama.' '.time());
+
+		$this->db->trans_begin();
+
+		$file_mimes = ['image/png', 'image/x-citrix-png', 'image/x-png', 'image/x-citrix-jpeg', 'image/jpeg', 'image/pjpeg'];
+
+		if(isset($_FILES['foto_det']['name']) && in_array($_FILES['foto_det']['type'], $file_mimes)) {
+						
+			$this->konfigurasi_upload_img($namafileseo, $id_talent);
+			//get detail extension
+			$pathDet = $_FILES['foto_det']['name'];
+			$extDet = pathinfo($pathDet, PATHINFO_EXTENSION);
+			
+			if ($this->file_obj->do_upload('foto_det')) 
+			{
+				$gbrBukti = $this->file_obj->data();
+				$nama_file_foto = $gbrBukti['file_name'];
+				$output_thumb = $this->konfigurasi_image_thumb($nama_file_foto, $gbrBukti, $id_talent);
+				$this->image_lib->clear();
+				## replace nama file + ext
+				$namafileseo = $namafileseo.'.'.$extDet;
+			} else {
+				$error = array('error' => $this->file_obj->display_errors());
+			}
+		}else{
+			$data['inputerror'][] = 'foto';
+			$data['error_string'][] = 'Wajib Mengisi Foto';
+			$data['status'] = FALSE;
+			echo json_encode($data);
+			return;
+		}
+
+		$datanya = [
+			'id' => $id,
+			'id_talent' => $id_talent,
+			'created_at' => $timestamp,
+			'path_file'	=> 'files/img/talent_img/'.$id.'/'.$namafileseo,
+			'path_file_thumb' => 'files/img/talent_img/'.$id.'/'.'thumbs'.'/'.$output_thumb
+		];
+
+		$insert = $this->t_file_talent->save($datanya);
+		
+		if ($this->db->trans_status() === FALSE){
+			$this->db->trans_rollback();
+			$retval['status'] = false;
+			$retval['pesan'] = 'Gagal menambahkan file gallery';
+		}else{
+			$this->db->trans_commit();
+			$retval['status'] = true;
+			$retval['pesan'] = 'Sukses menambahkan file gallery';
+		}
+
+		echo json_encode($retval);
 	}
 
 	// ===============================================
@@ -442,7 +474,7 @@ class Master_talent extends CI_Controller {
 	    $this->load->library('image_lib',$config2); //load image library
 	    $this->image_lib->initialize($config2);
 	    $this->image_lib->resize();
-	    return $output_thumb = $gbr['raw_name'].$gbr['file_ext'];	
+	    return $output_thumb = $gbr['raw_name'].'_thumb'.$gbr['file_ext'];	
 	}
 
 	private function seoUrl($string) {

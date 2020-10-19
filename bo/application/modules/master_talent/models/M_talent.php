@@ -91,11 +91,11 @@ class M_talent extends CI_Model
 		return $this->db->count_all_results();
 	}
 
-	public function get_detail_user($id_user)
+	public function get_detail_talent($id)
 	{
 		$this->db->select('*');
 		$this->db->from('m_user');
-		$this->db->where('id', $id_user);
+		$this->db->where('id', $id);
 
         $query = $this->db->get();
 
@@ -140,7 +140,7 @@ class M_talent extends CI_Model
 		$obj_date = new DateTime();
 		$timestamp = $obj_date->format('Y-m-d H:i:s');
 		$where = ['id' => $id];
-		$data = ['deleted_at' => $timestamp, 'status' => null];
+		$data = ['deleted_at' => $timestamp];
 		return $this->db->update($this->table, $data, $where);
 	}
 
