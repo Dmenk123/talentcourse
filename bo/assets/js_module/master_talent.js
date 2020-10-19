@@ -3,6 +3,8 @@ var table;
 
 $(document).ready(function() {
 
+    $('#deskripsi').ckeditor();
+
     //force integer input in textfield
     $('input.numberinput').bind('keypress', function (e) {
         return (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57) && e.which != 46) ? false : true;
@@ -84,17 +86,17 @@ function add_menu()
 {
     reset_modal_form();
     save_method = 'add';
-	$('#modal_user_form').modal('show');
-	$('#modal_title').text('Tambah User Baru'); 
+	$('#modal_talent_form').modal('show');
+	$('#modal_title').text('Tambah talent Baru'); 
 }
 
-function edit_user(id)
+function edit_talent(id)
 {
     reset_modal_form();
     save_method = 'update';
     //Ajax Load data from ajax
     $.ajax({
-        url : base_url + 'master_user/edit_user',
+        url : base_url + 'master_talent/edit_talent',
         type: "POST",
         dataType: "JSON",
         data : {id:id},
@@ -103,18 +105,18 @@ function edit_user(id)
             // data.data_menu.forEach(function(dataLoop) {
             //     $("#parent_menu").append('<option value = '+dataLoop.id+' class="append-opt">'+dataLoop.nama+'</option>');
             // });
-            $('#div_pass_lama').css("display","block");
+           
             $('#div_preview_foto').css("display","block");
-            $('#div_skip_password').css("display", "block");
-            $('[name="id_user"]').val(data.old_data.id);
-            $('[name="username"]').val(data.old_data.username).attr('disabled', true);
-            $('[name="role"]').val(data.old_data.id_role);
-            $('[name="status"]').val(data.old_data.status);
-            // $("#pegawai").val(data.old_data.id_pegawai).trigger("change");
+            $('[name="id_talent"]').val(data.old_data.id);
+            $('[name="nama"]').val(data.old_data.nama);
+            $("[name='deskripsi']").val(data.old_data.deskripsi);
+            $('[name="akun_fb"]').val(data.old_data.akun_fb);
+            $('[name="akun_ig"]').val(data.old_data.akun_ig);
+            $('[name="akun_tw"]').val(data.old_data.akun_tw);
+            
             $('#preview_img').attr('src', 'data:image/jpeg;base64,'+data.foto_encoded);
-            $('#modal_user_form').modal('show');
-	        $('#modal_title').text('Edit User'); 
-
+            $('#modal_talent_form').modal('show');
+            $('#modal_title').text('Edit Talent');         
         },
         error: function (jqXHR, textStatus, errorThrown)
         {
@@ -134,15 +136,18 @@ function save()
     var txtAksi;
 
     if(save_method == 'add') {
-        url = base_url + 'master_user/add_data_user';
-        txtAksi = 'Tambah User';
+        url = base_url + 'master_talent/add_data_talent';
+        txtAksi = 'Tambah Talent';
     }else{
-        url = base_url + 'master_user/update_data_user';
-        txtAksi = 'Edit User';
+        url = base_url + 'master_talent/update_data_talent';
+        txtAksi = 'Edit Talent';
     }
     
-    var form = $('#form-user')[0];
+
+    var form = $('#form-talent')[0];
     var data = new FormData(form);
+    var value = CKEDITOR.instances['deskripsi'].getData()
+    data.append('txt_deskripsi', value);
     
     $("#btnSave").prop("disabled", true);
     $('#btnSave').text('Menyimpan Data'); //change button text
@@ -234,15 +239,14 @@ function delete_user(id){
 
 function reset_modal_form()
 {
-    $('#form-user')[0].reset();
+    $('#form-talent')[0].reset();
     $('.append-opt').remove(); 
     $('div.form-group').children().removeClass("is-invalid invalid-feedback");
     $('span.help-block').text('');
-    $('#div_pass_lama').css("display","none");
-    $('#div_preview_foto').css("display","none");
-    $('#div_skip_password').css("display", "none");
     $('#label_foto').text('Pilih gambar yang akan diupload');
-    $('#username').attr('disabled', false);
+    $("#form-talent textarea[name='deskripsi']").val('');
+    $('#div_preview_foto').css("display","none");
+    $('#preview_img').attr('src', '');
 }
 
 function reset_modal_form_import()
