@@ -3,7 +3,7 @@
     <!-- Container Starts -->
     <div class="container">
         <!-- Copyright Text Starts -->
-        <p>Salimo - One Page Parallax</p>
+        <p>Saras Davina - IVY THE WONDERS</p>
         <p>
             &copy; Copyright 2017 Salimo & Designed with <span class="heart">&#10084;</span> by <a target="_blank" href="http://themeforest.net/user/celtano/">Celtano</a>
         </p>

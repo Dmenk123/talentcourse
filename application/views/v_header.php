@@ -7,10 +7,10 @@
 			<div class="logo">
 				<a data-toggle="collapse" data-target=".navbar-collapse.show" class="navbar-brand link-menu scroll-to-target" href="#mainslider">
 					<!-- Logo White Starts -->
-					<img id="logo-light" class="logo-light" src="<?php echo base_url('assets/template/img/logo-white.png');?>" alt="logo-light" />
+					<img id="logo-light" class="logo-light" src="<?php echo base_url('assets/images/saras.png');?>" alt="logo-light" />
 					<!-- Logo White Ends -->
 					<!-- Logo Black Starts -->
-					<img id="logo-dark" class="logo-dark" src="<?php echo base_url('assets/template/img/logo-black.png');?>" alt="logo-dark" />
+					<img id="logo-dark" class="logo-dark" src="<?php echo base_url('assets/images/saras.png');?>" alt="logo-dark" />
 					<!-- Logo Black Ends -->
 				</a>
 			</div>
@@ -27,7 +27,7 @@
 			<!-- Hamburger Icon Ends -->
 			<!-- Navigation Menu Starts -->
 			<div class="collapse navbar-collapse nav-menu" id="navbarSupportedContent">
-				<ul class="nav-menu-inner ml-auto">
+				<!-- <ul class="nav-menu-inner ml-auto">
 					<li><a data-toggle="collapse" data-target=".navbar-collapse.show" class="link-menu" href="#mainslider"><i class="fa fa-home"></i> home</a></li>
 					<li><a data-toggle="collapse" data-target=".navbar-collapse.show" class="link-menu" href="#about"><i class="fa fa-user"></i> about</a></li>
 					<li><a data-toggle="collapse" data-target=".navbar-collapse.show" class="link-menu" href="#services"><i class="fa fa-cog"></i> services</a></li>
@@ -35,7 +35,7 @@
 					<li><a data-toggle="collapse" data-target=".navbar-collapse.show" class="link-menu" href="#team"><i class="fa fa-user"></i> team</a></li>
 					<li><a data-toggle="collapse" data-target=".navbar-collapse.show" class="link-menu" href="#blog"><i class="fa fa-comments"></i> blog</a></li>
 					<li><a data-toggle="collapse" data-target=".navbar-collapse.show" class="link-menu" href="#contact"><i class="fa fa-envelope"></i> contact</a></li>
-				</ul>
+				</ul> -->
 			</div>
 			<!-- Navigation Menu Ends -->
 		</nav>

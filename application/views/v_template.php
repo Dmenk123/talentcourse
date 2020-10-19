@@ -13,7 +13,8 @@
 
 	<!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-
+    <link rel="stylesheet" type="text/css" href="<?= base_url('assets/template/css/flipdown.css'); ?>" />
+    <link href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" rel="stylesheet">
     <!-- Favicon -->
     <link rel="shortcut icon" href="http://via.placeholder.com/30x30">
 
@@ -115,7 +116,7 @@
 	<!-- Preloader Starts -->
     <div class="preloader" id="preloader">
         <div class="logopreloader">
-            <img src="<?= base_url('img/logo-white.png'); ?>" alt="logo-white">
+            <img src="<?= base_url('assets/images/saras.png'); ?>" alt="logo-white">
         </div>
         <div class="loader" id="loader"></div>
 	</div>
@@ -200,8 +201,14 @@
     <script src="<?= base_url('assets/template/js/plugins/revolution/js/extensions/revolution.extension.video.min.js');?>"></script>
 
      <!-- Main JS Initialization File -->
-	 <script src="<?= base_url('assets/template/js/custom.js'); ?>"></script>
+     <script src="<?= base_url('assets/template/js/custom.js'); ?>"></script>
+     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js"></script> -->
+     <script src="https://pbutcher.uk/flipdown/js/flipdown/flipdown.js"></script>
+     
 
+
+
+        
 	<!-- Revolution Slider Initialization Starts -->
 	<script>
 		(function() {
@@ -296,7 +303,34 @@
 			
 		})(jQuery);
 	</script>
-	<!-- Revolution Slider Initialization Ends -->
+    <!-- Revolution Slider Initialization Ends -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+        // Unix timestamp (in seconds) to count down to
+        var twoDaysFromNow = new Date().getTime() / 1000 + 86400 * 2 + 1;
+        // Set up FlipDown
+        var flipdown = new FlipDown(twoDaysFromNow)
+
+            // Start the countdown
+            .start()
+
+            // Do something when the countdown ends
+            .ifEnded(() => {
+            console.log("The countdown has ended!");
+            });
+
+        // Toggle theme
+        var interval = setInterval(() => {
+            let body = document.body;
+            body.classList.toggle("light-theme");
+            body.querySelector("#flipdown").classList.toggle("flipdown__theme-dark");
+            body.querySelector("#flipdown").classList.toggle("flipdown__theme-light");
+        }, 5000);
+
+        var ver = document.getElementById("ver");
+        ver.innerHTML = flipdown.version;
+        });
+    </script>
         
     <!-- load js per modul -->
     <?php if(isset($js)) { $this->load->view($js); }?>
