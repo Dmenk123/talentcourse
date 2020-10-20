@@ -376,7 +376,7 @@ h2 strong {
                         <!-- Image Ends -->
                         <!-- Details Starts -->
                         <div class="col-md-12 col-lg-12 col-xl-6 offset-xl-1">
-                            <h1>Ayo Pacaran dengan Saras Davina, kalau tidak pacaran mana mungkin bisnis anda bisa Meledak</h1>
+                            <p style="font-size: 26px;">Ayo Pacaran dengan Saras Davina, kalau tidak pacaran mana mungkin bisnis anda bisa Meledak</p>
                             <h3>Miss Katherina Hale</h3>
                             <p>
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus obcaecati pariatur officiis molestias eveniet harum laudantium sed optio iste. Iste, alias, non libero recusandae fugiat praesentium delectus inventore accusamus veniam!

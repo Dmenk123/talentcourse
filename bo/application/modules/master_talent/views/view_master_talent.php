@@ -34,7 +34,7 @@
         <table class="table table-striped- table-bordered table-hover table-checkable" id="tabel_talent">
           <thead>
             <tr>
-              <th style="width: 5%;">No</th>
+              <th style="width: 5%;">Foto</th>
               <th>Nama</th>
               <th>Deskripsi</th>
               <th>FB</th>

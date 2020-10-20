@@ -91,11 +91,11 @@ class M_talent extends CI_Model
 		return $this->db->count_all_results();
 	}
 
-	public function get_detail_user($id_user)
+	public function get_detail_talent($id)
 	{
 		$this->db->select('*');
 		$this->db->from('m_user');
-		$this->db->where('id', $id_user);
+		$this->db->where('id', $id);
 
         $query = $this->db->get();
 
@@ -140,45 +140,13 @@ class M_talent extends CI_Model
 		$obj_date = new DateTime();
 		$timestamp = $obj_date->format('Y-m-d H:i:s');
 		$where = ['id' => $id];
-		$data = ['deleted_at' => $timestamp, 'status' => null];
+		$data = ['deleted_at' => $timestamp];
 		return $this->db->update($this->table, $data, $where);
 	}
 
-	//dibutuhkan di contoller login untuk ambil data user
-	function login($data){
-		return $this->db->select('*')
-			->where('username',$data['data_user'])
-			->where('password',$data['data_password'])
-			->where('status', 1 )
-			->get($this->table)->row();
-	}
-
-	//dibutuhkan di contoller login untuk set last login
-	function set_lastlogin($id){
-		$this->db->where('id',$id);
-		$this->db->update(
-			$this->table, 
-			['last_login'=>date('Y-m-d H:i:s')]
-		);			
-	}
-
-	function get_kode_user(){
-            $q = $this->db->query("select MAX(RIGHT(kode_user,5)) as kode_max from m_user");
-            $kd = "";
-            if($q->num_rows()>0){
-                foreach($q->result() as $k){
-                    $tmp = ((int)$k->kode_max)+1;
-                    $kd = sprintf("%05s", $tmp);
-                }
-            }else{
-                $kd = "00001";
-            }
-            return "USR-".$kd;
-	}
-	
-	public function get_max_id_user()
+	public function get_max_id()
 	{
-		$q = $this->db->query("SELECT MAX(id) as kode_max from m_user");
+		$q = $this->db->query("SELECT MAX(id) as kode_max from $this->table");
 		$kd = "";
 		if($q->num_rows()>0){
 			$kd = $q->row();
@@ -188,34 +156,51 @@ class M_talent extends CI_Model
 		} 
 	}
 
-	public function get_id_pegawai_by_name($nama)
-	{
-		$this->db->select('id');
-		$this->db->from('m_pegawai');
-		$this->db->where('LCASE(nama)', $nama);
-		$q = $this->db->get();
-		if ($q) {
-			return $q->row();
-		}else{
-			return false;
-		}
-	}
 
-	public function get_id_role_by_name($nama)
-	{
-		$this->db->select('id');
-		$this->db->from('m_role');
-		$this->db->where('LCASE(nama)', $nama);
-		$q = $this->db->get();
-		if ($q) {
-			return $q->row();
-		}else{
-			return false;
-		}
-	}
+	// function get_kode_user(){
+    //         $q = $this->db->query("select MAX(RIGHT(kode_user,5)) as kode_max from m_user");
+    //         $kd = "";
+    //         if($q->num_rows()>0){
+    //             foreach($q->result() as $k){
+    //                 $tmp = ((int)$k->kode_max)+1;
+    //                 $kd = sprintf("%05s", $tmp);
+    //             }
+    //         }else{
+    //             $kd = "00001";
+    //         }
+    //         return "USR-".$kd;
+	// }
+	
+	
 
-	public function trun_master_user()
-	{
-		$this->db->query("truncate table m_user");
-	}
+	// public function get_id_pegawai_by_name($nama)
+	// {
+	// 	$this->db->select('id');
+	// 	$this->db->from('m_pegawai');
+	// 	$this->db->where('LCASE(nama)', $nama);
+	// 	$q = $this->db->get();
+	// 	if ($q) {
+	// 		return $q->row();
+	// 	}else{
+	// 		return false;
+	// 	}
+	// }
+
+	// public function get_id_role_by_name($nama)
+	// {
+	// 	$this->db->select('id');
+	// 	$this->db->from('m_role');
+	// 	$this->db->where('LCASE(nama)', $nama);
+	// 	$q = $this->db->get();
+	// 	if ($q) {
+	// 		return $q->row();
+	// 	}else{
+	// 		return false;
+	// 	}
+	// }
+
+	// public function trun_master_user()
+	// {
+	// 	$this->db->query("truncate table m_user");
+	// }
 }
