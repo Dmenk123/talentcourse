@@ -16,7 +16,7 @@ a {
   color: #1a1a1a;
 }
 
-h1 {
+/* h1 {
   margin-bottom: 60px;
   text-align: center;
   font: 300 2.25em "Lato";
@@ -35,7 +35,7 @@ h2 {
 }
 h2 strong {
   font-weight: 400;
-}
+} */
 
 .countdown {
   width: 720px;
@@ -173,6 +173,16 @@ h2 strong {
   margin: auto;
 }
 
+    @media (max-width: 768px) {
+        .slotholder {
+            height: 50%!important;
+        }
+
+        .mainslider {
+            height: 300px!important;
+        }
+
+    }
 
 </style>
 <!-- Main Slider Section Starts -->
