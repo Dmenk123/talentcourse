@@ -3,11 +3,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class T_harga extends CI_Model
 {
 	var $table = 't_harga';
-	var $column_search = ['h.is_reguler', 'h.nilai_harga', 't.nama', 'd.nama', 'h.masa_berlaku_diskon', 'd.besaran','tipe_harga'];
+	var $column_search = ['h.jenis_harga', 'h.nilai_harga', 't.nama', 'd.nama', 'h.masa_berlaku_diskon', 'd.besaran','tipe_harga'];
 	
 	var $column_order = [
 		null,
-		'h.is_reguler',
+		'h.jenis_harga',
 		'h.nilai_harga',
 		't.nama',
 		'd.nama',
@@ -27,7 +27,7 @@ class T_harga extends CI_Model
 
 	private function _get_datatables_query($term='')
 	{
-		$this->db->select("h.*, CASE WHEN h.is_reguler = 1 THEN 'Reguler' ELSE 'Eksklusif' END as tipe_harga, t.nama as nama_talent, d.nama as nama_diskon, d.besaran");
+		$this->db->select("h.*, CASE WHEN h.jenis_harga = 1 THEN 'Reguler' ELSE 'Eksklusif' END as tipe_harga, t.nama as nama_talent, d.nama as nama_diskon, d.besaran");
 		
 		$this->db->from($this->table.' h');
 		$this->db->join('m_talent t', 'h.id_talent = t.id', 'left');
@@ -56,7 +56,7 @@ class T_harga extends CI_Model
 						 * param both untuk wildcard pada awal dan akhir kata
 						 * param false untuk disable escaping (karena pake subquery)
 						 */
-						$this->db->or_like('(CASE WHEN h.is_reguler = 1 THEN \'Reguler\' ELSE \'Eksklusif\' END)', $_POST['search']['value'],'both',false);
+						$this->db->or_like('(CASE WHEN h.jenis_harga = 1 THEN \'Reguler\' ELSE \'Eksklusif\' END)', $_POST['search']['value'],'both',false);
 					}
 					else{
 						$this->db->or_like($item, $_POST['search']['value']);
@@ -157,41 +157,10 @@ class T_harga extends CI_Model
 		return $this->db->update($this->table, $data, $where);
 	}
 
-	//dibutuhkan di contoller login untuk ambil data user
-	function login($data){
-		return $this->db->select('*')
-			->where('username',$data['data_user'])
-			->where('password',$data['data_password'])
-			->where('status', 1 )
-			->get($this->table)->row();
-	}
-
-	//dibutuhkan di contoller login untuk set last login
-	function set_lastlogin($id){
-		$this->db->where('id',$id);
-		$this->db->update(
-			$this->table, 
-			['last_login'=>date('Y-m-d H:i:s')]
-		);			
-	}
-
-	function get_kode_user(){
-            $q = $this->db->query("select MAX(RIGHT(kode_user,5)) as kode_max from m_user");
-            $kd = "";
-            if($q->num_rows()>0){
-                foreach($q->result() as $k){
-                    $tmp = ((int)$k->kode_max)+1;
-                    $kd = sprintf("%05s", $tmp);
-                }
-            }else{
-                $kd = "00001";
-            }
-            return "USR-".$kd;
-	}
 	
-	public function get_max_id_user()
+	public function get_max_id()
 	{
-		$q = $this->db->query("SELECT MAX(id) as kode_max from m_user");
+		$q = $this->db->query("SELECT MAX(id) as kode_max from $this->table");
 		$kd = "";
 		if($q->num_rows()>0){
 			$kd = $q->row();

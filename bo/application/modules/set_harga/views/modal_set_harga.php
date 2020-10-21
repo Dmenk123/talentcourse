@@ -21,7 +21,7 @@
             <label for="lbl_talent" class="form-control-label">Jenis Harga :</label>
             <select class="form-control" id="jenis_harga" name="jenis_harga" style="width: 100%;">
               <option value="1">Reguler</option>
-              <option value="">Eksklusif</option>
+              <option value="2">Eksklusif</option>
             </select>
             <span class="help-block"></span>
           </div>
@@ -49,6 +49,11 @@
             <div class="form-group">
               <label for="lbl_masa" class="form-control-label">Masa Berlaku Diskon: (Dalam Satuan Hari)</label>
               <input type="text" class="form-control numberinput" id="masa_berlaku" name="masa_berlaku" autocomplete="off">
+              <span class="help-block"></span>
+            </div>
+            <div class="form-group">
+              <label for="lbl_masa" class="form-control-label">tgl Mulai Diskon: </label>
+              <input type="text" class="form-control kt_datepicker" id="tgl_mulai_disc" name="tgl_mulai_disc" autocomplete="off">
               <span class="help-block"></span>
             </div>
           </div>

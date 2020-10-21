@@ -56,11 +56,11 @@ class Set_harga extends CI_Controller {
 			//loop value tabel db
 			$row[] = $no;
 			$row[] = $val->tipe_harga;
-			$row[] = number_format($val->nilai_harga, 0, '.', '');
+			$row[] = "Rp " . number_format($val->nilai_harga,0,',','.');
 			$row[] = $val->nama_talent;
 			$row[] = $val->nama_diskon;
-			$row[] = $val->masa_berlaku_diskon;
-			$row[] = $val->besaran;
+			$row[] = $val->masa_berlaku_diskon.' Hari';
+			$row[] = $val->besaran.'%';
 			// $row[] = $obj_date->createFromFormat('d-m-Y H:i:s', $val->tgl_mulai_diskon)->format('d/m/Y');
 			// $row[] = $obj_date->createFromFormat('d-m-Y H:i:s', $val->tgl_akhir_diskon)->format('d/m/Y');
 			
@@ -101,6 +101,68 @@ class Set_harga extends CI_Controller {
 		echo json_encode($output);
 	}
 
+	public function add_data()
+	{
+		$obj_date = new DateTime();
+		$timestamp = $obj_date->format('Y-m-d H:i:s');
+		$arr_valid = $this->rule_validasi();
+		
+		$id_talent = $this->input->post('talent');
+		$jenis_harga = $this->input->post('jenis_harga');
+		$harga = trim($this->input->post('harga'));
+		$is_diskon = $this->input->post('is_diskon');
+		$id_diskon = $this->input->post('diskon');
+		$masa_berlaku = $this->input->post('masa_berlaku');
+		$tgl_mulai_disc = $obj_date->createFromFormat('d/m/Y', $this->input->post('tgl_mulai_disc'))->format('Y-m-d');
+		$tgl_akhiri_disc = $obj_date->createFromFormat('d/m/Y', $this->input->post('tgl_mulai_disc'))->modify('+'.$masa_berlaku.' day')->format('Y-m-d');
+		
+		if ($arr_valid['status'] == FALSE) {
+			echo json_encode($arr_valid);
+			return;
+		}
+
+		$this->db->trans_begin();
+
+		//ambil data existing
+		$cek = $this->t_harga->get_by_condition("jenis_harga = '$jenis_harga' and deleted_at is not null", true);
+		if($cek) {
+			//set deleted_at is null
+			$this->t_harga->update(['id' => $cek->id], ['deleted_at' => $timestamp]);
+		}
+
+		$id = $this->t_harga->get_max_id();
+		
+		$datanya['id'] = $id;
+		$datanya['jenis_harga'] = $jenis_harga;
+		$datanya['nilai_harga'] = $harga;
+		$datanya['id_talent'] = $id_talent;
+		$datanya['created_at'] = $timestamp;
+
+		if($is_diskon == '1') {
+			$datanya['is_diskon'] = 1;
+			$datanya['id_m_diskon'] = $id_diskon;
+			$datanya['tgl_mulai_diskon'] = $tgl_mulai_disc;
+			$datanya['tgl_akhir_diskon'] = $tgl_akhiri_disc;
+			$datanya['masa_berlaku_diskon'] = $masa_berlaku;
+		}
+		
+		$insert = $this->t_harga->save($datanya);
+		
+		if ($this->db->trans_status() === FALSE){
+			$this->db->trans_rollback();
+			$retval['status'] = false;
+			$retval['pesan'] = 'Gagal setting harga';
+		}else{
+			$this->db->trans_commit();
+			$retval['status'] = true;
+			$retval['pesan'] = 'Sukses setting harga';
+		}
+
+		echo json_encode($retval);
+	}
+
+	//////////////////////////////
+
 	public function edit_diskon()
 	{
 		$this->load->library('Enkripsi');
@@ -122,45 +184,7 @@ class Set_harga extends CI_Controller {
 		echo json_encode($data);
 	}
 
-	public function add_data_diskon()
-	{
-		$this->load->library('Enkripsi');
-		$obj_date = new DateTime();
-		$timestamp = $obj_date->format('Y-m-d H:i:s');
-		$arr_valid = $this->rule_validasi();
-		
-		$nama = trim($this->input->post('nama'));
-		$besaran = trim($this->input->post('besaran'));
-		$kode_ref = trim($this->input->post('kode_ref'));
-
-		if ($arr_valid['status'] == FALSE) {
-			echo json_encode($arr_valid);
-			return;
-		}
-		
-		$this->db->trans_begin();
-
-		$datanya = [
-			'nama' => $nama,
-			'besaran' => $besaran,
-			'kode_ref_diskon' => $kode_ref,
-			'created_at' => $timestamp,
-		];
-		
-		$insert = $this->m_diskon->save($datanya);
-		
-		if ($this->db->trans_status() === FALSE){
-			$this->db->trans_rollback();
-			$retval['status'] = false;
-			$retval['pesan'] = 'Gagal menambahkan diskon';
-		}else{
-			$this->db->trans_commit();
-			$retval['status'] = true;
-			$retval['pesan'] = 'Sukses menambahkan diskon';
-		}
-
-		echo json_encode($retval);
-	}
+	
 
 	public function update_data_diskon()
 	{
@@ -236,22 +260,36 @@ class Set_harga extends CI_Controller {
 		$data['inputerror'] = array();
 		$data['status'] = TRUE;
 
-		if ($this->input->post('nama') == '') {
-			$data['inputerror'][] = 'nama';
-            $data['error_string'][] = 'Wajib Memilih Nama Diskon';
+		if ($this->input->post('talent') == '') {
+			$data['inputerror'][] = 'talent';
+            $data['error_string'][] = 'Wajib Memilih Nama Talent';
             $data['status'] = FALSE;
 		}
 
-		if ($this->input->post('kode_ref') == '') {
-			$data['inputerror'][] = 'kode_ref';
-            $data['error_string'][] = 'Wajib Memilih Kode Ref';
+		if ($this->input->post('harga') == '') {
+			$data['inputerror'][] = 'harga';
+            $data['error_string'][] = 'Wajib Mengisi Harga';
             $data['status'] = FALSE;
 		}
 
-		if ($this->input->post('besaran') == '') {
-			$data['inputerror'][] = 'besaran';
-            $data['error_string'][] = 'Wajib Memilih Besaran';
-            $data['status'] = FALSE;
+		if($this->input->post('is_diskon') == '1') {
+			if ($this->input->post('diskon') == '') {
+				$data['inputerror'][] = 'diskon';
+				$data['error_string'][] = 'Wajib Memilih Diskon';
+				$data['status'] = FALSE;
+			}
+	
+			if ($this->input->post('masa_berlaku') == '') {
+				$data['inputerror'][] = 'masa_berlaku';
+				$data['error_string'][] = 'Wajib Memilih Masa Berlaku';
+				$data['status'] = FALSE;
+			}
+	
+			if ($this->input->post('tgl_mulai_disc') == '') {
+				$data['inputerror'][] = 'tgl_mulai_disc';
+				$data['error_string'][] = 'Wajib Memilih Tgl Mulai Diskon';
+				$data['status'] = FALSE;
+			}
 		}
 
         return $data;

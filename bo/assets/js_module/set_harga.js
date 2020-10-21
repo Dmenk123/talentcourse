@@ -155,7 +155,7 @@ function add_menu()
     reset_modal_form();
     save_method = 'add';
 	$('#modal_harga_form').modal('show');
-	$('#modal_title').text('Tambah Data Harga'); 
+	$('#modal_title').text('Set Data Harga'); 
 }
 
 function edit_diskon(id)
@@ -200,11 +200,11 @@ function save()
     var txtAksi;
 
     if(save_method == 'add') {
-        url = base_url + 'master_harga/add_data_harga';
-        txtAksi = 'Tambah harga';
+        url = base_url + 'set_harga/add_data';
+        txtAksi = 'Set harga';
     }else{
-        url = base_url + 'master_harga/update_data_harga';
-        txtAksi = 'Edit Diskon';
+        url = base_url + 'set_harga/update_data';
+        txtAksi = 'Update Harga';
     }
     
     var form = $('#form-harga')[0];
@@ -304,63 +304,7 @@ function reset_modal_form()
     $('.append-opt').remove(); 
     $('div.form-group').children().removeClass("is-invalid invalid-feedback");
     $('span.help-block').text('');
-    $('#div_pass_lama').css("display","none");
-    $('#div_preview_foto').css("display","none");
-    $('#div_skip_password').css("display", "none");
-    $('#label_foto').text('Pilih gambar yang akan diupload');
-    $('#username').attr('disabled', false);
-}
-
-function reset_modal_form_import()
-{
-    $('#form_import_excel')[0].reset();
-    $('#label_file_excel').text('Pilih file excel yang akan diupload');
-}
-
-function import_excel(){
-    $('#modal_import_excel').modal('show');
-	$('#modal_import_title').text('Import data user'); 
-}
-
-function import_data_excel(){
-    var form = $('#form_import_excel')[0];
-    var data = new FormData(form);
-    
-    $("#btnSaveImport").prop("disabled", true);
-    $('#btnSaveImport').text('Import Data');
-    $.ajax({
-        type: "POST",
-        enctype: 'multipart/form-data',
-        url: base_url + 'master_user/import_data_master',
-        data: data,
-        dataType: "JSON",
-        processData: false, // false, it prevent jQuery form transforming the data into a query string
-        contentType: false, 
-        success: function (data) {
-            if(data.status) {
-                swal.fire("Sukses!!", data.pesan, "success");
-                $("#btnSaveImport").prop("disabled", false);
-                $('#btnSaveImport').text('Simpan');
-            }else {
-                swal.fire("Gagal!!", data.pesan, "error");
-                $("#btnSaveImport").prop("disabled", false);
-                $('#btnSaveImport').text('Simpan');
-            }
-
-            reset_modal_form_import();
-            $(".modal").modal('hide');
-            table.ajax.reload();
-        },
-        error: function (e) {
-            console.log("ERROR : ", e);
-            $("#btnSaveImport").prop("disabled", false);
-            $('#btnSaveImport').text('Simpan');
-
-            reset_modal_form_import();
-            $(".modal").modal('hide');
-            table.ajax.reload();
-        }
-    });
+    $('.kt-select2').val('').trigger('change');
 }
 
 function readURL(input) {
