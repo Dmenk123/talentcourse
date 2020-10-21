@@ -225,6 +225,27 @@ class Master_diskon extends CI_Controller {
 		echo json_encode($retval);
 	}
 
+	/**
+	 * get data untuk select2 (dipakai dimana-mana)
+	 */
+	public function get_select_diskon()
+	{
+		$term = $this->input->get('term');
+		$data_diskon = $this->m_global->multi_row('*', ['deleted_at' => null, 'nama like' => '%'.$term.'%'], 'm_diskon', null, 'nama');
+		if($data_diskon) {
+			foreach ($data_diskon as $key => $value) {
+				$row['id'] = $value->id;
+				$row['text'] = $value->nama.' - '.$value->kode_ref_diskon.' ['.$value->besaran.'%]';
+				$row['nama'] = $value->nama;
+				$row['koderef'] = $value->kode_ref_diskon;
+				$retval[] = $row;
+			}
+		}else{
+			$retval = false;
+		}
+		echo json_encode($retval);
+	}
+
 	// ===============================================
 	private function rule_validasi()
 	{

@@ -315,6 +315,8 @@ class Master_talent extends CI_Controller {
 	public function detail_talent($id)
 	{
 		$data_talent = $this->m_talent->get_by_condition("id = '$id' and deleted_at is null", true);
+		$data_gallery = $this->t_file_talent->get_by_condition("id_talent = '$id' and deleted_at is null");
+
 		if($data_talent){
 			$id_user = $this->session->userdata('id_user'); 
 			$data_user = $this->m_user->get_detail_user($id_user);
@@ -328,9 +330,10 @@ class Master_talent extends CI_Controller {
 				'title' => 'Detail Data Talent',
 				'data_user' => $data_user,
 				'data_talent' => $data_talent,
-				'foto_encode' => $foto
+				'foto_encode' => $foto,
+				'data_gallery' => $data_gallery
 			);
-
+			
 			/**
 			 * content data untuk template
 			 * param (css : link css pada direktori assets/css_module)
@@ -395,8 +398,8 @@ class Master_talent extends CI_Controller {
 			'id' => $id,
 			'id_talent' => $id_talent,
 			'created_at' => $timestamp,
-			'path_file'	=> 'files/img/talent_img/'.$id.'/'.$namafileseo,
-			'path_file_thumb' => 'files/img/talent_img/'.$id.'/'.'thumbs'.'/'.$output_thumb
+			'path_file'	=> 'files/img/talent_img/'.$id_talent.'/'.$namafileseo,
+			'path_file_thumb' => 'files/img/talent_img/'.$id_talent.'/'.'thumbs'.'/'.$output_thumb
 		];
 
 		$insert = $this->t_file_talent->save($datanya);
@@ -411,6 +414,40 @@ class Master_talent extends CI_Controller {
 			$retval['pesan'] = 'Sukses menambahkan file gallery';
 		}
 
+		echo json_encode($retval);
+	}
+
+	public function delete_gallery()
+	{
+		$id = $this->input->post('id');
+		$del = $this->t_file_talent->softdelete_by_id($id);
+		if($del) {
+			$retval['status'] = TRUE;
+			$retval['pesan'] = 'Data Master Talent dihapus';
+		}else{
+			$retval['status'] = FALSE;
+			$retval['pesan'] = 'Data Master Talent dihapus';
+		}
+
+		echo json_encode($retval);
+	}
+
+	/**
+	 * get data untuk select2 (dipakai dimana-mana)
+	 */
+	public function get_select_talent()
+	{
+		$term = $this->input->get('term');
+		$data_talent = $this->m_global->multi_row('*', ['deleted_at' => null, 'nama like' => '%'.$term.'%'], 'm_talent', null, 'nama');
+		if($data_talent) {
+			foreach ($data_talent as $key => $value) {
+				$row['id'] = $value->id;
+				$row['text'] = $value->nama;
+				$retval[] = $row;
+			}
+		}else{
+			$retval = false;
+		}
 		echo json_encode($retval);
 	}
 

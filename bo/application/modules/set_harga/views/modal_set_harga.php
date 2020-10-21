@@ -9,34 +9,50 @@
       </div>
       <div class="modal-body">
         <form id="form-harga" name="form-harga">
+          <input type="hidden" class="form-control" id="id_harga" name="id_harga">
           <div class="form-group">
-            <input type="hidden" class="form-control" id="id_harga" name="id_harga">
-            <label for="lbl_nama" class="form-control-label">Nama:</label>
-            <input type="text" class="form-control" id="nama" name="nama" autocomplete="off">
+            <label for="lbl_talent" class="form-control-label">Nama Talent :</label>
+            <select class="form-control kt-select2" id="talent" name="talent" style="width: 100%;">
+              <option value="">Silahkan Pilih Talent</option>
+            </select>
             <span class="help-block"></span>
           </div>
-          <div class="col-12 row">
-            <div class="col-8">
-              <select class="form-control kt-select2" id="talent" name="talent" style="width: 100%;">
-                <option value="">Silahkan Pilih Talent</option>
+          <div class="form-group">
+            <label for="lbl_talent" class="form-control-label">Jenis Harga :</label>
+            <select class="form-control" id="jenis_harga" name="jenis_harga" style="width: 100%;">
+              <option value="1">Reguler</option>
+              <option value="">Eksklusif</option>
+            </select>
+            <span class="help-block"></span>
+          </div>
+          <div class="form-group">
+            <label for="lbl_harga" class="form-control-label">Harga :</label>
+            <input type="text" class="form-control numberinput" id="harga" name="harga" autocomplete="off">
+            <span class="help-block"></span>
+          </div>
+          <div class="form-group">
+            <label for="lbl_talent" class="form-control-label">Diskon / Tidak :</label>
+            <select class="form-control" id="is_diskon" name="is_diskon" style="width: 100%;">
+              <option value="">Harga Normal</option>  
+              <option value="1">Diskon</option>
+            </select>
+            <span class="help-block"></span>
+          </div>
+          <div class="hidden" id="div_diskon_area">
+            <div class="form-group">
+              <label for="lbl_talent" class="form-control-label">Nama Diskon :</label>
+              <select class="form-control kt-select2" id="diskon" name="diskon" style="width: 100%;">
+                <option value="">Silahkan Pilih Diskon</option>
               </select>
               <span class="help-block"></span>
             </div>
-            <div class="col-4">
-              <input type="number" class="form-control" id="gigi" name="gigi" value="">   
+            <div class="form-group">
+              <label for="lbl_masa" class="form-control-label">Masa Berlaku Diskon: (Dalam Satuan Hari)</label>
+              <input type="text" class="form-control numberinput" id="masa_berlaku" name="masa_berlaku" autocomplete="off">
               <span class="help-block"></span>
             </div>
           </div>
-          <div class="form-group">
-            <label for="lbl_koderef" class="form-control-label">Kode Ref Diskon:</label>
-            <input type="text" class="form-control" id="kode_ref" name="kode_ref" autocomplete="off">
-            <span class="help-block"></span>
-          </div>
-          <div class="form-group">
-            <label for="lbl_besaran" class="form-control-label">Besaran: (Besaran Persen)</label>
-            <input type="text" class="form-control numberinput" id="besaran" name="besaran" autocomplete="off">
-            <span class="help-block"></span>
-          </div>
+          
         </form>
       </div>
       <div class="modal-footer">

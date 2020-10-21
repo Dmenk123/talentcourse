@@ -91,7 +91,7 @@
             </div>
           </form>
         </div>
-        <h3>Galleri Foto Talent</h3>
+        <h3>Gallery Foto Talent</h3>
         <!--begin: Datatable -->
         <table class="table table-striped- table-bordered table-hover table-checkable" id="tabel_talent_det">
           <thead>
@@ -102,7 +102,18 @@
               <th style="width: 5%;">Aksi</th>
             </tr>
           </thead>
-          <tbody></tbody>
+          <tbody>
+            <?php foreach ($data_gallery as $key => $value) {?>
+              <tr>
+                <td><?= $key += 1; ?></td>
+                <td><?= '<div class="kt-widget__media"><img src="../../../'.$value->path_file_thumb.'"/></div>'; ?></td>
+                <td><?= $value->path_file; ?></td>
+                <td>
+                  <button class="btn btn-danger btn-sm" onclick="delete_gallery('<?=$value->id; ?>')">Hapus</button>
+                </td>
+              </tr>
+            <?php } ?>
+          </tbody>
         </table>
 
         <!--end: Datatable -->

@@ -8,6 +8,16 @@ $(document).ready(function() {
         return (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57) && e.which != 46) ? false : true;
     });
 
+    $('#is_diskon').change(function (e) { 
+        e.preventDefault();
+        if($(this).val() == '1') {
+            $('#div_diskon_area').removeClass('hidden');
+        }else{
+            $('#div_diskon_area').addClass('hidden');
+        }
+        
+    });
+
 	//datatables
 	table = $('#tabel_harga').DataTable({
 		responsive: true,
@@ -51,8 +61,40 @@ $(document).ready(function() {
                         return {
                             text: item.text,
                             id: item.id,
-                            kode: item.kode,
-                            html: item.html
+                            // kode: item.kode,
+                            // html: item.html
+                        }
+                    })
+                };
+            }
+        }
+    });
+
+    $("#diskon").select2({
+        // tags: true,
+        //multiple: false,
+        tokenSeparators: [',', ' '],
+        minimumInputLength: 0,
+        minimumResultsForSearch: 5,
+        ajax: {
+            url: base_url+'master_diskon/get_select_diskon',
+            dataType: "json",
+            type: "GET",
+            data: function (params) {
+
+                var queryParameters = {
+                    term: params.term
+                }
+                return queryParameters;
+            },
+            processResults: function (data) {
+                return {
+                    results: $.map(data, function (item) {
+                        return {
+                            text: item.text,
+                            id: item.id,
+                            kode: item.koderef,
+                            nama: item.nama
                         }
                     })
                 };
