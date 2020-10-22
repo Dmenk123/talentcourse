@@ -14,8 +14,10 @@ $(document).ready(function() {
             $('#div_diskon_area').removeClass('hidden');
         }else{
             $('#div_diskon_area').addClass('hidden');
+            $('#diskon').val('').trigger('change');
+            $('#masa_berlaku').val('');
+            $('#tgl_mulai_disc').val('');
         }
-        
     });
 
 	//datatables
@@ -146,7 +148,6 @@ $(document).ready(function() {
 
     $(".modal").on("hidden.bs.modal", function(){
         reset_modal_form();
-        reset_modal_form_import();
     });
 });	
 
@@ -156,37 +157,6 @@ function add_menu()
     save_method = 'add';
 	$('#modal_harga_form').modal('show');
 	$('#modal_title').text('Set Data Harga'); 
-}
-
-function edit_diskon(id)
-{
-    reset_modal_form();
-    save_method = 'update';
-    //Ajax Load data from ajax
-    $.ajax({
-        url : base_url + 'master_diskon/edit_diskon',
-        type: "POST",
-        dataType: "JSON",
-        data : {id:id},
-        success: function(data)
-        {
-            // data.data_menu.forEach(function(dataLoop) {
-            //     $("#parent_menu").append('<option value = '+dataLoop.id+' class="append-opt">'+dataLoop.nama+'</option>');
-            // });
-            $('[name="id_diskon"]').val(data.old_data.id);
-            $('[name="nama"]').val(data.old_data.nama);
-            $('[name="kode_ref"]').val(data.old_data.kode_ref_diskon);
-            $('[name="besaran"]').val(data.old_data.besaran);
-            
-            $('#modal_diskon_form').modal('show');
-	        $('#modal_title').text('Edit Diskon'); 
-
-        },
-        error: function (jqXHR, textStatus, errorThrown)
-        {
-            alert('Error get data from ajax');
-        }
-    });
 }
 
 function reload_table()
@@ -259,19 +229,19 @@ function save()
     });
 }
 
-function delete_diskon(id){
+function stop_diskon(id){
     swalConfirmDelete.fire({
-        title: 'Hapus Data Diskon ?',
-        text: "Data Akan dihapus permanen ?",
+        title: 'Stop Diskon ?',
+        text: "Data Diskon Akan Di Stop ?",
         type: 'warning',
         showCancelButton: true,
-        confirmButtonText: 'Ya, Hapus Data !',
+        confirmButtonText: 'Ya, Stop Diskon !',
         cancelButtonText: 'Tidak, Batalkan!',
         reverseButtons: true
       }).then((result) => {
         if (result.value) {
             $.ajax({
-                url : base_url + 'master_diskon/delete_diskon',
+                url : base_url + 'set_harga/stop_diskon',
                 type: "POST",
                 dataType: "JSON",
                 data : {id:id},
@@ -305,6 +275,7 @@ function reset_modal_form()
     $('div.form-group').children().removeClass("is-invalid invalid-feedback");
     $('span.help-block').text('');
     $('.kt-select2').val('').trigger('change');
+    $('#div_diskon_area').addClass('hidden');
 }
 
 function readURL(input) {
