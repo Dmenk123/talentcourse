@@ -379,6 +379,7 @@ class Master_talent extends CI_Controller {
 			{
 				$gbrBukti = $this->file_obj->data();
 				$nama_file_foto = $gbrBukti['file_name'];
+				$this->konfigurasi_image_resize($nama_file_foto, $gbrBukti, $id_talent);
 				$output_thumb = $this->konfigurasi_image_thumb($nama_file_foto, $gbrBukti, $id_talent);
 				$this->image_lib->clear();
 				## replace nama file + ext
@@ -488,6 +489,22 @@ class Master_talent extends CI_Controller {
 		//load library with custom object name alias
 		$this->load->library('upload', $config, 'file_obj');
 		$this->file_obj->initialize($config);
+	}
+
+	private function konfigurasi_image_resize($nmfile,$gbr, $folder)
+	{
+		//konfigurasi image lib
+	    $config['image_library'] = 'gd2';
+	    $config['source_image'] = '../files/img/talent_img/'.$folder.'/'.$nmfile;
+	    $config['create_thumb'] = FALSE;
+	    $config['maintain_ratio'] = FALSE;
+	    $config['new_image'] = '../files/img/talent_img/'.$folder.'/'.$nmfile;
+	    $config['overwrite'] = TRUE;
+	    $config['width'] = 480; //resize
+	    $config['height'] = 600; //resize
+	    $this->load->library('image_lib',$config); //load image library
+	    $this->image_lib->initialize($config);
+		$this->image_lib->resize();
 	}
 
 	private function konfigurasi_image_thumb($filename, $gbr, $folder)
