@@ -173,16 +173,67 @@ h2 strong {
   margin: auto;
 }
 
-    @media (max-width: 768px) {
-        .slotholder {
-            height: 50%!important;
-        }
+    
+            .gallery {
+                margin: -16px -12px 43px;
+                display: flex;
+                flex-wrap: wrap
+            }
 
-        .mainslider {
-            height: 300px!important;
-        }
+            .gallery .gallery-item {
+                padding: 0 12px;
+                margin-top: 24px;
+                margin-bottom: 0
+            }
 
-    }
+            .gallery.gallery-columns-2 .gallery-item {
+                width: 50%
+            }
+
+            .gallery.gallery-columns-3 .gallery-item {
+                width: 33.33%
+            }
+
+            .gallery.gallery-columns-4 .gallery-item {
+                width: 25%
+            }
+
+            .gallery.gallery-columns-5 .gallery-item {
+                width: 20%
+            }
+
+            .widget_media_gallery .gallery-item {
+                padding: 0 5px;
+                margin-top: 10px;
+                margin-bottom: 0
+            }
+
+            .widget_media_gallery .gallery {
+                margin: -10px -5px 0
+            }
+
+            @media (min-width: 768px) {
+
+                .foto {
+                    display: none;
+                }
+
+            }
+
+            @media (max-width: 768px) {
+                .slotholder {
+                    height: 50%!important;
+                }
+
+                .mainslider {
+                    height: 300px!important;
+                }
+
+                .foto {
+                    display: block;
+                }
+
+            }
 
 </style>
 <!-- Main Slider Section Starts -->
@@ -197,11 +248,11 @@ h2 strong {
                             <!-- LAYERS -->
 
                             <!-- LAYER NR. 1 -->
-                            <div class="tp-caption NotGeneric-Title   tp-resizeme" id="slide-24-layer-6" data-x="['left','left','left','left']" data-hoffset="['50','50','50','50']" data-y="['top','top','top','top']" data-voffset="['250','250','250','250']" data-width="none" data-height="none" data-whitespace="nowrap" data-transform_idle="o:1;" data-transform_in="opacity:0;s:500;e:Power2.easeInOut;" data-transform_out="opacity:0;s:1000;e:Power2.easeIn;s:1000;e:Power2.easeIn;" data-start="500" data-splitin="chars" data-splitout="none" data-basealign="slide" data-responsive_offset="on" data-elementdelay="0.03" style="z-index: 5; white-space: nowrap; font-size: 40px; line-height: 40px;">SARAS DAVINA
+                            <div class="tp-caption NotGeneric-Title   tp-resizeme" id="slide-24-layer-6" data-x="['left','left','left','left']" data-hoffset="['50','50','50','50']" data-y="['top','top','top','top']" data-voffset="['250','250','250','250']" data-width="none" data-height="none" data-whitespace="nowrap" data-transform_idle="o:1;" data-transform_in="opacity:0;s:500;e:Power2.easeInOut;" data-transform_out="opacity:0;s:1000;e:Power2.easeIn;s:1000;e:Power2.easeIn;" data-start="500" data-splitin="chars" data-splitout="none" data-basealign="slide" data-responsive_offset="on" data-elementdelay="0.03" style="z-index: 5; white-space: nowrap; font-size: 40px; line-height: 40px; color:yellow!important;">SARAS DAVINA
                             </div>
 
                             <!-- LAYER NR. 2 -->
-                            <div class="tp-caption Photography-Textblock   tp-resizeme" id="slide-24-layer-8" data-x="['left','left','left','left']" data-hoffset="['50','50','50','50']" data-y="['top','top','top','top']" data-voffset="['320','320','320','320']" data-width="350" data-height="150" data-whitespace="normal" data-transform_idle="o:1;" data-transform_in="opacity:0;s:500;e:Power2.easeInOut;" data-transform_out="opacity:0;s:1000;e:Power2.easeIn;s:1000;e:Power2.easeIn;" data-start="500" data-splitin="chars" data-splitout="none" data-basealign="slide" data-responsive_offset="on" data-elementdelay="0.01" style="z-index: 7; min-width: 350px; max-width: 350px; max-width: 150px; max-width: 150px; white-space: normal; font-size: 15px; line-height: 25px;">Milenial Sensual yang Meledakkan Bisnis Anda
+                            <div class="tp-caption Photography-Textblock   tp-resizeme" id="slide-24-layer-8" data-x="['left','left','left','left']" data-hoffset="['50','50','50','50']" data-y="['top','top','top','top']" data-voffset="['320','320','320','320']" data-width="350" data-height="150" data-whitespace="normal" data-transform_idle="o:1;" data-transform_in="opacity:0;s:500;e:Power2.easeInOut;" data-transform_out="opacity:0;s:1000;e:Power2.easeIn;s:1000;e:Power2.easeIn;" data-start="500" data-splitin="chars" data-splitout="none" data-basealign="slide" data-responsive_offset="on" data-elementdelay="0.01" style="z-index: 7; min-width: 350px; max-width: 350px; max-width: 150px; max-width: 150px; white-space: normal; font-size: 15px; line-height: 25px;"><b>Milenial Sensual yang Meledakkan Bisnis Anda</b>
                             </div>
                             <!-- LAYER NR. 3 -->
                             <!-- <div class="tp-caption" data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['180','97','90','90']" data-width="none" data-height="none" data-whitespace="nowrap" data-transform_idle="o:1;" data-transform_hover="o:1;rX:0;rY:0;rZ:0;z:0;s:300;e:Power1.easeInOut;" data-style_hover="c:rgba(255, 255, 255, 1.00);bc:rgba(255, 255, 255, 1.00);" data-transform_in="y:100px;sX:1;sY:1;opacity:0;s:2000;e:Power3.easeInOut;" data-transform_out="y:50px;opacity:0;s:1000;e:Power2.easeInOut;" data-start="750" data-splitin="none" data-splitout="none" data-responsive_offset="on" data-responsive="off" style="z-index: 11; white-space: nowrap;text-transform:left;outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer;"><a href="#about" class="custom-button slider-button scroll-to-target">learn more about us</a></div> -->
@@ -520,6 +571,28 @@ h2 strong {
 
                 </div>
                 <!-- Services Ends -->
+                <div class="col-md-4 foto">
+                    <div id="gallery-1" class="gallery galleryid-7 gallery-columns-3 gallery-size-full"><figure class="gallery-item">
+                        <div class="gallery-icon landscape">
+                            <a href="https://demo.casethemes.net/nimmo/wp-content/uploads/2018/11/gallery1.jpg"><img width="100" height="100" src="https://demo.casethemes.net/nimmo/wp-content/uploads/2018/11/gallery1.jpg" class="attachment-full size-full" alt="" srcset="https://demo.casethemes.net/nimmo/wp-content/uploads/2018/11/gallery1.jpg 600w, https://demo.casethemes.net/nimmo/wp-content/uploads/2018/11/gallery1-300x300.jpg 300w" sizes="(max-width: 600px) 100vw, 600px"></a>
+                        </div></figure><figure class="gallery-item">
+                        <div class="gallery-icon landscape">
+                            <a href="https://demo.casethemes.net/nimmo/wp-content/uploads/2018/11/gallery2.jpg"><img width="100" height="100" src="https://demo.casethemes.net/nimmo/wp-content/uploads/2018/11/gallery2.jpg" class="attachment-full size-full" alt="" srcset="https://demo.casethemes.net/nimmo/wp-content/uploads/2018/11/gallery2.jpg 600w, https://demo.casethemes.net/nimmo/wp-content/uploads/2018/11/gallery2-300x300.jpg 300w" sizes="(max-width: 600px) 100vw, 600px"></a>
+                        </div></figure><figure class="gallery-item">
+                        <div class="gallery-icon landscape">
+                            <a href="https://demo.casethemes.net/nimmo/wp-content/uploads/2018/11/gallery3.jpg"><img width="100" height="100" src="https://demo.casethemes.net/nimmo/wp-content/uploads/2018/11/gallery3.jpg" class="attachment-full size-full" alt="" srcset="https://demo.casethemes.net/nimmo/wp-content/uploads/2018/11/gallery3.jpg 600w, https://demo.casethemes.net/nimmo/wp-content/uploads/2018/11/gallery3-300x300.jpg 300w" sizes="(max-width: 600px) 100vw, 600px"></a>
+                        </div></figure><figure class="gallery-item">
+                        <div class="gallery-icon landscape">
+                            <a href="https://demo.casethemes.net/nimmo/wp-content/uploads/2018/11/gallery4.jpg"><img width="100" height="100" src="https://demo.casethemes.net/nimmo/wp-content/uploads/2018/11/gallery4.jpg" class="attachment-full size-full" alt="" srcset="https://demo.casethemes.net/nimmo/wp-content/uploads/2018/11/gallery4.jpg 600w, https://demo.casethemes.net/nimmo/wp-content/uploads/2018/11/gallery4-300x300.jpg 300w" sizes="(max-width: 600px) 100vw, 600px"></a>
+                        </div></figure><figure class="gallery-item">
+                        <div class="gallery-icon landscape">
+                            <a href="https://demo.casethemes.net/nimmo/wp-content/uploads/2018/11/gallery5.jpg"><img width="100" height="100" src="https://demo.casethemes.net/nimmo/wp-content/uploads/2018/11/gallery5.jpg" class="attachment-full size-full" alt="" srcset="https://demo.casethemes.net/nimmo/wp-content/uploads/2018/11/gallery5.jpg 600w, https://demo.casethemes.net/nimmo/wp-content/uploads/2018/11/gallery5-300x300.jpg 300w" sizes="(max-width: 600px) 100vw, 600px"></a>
+                        </div></figure><figure class="gallery-item">
+                        <div class="gallery-icon landscape">
+                            <a href="https://demo.casethemes.net/nimmo/wp-content/uploads/2018/11/gallery6.jpg"><img width="100" height="100" src="https://demo.casethemes.net/nimmo/wp-content/uploads/2018/11/gallery6.jpg" class="attachment-full size-full" alt="" srcset="https://demo.casethemes.net/nimmo/wp-content/uploads/2018/11/gallery6.jpg 600w, https://demo.casethemes.net/nimmo/wp-content/uploads/2018/11/gallery6-300x300.jpg 300w" sizes="(max-width: 600px) 100vw, 600px"></a>
+                        </div></figure>
+                    </div>
+                </div>
             </div>
         </section>
         <!-- Services Section Ends -->
