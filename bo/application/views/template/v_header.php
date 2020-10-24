@@ -164,8 +164,8 @@
 		<!-- begin:: Header Mobile -->
 		<div id="kt_header_mobile" class="kt-header-mobile  kt-header-mobile--fixed ">
 			<div class="kt-header-mobile__logo">
-				<a href="index.html">
-					<img alt="Logo" src="<?= base_url('assets/template/'); ?>assets/media/logos/logo-light.png" />
+				<a href="<?=base_url('/')?>">
+					<span style="color:#e2e5ec; font-size:14px; font-weight:bold;">Backoffice Talent Course</span>
 				</a>
 			</div>
 			<div class="kt-header-mobile__toolbar">
@@ -190,8 +190,8 @@
 					<!-- begin:: Aside -->
 					<div class="kt-aside__brand kt-grid__item " id="kt_aside_brand">
 						<div class="kt-aside__brand-logo">
-							<a href="index.html">
-								<img alt="Logo" src="<?= base_url('assets/template/'); ?>assets/media/logos/logo-light.png" />
+							<a href="<?=base_url('/')?>">
+								<span style="color:#e2e5ec; font-size:14px; font-weight:bold;">Backoffice Talent Course</span>
 							</a>
 						</div>
 						<div class="kt-aside__brand-tools">

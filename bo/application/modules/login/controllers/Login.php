@@ -67,11 +67,12 @@ class Login extends CI_Controller {
 			//$this->session->sess_destroy();
 			$this->session->unset_userdata('username');
 			$this->session->unset_userdata('id_user');
-			$this->session->unset_userdata('id_level_user');
+			$this->session->unset_userdata('last_login');
+			$this->session->unset_userdata('id_role');
 			$this->session->set_userdata(array('logged_in' => false));
 		}
 		
-		echo json_encode(['status' => 'success']);
+		return redirect('home');
 	}
 
 	public function lihat_pass($username)
