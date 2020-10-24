@@ -127,11 +127,15 @@
  _________________________________________________________ -->
 
     <?php $this->load->view('v_header'); ?>
-    
     <!-- *** HEADER END *** -->
 
-	<?php $this->load->view('v_content'); ?>
-	
+    <?php if($this->uri->segment(1) == 'checkout') {
+        $this->load->view('v_mainslider');  
+        $this->load->view('v_checkout');    
+    }else{
+        $this->load->view('v_content'); 
+    }?>
+		
 <!-- _________________________________________________________ -->
     <!-- *** FOOTER *** -->
     <?php $this->load->view('v_footer'); ?>
@@ -298,13 +302,13 @@
                         alert('sukses, nanti diganti sweeralert');
                         $("#btn_bayar").prop("disabled", false);
                         $('#btn_bayar').text('Simpan');
-                        location.reload();
+                        window.location = "<?= base_url('/');?>";
                     }else {
                         // swal.fire("Sukses!!", "Proses Checkout Gagal", "danger");
                         alert('gagal, nanti diganti sweeralert');
                         $("#btn_bayar").prop("disabled", false);
                         $('#btn_bayar').text('Simpan');
-                        location.reload();   
+                        window.location = "<?= base_url('/');?>";   
                     }
                 },
                 error: function (e) {

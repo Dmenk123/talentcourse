@@ -11,18 +11,25 @@ class Checkout extends CI_Controller {
 
 	public function index()
 	{	
-		$tahun = date('Y');
-		$bulan = date('m');
-		$hari = date('d');
-		$data_dashboard = [];
-		
-		/**
-		 * data passing ke halaman view content
-		 */
-		$data = array();
+        $type = $this->input->get('type');
+        if(in_array($type, ['reg', 'vip'])){
+            $tahun = date('Y');
+            $bulan = date('m');
+            $hari = date('d');
+            $data_dashboard = [];
+            
+            /**
+             * data passing ke halaman view content
+             */
+            $data = [
+                'type' => $type
+            ];
 
-
-		$this->load->view('v_template', $data, FALSE);
+            //cek disini 
+            $this->load->view('v_template', $data, FALSE);
+        }else{
+            return redirect('home');
+        };
 	}
 
 	public function proses_checkout()

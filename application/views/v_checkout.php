@@ -11,7 +11,7 @@
                             <label>Nama<span>*</span>
                             </label>
                             <input class="form-control" style="background-color: #e8f0fe;" type="text" name="nama" id="nama">
-                            <input type="hidden" name="keterangan" id="keterangan" value="<?= $this->input->get('checkout'); ?>">
+                            <input type="hidden" name="keterangan" id="keterangan" value="<?= $type; ?>">
                             <span class="help-block"></span>
                         </div>
                         <div class="form-group form-group--inline">
