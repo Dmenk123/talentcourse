@@ -6,6 +6,7 @@ class Home extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->model('m_global');
 	}
 
 	public function index()
@@ -13,13 +14,22 @@ class Home extends CI_Controller {
 		$tahun = date('Y');
 		$bulan = date('m');
 		$hari = date('d');
-		$data_dashboard = [];
 		
+		$select = "gk.*, ft.path_file, ft.path_file_thumb";
+		$where = ['gk.deleted_at is null' => null, 'gk.id_talent' => 1];
+		$table = 't_galeri_konten as gk';
+		$join = [ 
+			['table' => 't_file_talent as ft', 'on' => 'gk.id_t_file_talent = ft.id']
+		];
+
+		$galeri = $this->m_global->multi_row($select,$where,$table, $join, 'gk.urutan asc');
+		//var_dump($galeri);exit;
 		/**
 		 * data passing ke halaman view content
 		 */
-		$data = array();
-
+		$data = [
+			'galeri' => $galeri
+		];
 
 		$this->load->view('v_template', $data, FALSE);
 	}

@@ -30,6 +30,11 @@
     <link rel="stylesheet" type="text/css" href="<?= base_url('assets/template/js/plugins/revolution/css/layers.css'); ?>" />
     <link rel="stylesheet" type="text/css" href="<?= base_url('assets/template/js/plugins/revolution/css/navigation.css'); ?>" />
 
+    <!-- button css -->
+    <link rel="stylesheet" type="text/css" href="<?= base_url('assets/button-style/css/base.css'); ?>" />
+    <link rel="stylesheet" type="text/css" href="<?= base_url('assets/button-style/css/buttons.css'); ?>" />
+    <link rel="stylesheet" type="text/css" href="<?= base_url('assets/button-style/css/normalize.css'); ?>" />
+    <link rel="stylesheet" type="text/css" href="<?= base_url('assets/button-style/css/vicons-font.css'); ?>" />
     <style>
         .spinftw {
             border-radius: 100%;
