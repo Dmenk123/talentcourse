@@ -300,9 +300,10 @@ h2 strong {
         <!-- Main Slider Section Ends -->
         
         <!-- About Section Starts -->
-        <section id="about" class="about">
+        <section id="about" class="about" style="background-image: url('assets/images/pink1.jpg');background-repeat: no-repeat;
+  background-size: 1400px 900px;">
             <!-- Container Starts -->
-            <div class="container">
+            <div class="container" >
                 <!-- Main Heading Starts -->
                 <div class="text-center top-text">
                     <h1><span>About</span> Us</h1>
