@@ -1,7 +1,7 @@
 <!-- Portfolio Section Starts -->
 <section id="portfolio" class="portfolio">
     <!-- Container Starts -->
-    <div class="container" style="margin-bottom:-60px;">
+    <div class="container">
         <!-- Main Heading Starts -->
         <div class="text-center top-text">
             <p style="font-size:24px; font-family: arial; color: Red; line-height:26px;"><span style="font-size:24px; font-family: arial; color: blue;"><strong>Kalau tidak menguasai Ilmu Algoritma Instagram,</strong></span> maka Bisnis anda tidak meledak.</p>
@@ -19,12 +19,12 @@
             <div align="center" style="position:relative;top:30px;">
                 <div class="col-md-12 row no-gutters" align="center">
                     <div class="col-sm-6">
-                        <a href="<?= base_url('/');?>">
+                        <a href="<?= base_url('/home').'?checkout=reg#checkout'; ?>">
                             <img src="<?php echo base_url();?>assets/images/T 400rb.png" class="img-tombol">
                         </a>
                     </div>
                     <div class="col-sm-6">
-                        <a href="<?= base_url('/');?>">
+                        <a href="<?= base_url('/home').'?checkout=vip#checkout';?>">
                             <img src="<?php echo base_url();?>assets/images/T 1Jt.png" class="img-tombol">
                         </a>
                     </div>

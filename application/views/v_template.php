@@ -131,39 +131,12 @@
     <!-- *** HEADER END *** -->
 
 	<?php $this->load->view('v_content'); ?>
-	<?php 
-                if (isset($content_slider)) 
-                {
-                    $this->load->view($content_slider); 
-                } 
-			 ?>
-			 
-			 <?php 
-                if (isset($content_advantage)) 
-                {
-                    $this->load->view($content_advantage); 
-                } 
-			 ?>
-			 
-			 <?php 
-                if (isset($content_hot)) 
-                {
-                    $this->load->view($content_hot); 
-                } 
-			 ?>
-			 
-			 <?php 
-                if (isset($content)) 
-                {
-                    $this->load->view($content); 
-                } 
-             ?>
-
+	
 <!-- _________________________________________________________ -->
-        <!-- *** FOOTER *** -->
-        <?php $this->load->view('v_footer'); ?>
-        <!-- /#footer -->
-        <!-- *** FOOTER END *** -->
+    <!-- *** FOOTER *** -->
+    <?php $this->load->view('v_footer'); ?>
+    <!-- /#footer -->
+    <!-- *** FOOTER END *** -->
 
     </div>
     <!-- Wrapper Ends -->
@@ -177,7 +150,6 @@
 	<!-- Template JS Files -->
     <script src="<?= base_url('assets/template/js/jquery-2.2.4.min.js');?>"></script>
     <script src="<?= base_url('assets/template/js/plugins/jquery.easing.1.3.js');?>"></script>
-	<script src="<?= base_url('https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyBpN0oc0NeZv9JolJSIzQRNW9IkUOfKrxw');?>"></script>
     <script src="<?= base_url('assets/template/js/plugins/bootstrap.bundle.min.js');?>"></script>
     <script src="<?= base_url('assets/template/js/plugins/jquery.bxslider.min.js');?>"></script>
     <script src="<?= base_url('assets/template/js/plugins/jquery.filterizr.js');?>"></script>
@@ -276,31 +248,6 @@
 					});
 				}
 			});
-			
-			// GOOGLE MAP
-			function init_map() {
-				
-				var myOptions = {
-					scrollwheel: false,
-					zoom: 12,
-					center: new google.maps.LatLng(40.7127837, -74.00594130000002),
-					mapTypeId: google.maps.MapTypeId.ROADMAP
-				};
-				var map = new google.maps.Map(document.getElementById("gmap_canvas"), myOptions);
-				var marker = new google.maps.Marker({
-					map: map,
-					icon: "img/markers/red.png",
-					position: new google.maps.LatLng(40.7127837, -74.00594130000002)
-				});
-				var infowindow = new google.maps.InfoWindow({
-					content: "<strong>SALIMO</strong><br>1234 Disney Street, New York City<br>"
-				});
-				google.maps.event.addListener(marker, "click", function() {
-					infowindow.open(map, marker);
-				});
-			}
-			google.maps.event.addDomListener(window, "load", init_map);
-			
 		})(jQuery);
 	</script>
     <!-- Revolution Slider Initialization Ends -->
@@ -330,6 +277,46 @@
         var ver = document.getElementById("ver");
         ver.innerHTML = flipdown.version;
         });
+        
+        function proses_checkout(){
+            var form = $('#form_proses_checkout')[0];
+            var data = new FormData(form);
+
+            $.ajax({
+                type: "POST",
+                enctype: 'multipart/form-data',
+                url: "<?=base_url('checkout/proses_checkout')?>",
+                data: data,
+                dataType: "JSON",
+                processData: false, // false, it prevent jQuery form transforming the data into a query string
+                contentType: false, 
+                cache: false,
+                timeout: 600000,
+                success: function (data) {
+                    if(data.status) {
+                        // swal.fire("Sukses!!", "Proses Checkout Berhasil", "success");
+                        alert('sukses, nanti diganti sweeralert');
+                        $("#btn_bayar").prop("disabled", false);
+                        $('#btn_bayar').text('Simpan');
+                        location.reload();
+                    }else {
+                        // swal.fire("Sukses!!", "Proses Checkout Gagal", "danger");
+                        alert('gagal, nanti diganti sweeralert');
+                        $("#btn_bayar").prop("disabled", false);
+                        $('#btn_bayar').text('Simpan');
+                        location.reload();   
+                    }
+                },
+                error: function (e) {
+                    console.log("ERROR : ", e);
+                    $("#btnSave").prop("disabled", false);
+                    $('#btnSave').text('Simpan');
+
+                    reset_modal_form();
+                    $(".modal").modal('hide');
+                }
+            });
+        }
     </script>
         
     <!-- load js per modul -->

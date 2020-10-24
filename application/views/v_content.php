@@ -247,3 +247,7 @@ figure img {
 <?php $this->load->view('v_videotalent');  ?>
 <!-- Viedo Talent -->
 <?php $this->load->view('v_ending');  ?>
+<!-- Pembayaran -->
+<?php if($this->input->get('checkout') != ''){
+    $this->load->view('v_checkout');
+} ?>

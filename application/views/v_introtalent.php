@@ -10,7 +10,7 @@
                     
                         <p style="font-size:20px; font-family: arial; color: Yellow; line-height:22px;"><strong>Kalau tidak menguasai Ilmu Algoritma Instagram,</strong></span> maka Bisnis anda tidak meledak.</p>
                         <p style="font-size:20px; font-family: arial; color:orchid; line-height:22px;"><strong>Ayo "Pacaran" dengan Saras Davina, <span style="color:white;">LIVE</span></strong> <span style="font-size:20px; font-family: arial; color:orange; line-height:22px;">yaitu nyetrum belajar Ilmu Algoritma Instagram untuk Bisnis.</span></p>
-                        <p style="font-size:18px; line-height:20px; text-align:left;">Saras Davina adalah milenial atraktif, sensual, cerdas yang mengajarkan Ilmu Algoritma Instagram.<br><br>Mulai dari nol sampai yang canggih, Saras akan mengajari anda sebagaimana Saras terbiasa membimbing 180 RIBU followersnya.</p>
+                        <p style="font-size:18px; line-height:20px; text-align:left;">Saras Davina adalah milenial atraktif, <strong>sensual</strong>, cerdas yang mengajarkan Ilmu Algoritma Instagram.<br><br>Mulai dari nol sampai yang canggih, Saras akan mengajari anda sebagaimana Saras terbiasa membimbing 180 RIBU followersnya.</p>
             
                         <p style="font-size:18px; text-align:left; color:White;">"Pacarannya" ada 2 macam :</p>
 

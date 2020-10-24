@@ -11,7 +11,7 @@
  Target Server Version : 100413
  File Encoding         : 65001
 
- Date: 19/10/2020 23:48:47
+ Date: 24/10/2020 19:07:00
 */
 
 SET NAMES utf8mb4;
@@ -65,11 +65,14 @@ INSERT INTO `m_menu` VALUES (2, 0, 'Setting (Administrator)', 'Setting', NULL, '
 INSERT INTO `m_menu` VALUES (3, 2, 'Setting Menu', 'Setting Menu', 'set_menu', 'flaticon-grid-menu', 1, 2, 2, 1, 1, 1);
 INSERT INTO `m_menu` VALUES (4, 2, 'Setting Role', 'Setting Role', 'set_role', 'flaticon-network', 1, 2, 1, 1, 1, 1);
 INSERT INTO `m_menu` VALUES (6, 0, 'Master', 'Master', '', 'flaticon-folder-1', 1, 1, 2, 0, 0, 0);
-INSERT INTO `m_menu` VALUES (7, 6, 'Data User', 'Data User', 'master_user', 'flaticon-users', 1, 3, 1, 1, 1, 1);
+INSERT INTO `m_menu` VALUES (7, 6, 'Data User', 'Data User', 'master_user', 'flaticon-users', 1, 2, 1, 1, 1, 1);
 INSERT INTO `m_menu` VALUES (8, 6, 'Data Diskon', 'Master Data Diskon', 'master_diskon', 'flaticon-price-tag', 1, 2, 2, 1, 1, 1);
 INSERT INTO `m_menu` VALUES (9, 0, 'Manajemen Konten', 'Manajemen Konten', '', 'flaticon-profile', 1, 1, 3, 0, 0, 0);
 INSERT INTO `m_menu` VALUES (10, 9, 'Setting Harga', 'Setting Harga', 'set_harga', 'flaticon2-shopping-cart', 1, 2, 1, 1, 1, 1);
 INSERT INTO `m_menu` VALUES (11, 6, 'Data Talent', 'Master Data Talent', 'master_talent', 'flaticon-customer', 1, 2, 3, 1, 1, 1);
+INSERT INTO `m_menu` VALUES (12, 9, 'Setting Aktif Talent', 'Setting Aktif Talent', 'set_aktif_talent', 'flaticon-user', 1, 2, 2, 1, 1, 1);
+INSERT INTO `m_menu` VALUES (13, 9, 'Set Galeri Konten', 'Set Galeri Konten', 'set_galeri_konten', 'flaticon-user-settings', 1, 2, 3, 1, 1, 1);
+INSERT INTO `m_menu` VALUES (14, 0, 'Laporan', 'Laporan', '', 'flaticon-graph', 1, 1, 4, 0, 0, 0);
 
 -- ----------------------------
 -- Table structure for m_role
@@ -136,8 +139,51 @@ CREATE TABLE `m_user`  (
 -- ----------------------------
 -- Records of m_user
 -- ----------------------------
-INSERT INTO `m_user` VALUES (1, 1, 'admin', 'SnIvSVV6c2UwdWhKS1ZKMDluUlp4dz09', 1, '2020-10-19 20:09:22', 'USR-00001', NULL, NULL, NULL, NULL);
+INSERT INTO `m_user` VALUES (1, 1, 'admin', 'SnIvSVV6c2UwdWhKS1ZKMDluUlp4dz09', 1, '2020-10-24 12:28:18', 'USR-00001', NULL, NULL, NULL, NULL);
 INSERT INTO `m_user` VALUES (2, 1, 'coba', 'Tzg1eTllUlU2a2xNQk5yYktIM1pwUT09', NULL, NULL, 'USR-00002', 'coba-1602775328.jpg', '2020-10-15 22:22:08', '2020-10-15 22:43:54', '2020-10-15 22:58:50');
+
+-- ----------------------------
+-- Table structure for t_aktif_talent
+-- ----------------------------
+DROP TABLE IF EXISTS `t_aktif_talent`;
+CREATE TABLE `t_aktif_talent`  (
+  `id` int(11) NOT NULL,
+  `id_talent` int(11) NULL DEFAULT NULL,
+  `created_at` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `deleted_at` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of t_aktif_talent
+-- ----------------------------
+INSERT INTO `t_aktif_talent` VALUES (1, 1, '2020-10-22 21:51:45', NULL, NULL);
+
+-- ----------------------------
+-- Table structure for t_checkout
+-- ----------------------------
+DROP TABLE IF EXISTS `t_checkout`;
+CREATE TABLE `t_checkout`  (
+  `id` int(64) NOT NULL AUTO_INCREMENT,
+  `kode_ref` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `nama` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `telp` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `keterangan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'reguler/eksklusif',
+  `harga` double(20, 2) NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL,
+  `deleted_at` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of t_checkout
+-- ----------------------------
+INSERT INTO `t_checkout` VALUES (1, 'oxqSwDoQ', 'masnur@ganteng.com', 'masnur', NULL, 'eksklusif', 1000000.00, '2020-10-24 19:03:49', NULL, NULL);
+INSERT INTO `t_checkout` VALUES (2, 'Sk1pheB7', 'masnur@ganteng.com', 'masnur', NULL, 'eksklusif', 1000000.00, '2020-10-24 19:05:24', NULL, NULL);
+INSERT INTO `t_checkout` VALUES (3, 'ms8rVtOz', 'masnur@ganteng.com', 'masnur', NULL, 'reguler', 400000.00, '2020-10-24 19:06:00', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for t_file_talent
@@ -158,7 +204,43 @@ CREATE TABLE `t_file_talent`  (
 -- Records of t_file_talent
 -- ----------------------------
 INSERT INTO `t_file_talent` VALUES (1, 1, 'files/img/talent_img/1/1-via-vallen-1603125855.jpg', 'files/img/talent_img/1/thumbs/1-via-vallen-1603125855_thumb.jpg', '2020-10-19 23:44:15', NULL, NULL);
-INSERT INTO `t_file_talent` VALUES (2, 1, 'files/img/talent_img/2/2-via-vallen-1603126013.jpg', 'files/img/talent_img/2/thumbs/2-via-vallen-1603126013_thumb.jpg', '2020-10-19 23:46:53', NULL, NULL);
+INSERT INTO `t_file_talent` VALUES (2, 1, 'files/img/talent_img/2/2-via-vallen-1603126013.jpg', 'files/img/talent_img/1/thumbs/2-via-vallen-1603126013_thumb.jpg', '2020-10-19 23:46:53', NULL, NULL);
+INSERT INTO `t_file_talent` VALUES (3, 1, 'files/img/talent_img/3/3-via-vallen-1603209362.jpg', 'files/img/talent_img/1/thumbs/3-via-vallen-1603209362_thumb.jpg', '2020-10-20 22:56:02', NULL, NULL);
+INSERT INTO `t_file_talent` VALUES (4, 1, 'files/img/talent_img/1/4-via-vallen-1603210084.jpeg', 'files/img/talent_img/1/thumbs/4-via-vallen-1603210084_thumb.jpeg', '2020-10-20 23:08:04', NULL, NULL);
+INSERT INTO `t_file_talent` VALUES (5, 2, 'files/img/talent_img/2/5-anton-1603244548.jpg', 'files/img/talent_img/2/thumbs/5-anton-1603244548_thumb.jpg', '2020-10-21 08:42:28', NULL, NULL);
+INSERT INTO `t_file_talent` VALUES (6, 2, 'files/img/talent_img/2/6-anton-1603244580.jpg', 'files/img/talent_img/2/thumbs/6-anton-1603244580_thumb.jpg', '2020-10-21 08:43:00', NULL, NULL);
+INSERT INTO `t_file_talent` VALUES (7, 1, 'files/img/talent_img/1/7-via-vallen-1603383129.jpg', 'files/img/talent_img/1/thumbs/7-via-vallen-1603383129_thumb.jpg', '2020-10-22 23:12:09', NULL, NULL);
+INSERT INTO `t_file_talent` VALUES (8, 1, 'files/img/talent_img/1/8-via-vallen-1603383332.jpg', 'files/img/talent_img/1/thumbs/8-via-vallen-1603383332_thumb.jpg', '2020-10-22 23:15:32', NULL, NULL);
+INSERT INTO `t_file_talent` VALUES (9, 1, 'files/img/talent_img/1/9-via-vallen-1603383428.jpg', 'files/img/talent_img/1/thumbs/9-via-vallen-1603383428_thumb.jpg', '2020-10-22 23:17:08', NULL, NULL);
+INSERT INTO `t_file_talent` VALUES (10, 1, 'files/img/talent_img/1/10-via-vallen-1603383925.jpg', 'files/img/talent_img/1/thumbs/10-via-vallen-1603383925_thumb.jpg', '2020-10-22 23:25:25', NULL, NULL);
+INSERT INTO `t_file_talent` VALUES (11, 1, 'files/img/talent_img/1/11-via-vallen-1603384021.jpg', 'files/img/talent_img/1/thumbs/11-via-vallen-1603384021_thumb.jpg', '2020-10-22 23:27:01', NULL, NULL);
+INSERT INTO `t_file_talent` VALUES (12, 1, 'files/img/talent_img/1/12-via-vallen-1603384282.jpg', 'files/img/talent_img/1/thumbs/12-via-vallen-1603384282_thumb.jpg', '2020-10-22 23:31:22', NULL, NULL);
+INSERT INTO `t_file_talent` VALUES (13, 1, 'files/img/talent_img/1/13-via-vallen-1603384840.jpg', 'files/img/talent_img/1/thumbs/13-via-vallen-1603384840_thumb.jpg', '2020-10-22 23:40:40', NULL, NULL);
+
+-- ----------------------------
+-- Table structure for t_galeri_konten
+-- ----------------------------
+DROP TABLE IF EXISTS `t_galeri_konten`;
+CREATE TABLE `t_galeri_konten`  (
+  `id` int(11) NOT NULL,
+  `id_talent` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `id_t_file_talent` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `urutan` int(5) NULL DEFAULT NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL,
+  `deleted_at` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of t_galeri_konten
+-- ----------------------------
+INSERT INTO `t_galeri_konten` VALUES (1, '1', '3', 1, '2020-10-23 23:29:34', NULL, NULL);
+INSERT INTO `t_galeri_konten` VALUES (2, '1', '1', 2, '2020-10-23 23:30:01', NULL, NULL);
+INSERT INTO `t_galeri_konten` VALUES (3, '1', '4', 3, '2020-10-23 23:30:53', NULL, NULL);
+INSERT INTO `t_galeri_konten` VALUES (4, '1', '8', 4, '2020-10-23 23:45:39', NULL, '2020-10-23 23:59:27');
+INSERT INTO `t_galeri_konten` VALUES (5, '1', '10', 5, '2020-10-23 23:45:53', NULL, '2020-10-23 23:59:23');
+INSERT INTO `t_galeri_konten` VALUES (6, '1', '8', 4, '2020-10-23 23:59:36', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for t_harga
@@ -166,12 +248,14 @@ INSERT INTO `t_file_talent` VALUES (2, 1, 'files/img/talent_img/2/2-via-vallen-1
 DROP TABLE IF EXISTS `t_harga`;
 CREATE TABLE `t_harga`  (
   `id` int(64) NOT NULL,
-  `is_reguler` int(1) NULL DEFAULT NULL COMMENT 'reguler / ekslusif',
+  `jenis_harga` int(1) NULL DEFAULT NULL COMMENT '1: reguler / 2: ekslusif',
   `is_diskon` int(1) NULL DEFAULT NULL,
   `id_m_diskon` int(64) NULL DEFAULT NULL,
   `id_talent` int(64) NULL DEFAULT NULL,
   `nilai_harga` float(20, 2) NULL DEFAULT NULL,
-  `masa_berlaku_diskon` int(6) NULL DEFAULT NULL,
+  `tgl_mulai_diskon` date NULL DEFAULT NULL,
+  `tgl_akhir_diskon` date NULL DEFAULT NULL,
+  `masa_berlaku_diskon` int(6) NULL DEFAULT NULL COMMENT 'satuan hari',
   `created_at` datetime(0) NULL DEFAULT NULL,
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL,
@@ -181,6 +265,16 @@ CREATE TABLE `t_harga`  (
 -- ----------------------------
 -- Records of t_harga
 -- ----------------------------
+INSERT INTO `t_harga` VALUES (1, 1, 1, 1, 1, 400000.00, '2020-10-21', '2020-11-02', 12, '2020-10-21 22:53:19', '2020-10-22 21:33:22', NULL);
+INSERT INTO `t_harga` VALUES (2, 2, 1, 1, 1, 1000000.00, '2020-10-22', '2020-10-25', 3, '2020-10-22 21:32:07', '2020-10-22 21:33:27', NULL);
+INSERT INTO `t_harga` VALUES (3, 1, NULL, NULL, 1, 400000.00, NULL, NULL, NULL, '2020-10-22 21:33:22', '2020-10-23 21:47:53', NULL);
+INSERT INTO `t_harga` VALUES (4, 2, NULL, NULL, 1, 1000000.00, NULL, NULL, NULL, '2020-10-22 21:33:27', '2020-10-23 21:48:26', NULL);
+INSERT INTO `t_harga` VALUES (5, 1, 1, 1, 1, 400000.00, '2020-10-23', '2020-11-12', 20, '2020-10-23 21:47:53', '2020-10-23 21:48:32', NULL);
+INSERT INTO `t_harga` VALUES (6, 2, 1, 1, 1, 1000000.00, '2020-10-23', '2020-11-17', 25, '2020-10-23 21:48:26', '2020-10-23 21:48:38', NULL);
+INSERT INTO `t_harga` VALUES (7, 1, NULL, NULL, 1, 400000.00, NULL, NULL, NULL, '2020-10-23 21:48:32', '2020-10-24 00:06:38', NULL);
+INSERT INTO `t_harga` VALUES (8, 2, NULL, NULL, 1, 1000000.00, NULL, NULL, NULL, '2020-10-23 21:48:38', '2020-10-24 00:07:20', NULL);
+INSERT INTO `t_harga` VALUES (9, 1, 1, 1, 1, 400000.00, '2020-10-24', '2020-10-27', 3, '2020-10-24 00:06:38', NULL, NULL);
+INSERT INTO `t_harga` VALUES (10, 2, 1, 1, 1, 1100000.00, '2020-10-24', '2020-10-27', 3, '2020-10-24 00:07:20', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for t_role_menu
@@ -208,6 +302,9 @@ INSERT INTO `t_role_menu` VALUES (8, 1, 1, 1, 1);
 INSERT INTO `t_role_menu` VALUES (11, 1, 1, 1, 1);
 INSERT INTO `t_role_menu` VALUES (9, 1, 0, 0, 0);
 INSERT INTO `t_role_menu` VALUES (10, 1, 1, 1, 1);
+INSERT INTO `t_role_menu` VALUES (12, 1, 1, 1, 1);
+INSERT INTO `t_role_menu` VALUES (13, 1, 1, 1, 1);
+INSERT INTO `t_role_menu` VALUES (14, 1, 0, 0, 0);
 INSERT INTO `t_role_menu` VALUES (2, 1, 0, 0, 0);
 INSERT INTO `t_role_menu` VALUES (4, 1, 1, 1, 1);
 INSERT INTO `t_role_menu` VALUES (3, 1, 1, 1, 1);
