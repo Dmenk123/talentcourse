@@ -19,10 +19,10 @@
             <div align="center" style="position:relative;top:30px;">
                 <div class="col-md-12 row no-gutters" align="center">
                     <div class="col-sm-6">
-                        <!-- <a href="<?= base_url('checkout').'?type=reg#checkout'; ?>">
+                        <a href="<?= base_url('checkout').'?type=reg#checkout'; ?>">
                             <img src="<?php echo base_url();?>assets/images/T 400rb.png" class="img-tombol">
-                        </a> -->
-                        <div class="box">
+                        </a>
+                        <!-- <div class="box">
                             <button class="button button--ujarak button--border-medium button--round-s button--text-thick">
                                 <p>
                                     <span style="color:white;font-size:20px;font-weight:bold;">Klik Disini</span> <br>
@@ -31,7 +31,7 @@
                                     Untuk Total 2x Live
                                 </p>
                             </button>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="col-sm-6">
                         <a href="<?= base_url('checkout').'?type=vip#checkout';?>">
