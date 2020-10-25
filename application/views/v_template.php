@@ -135,8 +135,8 @@
     <!-- *** HEADER END *** -->
 
     <?php if($this->uri->segment(1) == 'checkout') {
-        $this->load->view('v_mainslider');  
-        $this->load->view('v_checkout');    
+        // $this->load->view('v_mainslider');  
+        $this->load->view('checkout_snap');    
     }else{
         $this->load->view('v_content'); 
     }?>
@@ -185,6 +185,9 @@
      <script src="<?= base_url('assets/template/js/custom.js'); ?>"></script>
      <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js"></script> -->
      <script src="https://pbutcher.uk/flipdown/js/flipdown/flipdown.js"></script>
+     <script type="text/javascript"
+            src="https://app.sandbox.midtrans.com/snap/snap.js"
+            data-client-key="<CLIENT-KEY>"></script>
      
 
 
@@ -327,6 +330,73 @@
             });
         }
     </script>
+
+     <script type="text/javascript">
+  
+    $('#pay-button').click(function (event) {
+      event.preventDefault();
+      $(this).attr("disabled", "disabled");
+    
+        var id            = $("#id").val();
+        var email         = $("#email").val();
+        var price         = $("#keterangan").val();
+        var quantity      = 1;
+        var first_name    = $("#nama_depan").val();
+        var last_name     = $("#nama_belakang").val();
+        var telp          = $("#telp").val();
+
+    $.ajax({
+        method : "POST",
+        url: '<?=site_url()?>/snap/token',
+        data : {
+                email: email, 
+                first_name: first_name, 
+                last_name: last_name,
+                price: price, 
+                quantity: quantity, 
+                telp: telp
+                },
+        cache: false,
+
+      success: function(data) {
+        //location = data;
+
+        console.log('token = '+data);
+        
+        var resultType = document.getElementById('result-type');
+        var resultData = document.getElementById('result-data');
+
+        function changeResult(type,data){
+          $("#result-type").val(type);
+          $("#result-data").val(JSON.stringify(data));
+          //resultType.innerHTML = type;
+          //resultData.innerHTML = JSON.stringify(data);
+        }
+
+        snap.pay(data, {
+          
+          onSuccess: function(result){
+            changeResult('success', result);
+            console.log(result.status_message);
+            console.log(result);
+            $("#payment-form").submit();
+          },
+          onPending: function(result){
+            changeResult('pending', result);
+            console.log(result.status_message);
+            $("#payment-form").submit();
+          },
+          onError: function(result){
+            changeResult('error', result);
+            console.log(result.status_message);
+            $("#payment-form").submit();
+          }
+        });
+      }
+    });
+  });
+
+  </script>
         
     <!-- load js per modul -->
     <?php if(isset($js)) { $this->load->view($js); }?>
