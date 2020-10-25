@@ -18,25 +18,34 @@
                 
             <div align="center" style="position:relative;top:30px;">
                 <div class="col-md-12 row no-gutters" align="center">
-                    <div class="col-sm-6">
-                        <a href="<?= base_url('snap').'?type=reg#checkout'; ?>">
-                            <img src="<?php echo base_url();?>assets/images/T 400rb.png" class="img-tombol">
+                    <div class="col-sm-6 box" style="padding: 0 auto;">
+                        
+                        <a href="<?= base_url('snap').'?type=reg#checkout'; ?>" style="background-color: #6f42c1;" class="button button--winona button--border-thick button--round-l button--size-s button--text-thick img-tombol">
+                            <p>
+                                <span style="color: yellow;font-size:24px;font-weight:bold;">Klik Disini</span>
+                                <br>
+                                <span style="color: yellow;font-size:14px;">Pertemuan/Kelas</span>&nbsp;<span style="color: white;font-size:20px;font-weight:bold;">Ramai-ramai</span>
+                                <br>
+                                <span style="color: yellow;">Rp. 400 rb</span>
+                                <br>
+                                <span style="color: yellow;">Untuk Total</span>&nbsp;<span style="color: white;font-size:20px;font-weight:bold;">2x Live</span>
+                            </p>
                         </a>
-                        <!-- <div class="box">
-                            <button class="button button--ujarak button--border-medium button--round-s button--text-thick">
-                                <p>
-                                    <span style="color:white;font-size:20px;font-weight:bold;">Klik Disini</span> <br>
-                                    Pertemuan / kelas Lebih Privat
-                                    Rp. 129102
-                                    Untuk Total 2x Live
-                                </p>
-                            </button>
-                        </div> -->
+                        
                     </div>
-                    <div class="col-sm-6">
-                        <a href="<?= base_url('snap').'?type=vip#checkout';?>">
-                            <img src="<?php echo base_url();?>assets/images/T 1Jt.png" class="img-tombol">
+                    <div class="col-sm-6 box">
+                        <a href="<?= base_url('snap').'?type=vip#checkout'; ?>" style="background-color: #e83e8c;" class="button button--winona button--border-thick button--round-l button--size-s button--text-thick img-tombol">
+                            <p>
+                                <span style="color: yellow;font-size:24px;font-weight:bold;">Klik Disini</span>
+                                <br>
+                                <span style="color: yellow;font-size:14px;">Pertemuan/Kelas</span>&nbsp;<span style="color: white;font-size:20px;font-weight:bold;">Lebih Privat&nbsp;</span>
+                                <br>
+                                <span style="color: yellow;">Rp. 1,1 Jt</span>
+                                <br>
+                                <span style="color: yellow;">Untuk Total</span>&nbsp;<span style="color: white;font-size:20px;font-weight:bold;">2x Live</span>
+                            </p>
                         </a>
+                       
                     </div>
                 </div>
             </div>

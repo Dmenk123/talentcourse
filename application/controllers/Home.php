@@ -11,9 +11,9 @@ class Home extends CI_Controller {
 
 	public function index()
 	{	
-		$tahun = date('Y');
-		$bulan = date('m');
-		$hari = date('d');
+		$obj_date = new DateTime();
+		$timestamp = $obj_date->format('Y-m-d H:i:s');
+		$tanggal = $obj_date->format('Y-m-d');
 		
 		$select = "gk.*, ft.path_file, ft.path_file_thumb";
 		$where = ['gk.deleted_at is null' => null, 'gk.id_talent' => 1];
@@ -21,15 +21,65 @@ class Home extends CI_Controller {
 		$join = [ 
 			['table' => 't_file_talent as ft', 'on' => 'gk.id_t_file_talent = ft.id']
 		];
-
+		
 		$galeri = $this->m_global->multi_row($select,$where,$table, $join, 'gk.urutan asc');
-		//var_dump($galeri);exit;
+
+		/////////////////////////////
+		$select = 't_harga.*, m_diskon.nama, m_diskon.besaran';
+		$where = ['t_harga.deleted_at is null' => null, 't_harga.id_talent' => 1];
+		$table = 't_harga';
+		$join = [ 
+			['table' => 'm_diskon', 'on' => 't_harga.id_m_diskon = m_diskon.id']
+		];
+		
+		$harga = $this->m_global->multi_row($select,$where,$table, $join);
+		
+		foreach ($harga as $key => $value) {
+			if($value->is_diskon) {
+				// cek tanggal
+				$tgl_akhir_diskon = $obj_date->createFromFormat('Y-m-d H:i:s', $value->tgl_akhir_diskon.' 23:59:59')->format('Y-m-d H:i:s');
+				//jika harga normal
+				if(strtotime($timestamp) > strtotime($tgl_akhir_diskon)) {
+					$arr['harga'] = $value->nilai_harga;
+					$arr['jenis_harga'] = $value->jenis_harga;
+				}else{
+					$arr['harga'] = (float)$value->nilai_harga * (float)$value->besaran / 100;
+					$arr['jenis_harga'] = $value->jenis_harga;
+				}
+			}else{
+				$arr['harga'] = $value->nilai_harga;
+				$arr['jenis_harga'] = $value->jenis_harga;
+			}
+
+			$arr_harga[] = $arr;
+		}
+
+		//cek apakah diskon ?
+		foreach ($harga as $keys => $vals) {
+			if($value->is_diskon) {
+				$is_diskon = true;
+			}else{
+				//jika tidak diskon set to false dan break
+				$is_diskon = false;
+				break;
+			}
+		}
+		
 		/**
 		 * data passing ke halaman view content
 		 */
 		$data = [
-			'galeri' => $galeri
+			'galeri' => $galeri,
+			'harga' => $harga,
+			'arr_harga' => $arr_harga,
+			'is_diskon' => $is_diskon
 		];
+
+		
+		// echo "<pre>";
+		// print_r ($data);
+		// echo "</pre>";
+		// exit;
 
 		$this->load->view('v_template', $data, FALSE);
 	}
@@ -75,6 +125,11 @@ class Home extends CI_Controller {
 		}
 	
 		return $token;
+	}
+
+	private function get_harga_teks($harga)
+	{
+		
 	}
 
 }

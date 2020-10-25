@@ -233,6 +233,18 @@ figure img {
     max-width: 100%;
     max-height: 90%;
 }
+
+.box {
+    padding: 0.5em 0;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
 </style>
 
 <!-- main slider -->
