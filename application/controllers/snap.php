@@ -176,6 +176,8 @@ class Snap extends CI_Controller {
 
     public function finish()
     {
+
+		$this->load->model('snapmodel');
     	$result = json_decode($this->input->post('result_data'));
     	if (isset($result->va_number[0]->bank)) {
 			$bank = $result->va_number[0]->bank;

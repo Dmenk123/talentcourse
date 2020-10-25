@@ -12,6 +12,10 @@ class M_global extends CI_Model
         $this->db->insert($table,$data);
         return $this->db->insert_id();
     }
+    
+    function insert($data) {
+        return $this->db->insert($this->table, $data);
+    }
 
     function store($data,$table){
         $this->db->insert($table,$data);

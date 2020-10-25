@@ -134,7 +134,8 @@
     <?php $this->load->view('v_header'); ?>
     <!-- *** HEADER END *** -->
 
-    <?php if($this->uri->segment(1) == 'checkout') {
+    
+    <?php if($this->uri->segment(1) == 'snap') {    
         // $this->load->view('v_mainslider');  
         $this->load->view('checkout_snap');    
     }else{
