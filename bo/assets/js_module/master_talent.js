@@ -233,6 +233,86 @@ function save_detail(){
     });
 }
 
+function save_video_bak(){
+    var form = $('#form_video')[0];
+    var data = new FormData(form);
+    $.ajax({
+        type: "POST",
+        enctype: 'multipart/form-data',
+        url: base_url + 'master_talent/simpan_video',
+        data: data,
+        dataType: "JSON",
+        processData: false, // false, it prevent jQuery form transforming the data into a query string
+        contentType: false, 
+        cache: false,
+        timeout: 600000,
+        success: function (data) {
+            if(data.status) {
+                swal.fire("Sukses!!", "Berhasil Menambah File Gallery", "success");
+                location.reload();
+            }else {
+                swalConfirm.fire(
+                    'Oops',
+                    'Terjadi Kesalahan',
+                    'error'
+                );
+            }
+        },
+        error: function (e) {
+            console.log("ERROR : ", e);
+            $("#btnSave").prop("disabled", false);
+            $('#btnSave').text('Simpan');
+
+            reset_modal_form();
+            $(".modal").modal('hide');
+        }
+    });
+}
+
+function save_video(){
+    $('.progress').removeClass('hidden');
+
+    var form = $('#form_video')[0];
+    var data = new FormData(form);
+    $.ajax({
+        xhr: function() {
+          var xhr = new window.XMLHttpRequest();
+          xhr.upload.addEventListener("progress", function(evt) {
+            $('.persen').text('0%');
+            
+            if (evt.lengthComputable) {
+              var percentComplete = evt.loaded / evt.total;
+              percentComplete = parseInt(percentComplete * 100);
+              $('.persen').text(percentComplete+'%');
+              $('.progress-bar').css("width",percentComplete+"%");
+      
+              if (percentComplete === 100) {
+                //Swal.fire('Sukses Upload Video`');
+              }
+      
+            }
+          }, false);
+      
+          return xhr;
+        },
+        enctype: 'multipart/form-data',
+        url: base_url+'master_talent/simpan_video_talent',
+        type: "POST",
+        data: data,
+        contentType: "application/json",
+        dataType: "json",
+        processData: false, // false, it prevent jQuery form transforming the data into a query string
+        contentType: false, 
+        cache: false,
+        timeout: 600000,
+        success: function(result) {
+            //console.log(result);
+            swalConfirm.fire('Sukses!', 'Berhasil Upload Video', 'success');
+            location.reload();
+        }
+      });
+}
+
 function delete_talent(id){
     swalConfirmDelete.fire({
         title: 'Hapus Data Talent ?',
@@ -311,6 +391,45 @@ function delete_gallery(id){
     });
 }
 
+function delete_video(id) {
+    swalConfirmDelete.fire({
+        title: 'Hapus File Terpilih ?',
+        text: "Data Video dihapus permanen ?",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Ya, Hapus Data !',
+        cancelButtonText: 'Tidak, Batalkan!',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                url : base_url + 'master_talent/delete_video',
+                type: "POST",
+                dataType: "JSON",
+                data : {id:id},
+                success: function(data)
+                {
+                    swalConfirm.fire('Berhasil Hapus video!', data.pesan, 'success');
+                    location.reload();
+                },
+                error: function (jqXHR, textStatus, errorThrown)
+                {
+                    Swal.fire('Terjadi Kesalahan');
+                }
+            });
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalConfirm.fire(
+            'Dibatalkan',
+            'Aksi Dibatalakan',
+            'error'
+          )
+        }
+    });
+}
+
 function reset_modal_form()
 {
     $('#form-talent')[0].reset();
@@ -327,52 +446,6 @@ function reset_modal_form_import()
 {
     $('#form_import_excel')[0].reset();
     $('#label_file_excel').text('Pilih file excel yang akan diupload');
-}
-
-function import_excel(){
-    $('#modal_import_excel').modal('show');
-	$('#modal_import_title').text('Import data user'); 
-}
-
-function import_data_excel(){
-    var form = $('#form_import_excel')[0];
-    var data = new FormData(form);
-    
-    $("#btnSaveImport").prop("disabled", true);
-    $('#btnSaveImport').text('Import Data');
-    $.ajax({
-        type: "POST",
-        enctype: 'multipart/form-data',
-        url: base_url + 'master_user/import_data_master',
-        data: data,
-        dataType: "JSON",
-        processData: false, // false, it prevent jQuery form transforming the data into a query string
-        contentType: false, 
-        success: function (data) {
-            if(data.status) {
-                swal.fire("Sukses!!", data.pesan, "success");
-                $("#btnSaveImport").prop("disabled", false);
-                $('#btnSaveImport').text('Simpan');
-            }else {
-                swal.fire("Gagal!!", data.pesan, "error");
-                $("#btnSaveImport").prop("disabled", false);
-                $('#btnSaveImport').text('Simpan');
-            }
-
-            reset_modal_form_import();
-            $(".modal").modal('hide');
-            table.ajax.reload();
-        },
-        error: function (e) {
-            console.log("ERROR : ", e);
-            $("#btnSaveImport").prop("disabled", false);
-            $('#btnSaveImport').text('Simpan');
-
-            reset_modal_form_import();
-            $(".modal").modal('hide');
-            table.ajax.reload();
-        }
-    });
 }
 
 function readURL(input) {

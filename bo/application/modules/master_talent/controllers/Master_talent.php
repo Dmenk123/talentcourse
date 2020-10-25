@@ -13,6 +13,7 @@ class Master_talent extends CI_Controller {
 		$this->load->model('master_user/m_user');
 		$this->load->model('m_talent');
 		$this->load->model('t_file_talent');
+		$this->load->model('t_video_talent');
 	}
 
 	public function index()
@@ -71,7 +72,10 @@ class Master_talent extends CI_Controller {
 							<i class="la la-trash"></i> Hapus
 						</button>
 						<a class="button dropdown-item" href="'.base_url("master_talent/detail_talent/$val->id").'" target="_blank">
-							<i class="la la-paperclip"></i> Detail
+							<i class="la la-paperclip"></i> Galeri Foto
+						</a>
+						<a class="button dropdown-item" href="'.base_url("master_talent/video_talent/$val->id").'" target="_blank">
+							<i class="la la-file-video-o"></i> Video
 						</a>
 			';
 
@@ -352,7 +356,48 @@ class Master_talent extends CI_Controller {
 		}else{
 			return redirect('master_talent');
 		}
+	}
 
+	public function video_talent($id)
+	{
+		$data_talent = $this->m_talent->get_by_condition("id = '$id' and deleted_at is null", true);
+		$data_video = $this->t_video_talent->get_by_condition("id_talent = '$id' and deleted_at is null");
+
+		if($data_talent){
+			$id_user = $this->session->userdata('id_user'); 
+			$data_user = $this->m_user->get_detail_user($id_user);
+			
+			$url_foto = '../'.$data_talent->foto;
+			$foto = base64_encode(file_get_contents($url_foto));  
+			/**
+			 * data passing ke halaman view content
+			 */
+			$data = array(
+				'title' => 'Gallery Video Talent',
+				'data_user' => $data_user,
+				'data_talent' => $data_talent,
+				'foto_encode' => $foto,
+				'data_video' => $data_video
+			);
+			
+			/**
+			 * content data untuk template
+			 * param (css : link css pada direktori assets/css_module)
+			 * param (modal : modal komponen pada modules/nama_modul/views/nama_modal)
+			 * param (js : link js pada direktori assets/js_module)
+			 */
+			$content = [
+				'css' 	=> null,
+				'modal' => null,
+				'js'	=> 'master_talent.js',
+				'view'	=> 'view_master_talent_video'
+			];
+
+			$this->template_view->load_view($content, $data);
+			
+		}else{
+			return redirect('master_talent');
+		}
 	}
 
 	public function simpan_detail_talent()
@@ -418,6 +463,65 @@ class Master_talent extends CI_Controller {
 		echo json_encode($retval);
 	}
 
+	public function simpan_video_talent()
+	{
+		$obj_date = new DateTime();
+		$id = $this->t_video_talent->get_max_id();
+		$id_talent = $this->input->post('id_talent');
+		$timestamp = $obj_date->format('Y-m-d H:i:s');
+		$data_talent = $this->m_talent->get_by_id($id_talent);
+		$namafileseo = $this->seoUrl($id.'-video-'.$data_talent->nama.' '.time());
+
+		$this->db->trans_begin();
+
+		$file_mimes = ['video/mp4'];
+
+		if(isset($_FILES['video']['name']) && in_array($_FILES['video']['type'], $file_mimes)) {
+						
+			$this->konfigurasi_upload_video($namafileseo, $id_talent);
+			//get detail extension
+			$pathDet = $_FILES['video']['name'];
+			$extDet = pathinfo($pathDet, PATHINFO_EXTENSION);
+			
+			if ($this->file_obj->do_upload('video')) 
+			{
+				$data_file = $this->file_obj->data();
+				$nama_file_video = $data_file['file_name'];
+				## replace nama file + ext
+				$namafileseo = $namafileseo.'.'.$extDet;
+			} else {
+				$error = array('error' => $this->file_obj->display_errors());
+			}
+		}else{
+			$data['inputerror'][] = 'video';
+			$data['error_string'][] = 'Wajib Mengisi video';
+			$data['status'] = FALSE;
+			echo json_encode($data);
+			return;
+		}
+
+		$datanya = [
+			'id' => $id,
+			'id_talent' => $id_talent,
+			'created_at' => $timestamp,
+			'path_video' => 'files/img/talent_img/'.$id_talent.'/'.$namafileseo
+		];
+
+		$insert = $this->t_video_talent->save($datanya);
+		
+		if ($this->db->trans_status() === FALSE){
+			$this->db->trans_rollback();
+			$retval['status'] = false;
+			$retval['pesan'] = 'Gagal menambahkan file Video';
+		}else{
+			$this->db->trans_commit();
+			$retval['status'] = true;
+			$retval['pesan'] = 'Sukses menambahkan file Video';
+		}
+
+		echo json_encode($retval);
+	}
+
 	public function delete_gallery()
 	{
 		$id = $this->input->post('id');
@@ -433,6 +537,20 @@ class Master_talent extends CI_Controller {
 		echo json_encode($retval);
 	}
 
+	public function delete_video()
+	{
+		$id = $this->input->post('id');
+		$del = $this->t_video_talent->softdelete_by_id($id);
+		if($del) {
+			$retval['status'] = TRUE;
+			$retval['pesan'] = 'Data Video Talent dihapus';
+		}else{
+			$retval['status'] = FALSE;
+			$retval['pesan'] = 'Data Video Talent dihapus';
+		}
+
+		echo json_encode($retval);
+	}
 	/**
 	 * get data untuk select2 (dipakai dimana-mana)
 	 */
@@ -483,6 +601,22 @@ class Master_talent extends CI_Controller {
 		$config['allowed_types'] = 'gif|jpg|png|jpeg|bmp';
 		$config['overwrite'] = TRUE;
 		$config['max_size'] = '4000';//in KB (4MB)
+		$config['max_width']  = '0';//zero for no limit 
+		$config['max_height']  = '0';//zero for no limit
+		$config['file_name'] = $nmfile;
+		//load library with custom object name alias
+		$this->load->library('upload', $config, 'file_obj');
+		$this->file_obj->initialize($config);
+	}
+
+	private function konfigurasi_upload_video($nmfile, $folder)
+	{ 
+		//konfigurasi upload video display
+		$config['upload_path'] = '../files/img/talent_img/'.$folder;
+		$config['allowed_types'] = 'mp4';
+		$config['overwrite'] = TRUE;
+		$config['remove_spaces'] = TRUE;
+		$config['max_size'] = '0';//in KB (4MB)
 		$config['max_width']  = '0';//zero for no limit 
 		$config['max_height']  = '0';//zero for no limit
 		$config['file_name'] = $nmfile;
