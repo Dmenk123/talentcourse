@@ -1,6 +1,6 @@
 <!-- Main Slider Section Starts -->
 <section class="mainslider" id="mainslider">
-    <article class="content">
+    <article>
         <div id="rev_slider_6_1" class="rev_slider fullwidthabanner" style="display:none;" data-version="5.0.7">
             <ul>
                 <!-- SLIDE  -->
