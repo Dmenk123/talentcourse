@@ -113,6 +113,19 @@
             background: rgba(49, 58, 56, 0.85);
             z-index: 9999;
         }
+
+        /* responsive video css */
+        #video-meta-content {
+            width: 100%;
+            height: 500px;
+            margin:0;
+            padding:0;
+            border: 3px solid grey;
+        }
+
+        video {
+            max-width: 100%;
+        }
     </style>
 
 </head>
@@ -186,9 +199,7 @@
      <script src="<?= base_url('assets/template/js/custom.js'); ?>"></script>
      <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js"></script> -->
      <script src="https://pbutcher.uk/flipdown/js/flipdown/flipdown.js"></script>
-     <script type="text/javascript"
-            src="https://app.sandbox.midtrans.com/snap/snap.js"
-            data-client-key="<CLIENT-KEY>"></script>
+     <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="<CLIENT-KEY>"></script>
      
 
 
@@ -267,9 +278,11 @@
     <script>
         document.addEventListener("DOMContentLoaded", () => {
         // Unix timestamp (in seconds) to count down to
-        var twoDaysFromNow = new Date().getTime() / 1000 + 86400 * 2 + 1;
+        var unixRemaining = Math.round(new Date("<?=$arr_harga[0]['sisa_waktu_diskon'];?>").getTime()/1000);
+        console.log(unixRemaining);
+        // console.log(twoDaysFromNow);
         // Set up FlipDown
-        var flipdown = new FlipDown(twoDaysFromNow)
+        var flipdown = new FlipDown(unixRemaining)
 
             // Start the countdown
             .start()
@@ -332,7 +345,7 @@
         }
     </script>
 
-     <script type="text/javascript">
+    <script type="text/javascript">
   
     $('#pay-button').click(function (event) {
       event.preventDefault();
@@ -346,58 +359,73 @@
         var last_name     = $("#nama_belakang").val();
         var telp          = $("#telp").val();
 
-    $.ajax({
-        method : "POST",
-        url: '<?=site_url()?>/snap/token',
-        data : {
-                email: email, 
-                first_name: first_name, 
-                last_name: last_name,
-                price: price, 
-                quantity: quantity, 
-                telp: telp
-                },
-        cache: false,
+        $.ajax({
+            method : "POST",
+            url: '<?=site_url()?>/snap/token',
+            data : {
+                    email: email, 
+                    first_name: first_name, 
+                    last_name: last_name,
+                    price: price, 
+                    quantity: quantity, 
+                    telp: telp
+                    },
+            cache: false,
 
-      success: function(data) {
-        //location = data;
+        success: function(data) {
+            //location = data;
 
-        console.log('token = '+data);
-        
-        var resultType = document.getElementById('result-type');
-        var resultData = document.getElementById('result-data');
+            console.log('token = '+data);
+            
+            var resultType = document.getElementById('result-type');
+            var resultData = document.getElementById('result-data');
 
-        function changeResult(type,data){
-          $("#result-type").val(type);
-          $("#result-data").val(JSON.stringify(data));
-          //resultType.innerHTML = type;
-          //resultData.innerHTML = JSON.stringify(data);
+            function changeResult(type,data){
+            $("#result-type").val(type);
+            $("#result-data").val(JSON.stringify(data));
+            //resultType.innerHTML = type;
+            //resultData.innerHTML = JSON.stringify(data);
+            }
+
+            snap.pay(data, {
+            
+            onSuccess: function(result){
+                changeResult('success', result);
+                console.log(result.status_message);
+                console.log(result);
+                $("#payment-form").submit();
+            },
+            onPending: function(result){
+                changeResult('pending', result);
+                console.log(result.status_message);
+                $("#payment-form").submit();
+            },
+            onError: function(result){
+                changeResult('error', result);
+                console.log(result.status_message);
+                $("#payment-form").submit();
+            }
+            });
         }
-
-        snap.pay(data, {
-          
-          onSuccess: function(result){
-            changeResult('success', result);
-            console.log(result.status_message);
-            console.log(result);
-            $("#payment-form").submit();
-          },
-          onPending: function(result){
-            changeResult('pending', result);
-            console.log(result.status_message);
-            $("#payment-form").submit();
-          },
-          onError: function(result){
-            changeResult('error', result);
-            console.log(result.status_message);
-            $("#payment-form").submit();
-          }
         });
-      }
     });
-  });
 
-  </script>
+    $('.openVideo').magnificPopup({
+        type: 'inline',
+        callbacks: {
+        open: function() {
+            $('html').css('margin-right', 0);
+            // Play video on open:
+            $(this.content).find('video')[0].play();
+            },
+        close: function() {
+            // Reset video on close:
+            $(this.content).find('video')[0].load();
+            }
+        }
+    });
+
+    </script>
         
     <!-- load js per modul -->
     <?php if(isset($js)) { $this->load->view($js); }?>

@@ -6,7 +6,7 @@
         <div class="text-center top-text">
             <p style="font-size:24px; font-family: arial; color: Red; line-height:26px;"><span style="font-size:24px; font-family: arial; color: blue;"><strong>Kalau tidak menguasai Ilmu Algoritma Instagram,</strong></span> maka Bisnis anda tidak meledak.</p>
             <p style="font-size:20px; font-family: arial; color:orchid; line-height:22px;"><strong>Ayo "Pacaran" dengan Saras Davina, <span style="color:blue;">LIVE</span></strong> <span style="font-size:20px; font-family: arial; color:darkslategray; line-height:22px;">yaitu nyetrum belajar Ilmu Algoritma Instagram untuk Bisnis.</span></p>
-            <p style="font-size:20px; font-family: arial; color:blue; line-height:22px;"><strong>Harga di bawah hanya untuk masa promosi.</strong> <br><span style="font-size:20px; font-family: arial; color:darkslategray; line-height:22px;">Anda hanya memiliki waktu 2 hari, setelah timer kembali ke angka 0, maka harga akan kembali Normal.</span></p>
+            <p style="font-size:20px; font-family: arial; color:blue; line-height:22px;"><strong>Harga di bawah hanya untuk masa promosi.</strong> <br><span style="font-size:20px; font-family: arial; color:darkslategray; line-height:22px;">Anda hanya memiliki waktu <?= $harga[0]->masa_berlaku_diskon; ?> hari, setelah timer kembali ke angka 0, maka harga akan kembali Normal.</span></p>
         </div>
 
         <div class="fact-badges text-center top-text">
@@ -26,7 +26,7 @@
                                 <br>
                                 <span style="color: yellow;font-size:14px;">Pertemuan/Kelas</span>&nbsp;<span style="color: white;font-size:20px;font-weight:bold;">Ramai-ramai</span>
                                 <br>
-                                <span style="color: yellow;">Rp. 400 rb</span>
+                                <span style="color: yellow;"><?=$arr_harga[0]['harga_txt'];?></span>
                                 <br>
                                 <span style="color: yellow;">Untuk Total</span>&nbsp;<span style="color: white;font-size:20px;font-weight:bold;">2x Live</span>
                             </p>
@@ -40,7 +40,7 @@
                                 <br>
                                 <span style="color: yellow;font-size:14px;">Pertemuan/Kelas</span>&nbsp;<span style="color: white;font-size:20px;font-weight:bold;">Lebih Privat&nbsp;</span>
                                 <br>
-                                <span style="color: yellow;">Rp. 1,1 Jt</span>
+                                <span style="color: yellow;"><?=$arr_harga[1]['harga_txt'];?></span>
                                 <br>
                                 <span style="color: yellow;">Untuk Total</span>&nbsp;<span style="color: white;font-size:20px;font-weight:bold;">2x Live</span>
                             </p>

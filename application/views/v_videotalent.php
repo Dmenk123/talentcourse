@@ -5,17 +5,31 @@
         <div class="container">
             <!-- Main Heading Starts -->
             <div class="text-center top-text">
-                <h1><span>Ini Nanti</span> Berisi Video</h1>
-                <h4>7 menitan</h4>
+                <h1><span>Video</span> Saras Davina</h1>
             </div>
-            <!-- Main Heading Starts -->
-            <!-- Blockquotes Starts -->
+
             <div class="video-content">
-                <p class="text-center">Untuk video<br> saras</p>
                 <!-- Video Play Starts -->
-                <div class="magnific-popup-gallery">
+                <!-- <div class="magnific-popup-gallery">
                     <div class="btn-wrapper text-center"><a class="image-wrap mfp-youtube" href="https://www.youtube.com/watch?v=0gv7OC9L2s8"></a></div>
-                </div>
+                </div> -->
+                
+                <!-- <div class="magnific-popup-gallery">
+                    <div class="btn-wrapper text-center" style="text-align:center;">
+                        <a href="#video-01" class="openVideo">
+                            <div id="video-01" class="video-popup mfp-hide" style="text-align: center;">
+                                <video preload="false" poster="">
+                                    <source src="" type="video/mp4">
+                                </video>
+                            </div>
+                        </a>
+                    </div>
+                </div> -->  
+
+                 <!-- Video Play Starts -->
+                <video width="720" height="480" controls>
+                    <source src="<?=base_url().$video[0]->path_video;?>" type=video/mp4>
+                </video>
                 <!-- Video Play Ends -->
             </div>
             <!-- Blockquotes Ends -->

@@ -46,8 +46,8 @@ $(document).ready(function() {
 
 function delete_galeri(id){
     swalConfirmDelete.fire({
-        title: 'Hapus Galeri ?',
-        text: "Data Galeri Akan Di Stop ?",
+        title: 'Hapus Video ?',
+        text: "Data Video Akan Di Stop ?",
         type: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Ya, Hapus Galeri !',
@@ -56,13 +56,13 @@ function delete_galeri(id){
       }).then((result) => {
         if (result.value) {
             $.ajax({
-                url : base_url + 'set_galeri_konten/delete_data',
+                url : base_url + 'set_video_konten/delete_data',
                 type: "POST",
                 dataType: "JSON",
                 data : {id:id},
                 success: function(data)
                 {
-                    swalConfirm.fire('Berhasil Hapus Diskon!', data.pesan, 'success');
+                    swalConfirm.fire('Berhasil Hapus Video!', data.pesan, 'success');
                     location.reload();
                 },
                 error: function (jqXHR, textStatus, errorThrown)

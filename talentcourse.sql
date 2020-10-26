@@ -11,7 +11,7 @@
  Target Server Version : 100413
  File Encoding         : 65001
 
- Date: 25/10/2020 23:55:09
+ Date: 27/10/2020 00:49:36
 */
 
 SET NAMES utf8mb4;
@@ -141,7 +141,7 @@ CREATE TABLE `m_user`  (
 -- ----------------------------
 -- Records of m_user
 -- ----------------------------
-INSERT INTO `m_user` VALUES (1, 1, 'admin', 'SnIvSVV6c2UwdWhKS1ZKMDluUlp4dz09', 1, '2020-10-25 20:16:39', 'USR-00001', NULL, NULL, NULL, NULL);
+INSERT INTO `m_user` VALUES (1, 1, 'admin', 'SnIvSVV6c2UwdWhKS1ZKMDluUlp4dz09', 1, '2020-10-27 00:38:10', 'USR-00001', NULL, NULL, NULL, NULL);
 INSERT INTO `m_user` VALUES (2, 1, 'coba', 'Tzg1eTllUlU2a2xNQk5yYktIM1pwUT09', NULL, NULL, 'USR-00002', 'coba-1602775328.jpg', '2020-10-15 22:22:08', '2020-10-15 22:43:54', '2020-10-15 22:58:50');
 
 -- ----------------------------
@@ -247,7 +247,7 @@ CREATE TABLE `t_galeri_konten`  (
 -- ----------------------------
 -- Records of t_galeri_konten
 -- ----------------------------
-INSERT INTO `t_galeri_konten` VALUES (1, '1', '3', 1, '2020-10-23 23:29:34', NULL, '2020-10-24 22:57:07');
+INSERT INTO `t_galeri_konten` VALUES (1, '1', '3', 1, '2020-10-23 23:29:34', NULL, '2020-10-27 00:38:56');
 INSERT INTO `t_galeri_konten` VALUES (2, '1', '1', 2, '2020-10-23 23:30:01', NULL, '2020-10-24 22:57:10');
 INSERT INTO `t_galeri_konten` VALUES (3, '1', '4', 3, '2020-10-23 23:30:53', NULL, '2020-10-24 22:57:14');
 INSERT INTO `t_galeri_konten` VALUES (4, '1', '8', 4, '2020-10-23 23:45:39', NULL, '2020-10-23 23:59:27');
@@ -353,7 +353,9 @@ CREATE TABLE `t_video_konten`  (
 -- ----------------------------
 -- Records of t_video_konten
 -- ----------------------------
-INSERT INTO `t_video_konten` VALUES (1, 1, 1, 1, '2020-10-25 20:43:56', NULL, NULL);
+INSERT INTO `t_video_konten` VALUES (1, 1, 1, 1, '2020-10-25 20:43:56', NULL, '2020-10-27 00:42:06');
+INSERT INTO `t_video_konten` VALUES (2, 1, 3, 1, '2020-10-27 00:44:55', NULL, '2020-10-27 00:47:50');
+INSERT INTO `t_video_konten` VALUES (3, 1, 1, 1, '2020-10-27 00:47:57', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for t_video_talent
@@ -374,6 +376,7 @@ CREATE TABLE `t_video_talent`  (
 -- ----------------------------
 INSERT INTO `t_video_talent` VALUES (1, 1, 'files/img/talent_img/1/1-video-via-vallen-1603612269.mp4', '2020-10-25 14:51:09', NULL, NULL);
 INSERT INTO `t_video_talent` VALUES (2, 1, 'files/img/talent_img/1/2-video-via-vallen-1603612532.mp4', '2020-10-25 14:55:32', NULL, '2020-10-25 14:58:27');
+INSERT INTO `t_video_talent` VALUES (3, 1, 'files/img/talent_img/1/3-video-via-vallen-1603734283.mp4', '2020-10-27 00:44:43', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for tbl_requesttransaksi

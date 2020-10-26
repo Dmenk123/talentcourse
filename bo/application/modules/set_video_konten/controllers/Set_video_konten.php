@@ -136,14 +136,14 @@ class Set_video_konten extends CI_Controller {
 	public function delete_data()
 	{
 		$id = $this->input->post('id');
-		$del = $this->t_galeri_konten->softdelete_by_id($id);
+		$del = $this->t_video_konten->softdelete_by_id($id);
 		
 		if($del) {
 			$retval['status'] = TRUE;
-			$retval['pesan'] = 'Data Galeri Sukses dihapus';
+			$retval['pesan'] = 'Data Video Sukses dihapus';
 		}else{
 			$retval['status'] = FALSE;
-			$retval['pesan'] = 'Data Galeri Gagal dihapus';
+			$retval['pesan'] = 'Data Video Gagal dihapus';
 		}
 
 		echo json_encode($retval);

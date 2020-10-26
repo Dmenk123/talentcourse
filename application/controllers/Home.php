@@ -25,6 +25,18 @@ class Home extends CI_Controller {
 		$galeri = $this->m_global->multi_row($select,$where,$table, $join, 'gk.urutan asc');
 
 		/////////////////////////////
+		
+		$select = "vk.*, vt.path_video";
+		$where = ['vk.deleted_at is null' => null, 'vk.id_talent' => 1];
+		$table = 't_video_konten as vk';
+		$join = [ 
+			['table' => 't_video_talent as vt', 'on' => 'vk.id_t_video_talent = vt.id']
+		];
+		
+		$video = $this->m_global->multi_row($select,$where,$table, $join, 'vk.urutan asc');
+
+		/////////////////////////////
+
 		$select = 't_harga.*, m_diskon.nama, m_diskon.besaran';
 		$where = ['t_harga.deleted_at is null' => null, 't_harga.id_talent' => 1];
 		$table = 't_harga';
@@ -41,14 +53,25 @@ class Home extends CI_Controller {
 				//jika harga normal
 				if(strtotime($timestamp) > strtotime($tgl_akhir_diskon)) {
 					$arr['harga'] = $value->nilai_harga;
+					$arr['harga_txt'] = "Rp " . number_format($value->nilai_harga,0,',','.');
 					$arr['jenis_harga'] = $value->jenis_harga;
+					$arr['sisa_waktu_diskon'] = null;
 				}else{
-					$arr['harga'] = (float)$value->nilai_harga * (float)$value->besaran / 100;
+					$arr['harga'] = (float)$value->nilai_harga - ((float)$value->nilai_harga * (float)$value->besaran / 100);
+					$arr['harga_txt'] = "Rp " . number_format($value->nilai_harga,0,',','.');
 					$arr['jenis_harga'] = $value->jenis_harga;
+					
+					$datetime_akhir = new DateTime($tgl_akhir_diskon);
+					$selisih = $obj_date->diff($datetime_akhir);
+					$sisa_interval_diskon = $obj_date->modify('+'.$selisih->d.' day'.' '.'+'.$selisih->h.' hour'.' '.'+'.$selisih->i.' minute'.' '.'+'.$selisih->s.' second');
+					
+					$arr['sisa_waktu_diskon'] = $sisa_interval_diskon->format('Y/m/d H:i:s');
 				}
 			}else{
 				$arr['harga'] = $value->nilai_harga;
+				$arr['harga_txt'] = "Rp " . number_format($value->nilai_harga,0,',','.');
 				$arr['jenis_harga'] = $value->jenis_harga;
+				$arr['sisa_waktu_diskon'] = null;
 			}
 
 			$arr_harga[] = $arr;
@@ -70,26 +93,14 @@ class Home extends CI_Controller {
 		 */
 		$data = [
 			'galeri' => $galeri,
+			'video' => $video,
 			'harga' => $harga,
 			'arr_harga' => $arr_harga,
 			'is_diskon' => $is_diskon
 		];
 
-		
-		// echo "<pre>";
-		// print_r ($data);
-		// echo "</pre>";
-		// exit;
-
 		$this->load->view('v_template', $data, FALSE);
 	}
-
-	public function checkout_reguler()
-	{
-		$kode_ref = $this->generate_kode_ref();
-		var_dump($kode_ref);exit;
-	}
-
 
 	public function oops()
 	{	
