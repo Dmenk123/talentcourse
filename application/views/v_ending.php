@@ -1,20 +1,29 @@
 <!-- Portfolio Section Starts -->
-<section id="portfolio" class="portfolio">
+<section id="portfolio" class="portfolio" style="background-image: url('assets/images/ice2.jpg');background-repeat: no-repeat;
+  background-size: 1350px 1700px;">
     <!-- Container Starts -->
     <div class="container">
         <!-- Main Heading Starts -->
         <div class="text-center top-text">
             <p style="font-size:24px; font-family: arial; color: Red; line-height:26px;"><span style="font-size:24px; font-family: arial; color: blue;"><strong>Kalau tidak menguasai Ilmu Algoritma Instagram,</strong></span> maka Bisnis anda tidak meledak.</p>
             <p style="font-size:20px; font-family: arial; color:orchid; line-height:22px;"><strong>Ayo "Pacaran" dengan Saras Davina, <span style="color:blue;">LIVE</span></strong> <span style="font-size:20px; font-family: arial; color:darkslategray; line-height:22px;">yaitu nyetrum belajar Ilmu Algoritma Instagram untuk Bisnis.</span></p>
-            <p style="font-size:20px; font-family: arial; color:blue; line-height:22px;"><strong>Harga di bawah hanya untuk masa promosi.</strong> <br><span style="font-size:20px; font-family: arial; color:darkslategray; line-height:22px;">Anda hanya memiliki waktu <?= $harga[0]->masa_berlaku_diskon; ?> hari, setelah timer kembali ke angka 0, maka harga akan kembali Normal.</span></p>
+            <?php if($tgl_mulai_diskon && $tgl_mulai_diskon) { ?>
+                <?php if((strtotime($tgl_mulai_diskon) <= strtotime(date('Y-m-d H:i:s'))) && (strtotime($tgl_akhir_diskon) >= strtotime(date('Y-m-d H:i:s')))) { ?>
+                    <p style="font-size:20px; font-family: arial; color:blue; line-height:22px;"><strong>Harga di bawah hanya untuk masa promosi.</strong> <br><span style="font-size:20px; font-family: arial; color:darkslategray; line-height:22px;">Anda hanya memiliki waktu <?php if(isset($jml_hari)){ echo $jml_hari; }; ?> hari, setelah timer kembali ke angka 0, maka harga akan kembali Normal.</span></p>
+                <?php } ?>
+            <?php } ?>
         </div>
 
         <div class="fact-badges text-center top-text">
-                
-            <div class="flipcountercss" align="center">
-                <h1>Buruan Pesan Sekarang</h1>
-                <div id="flipdown" class="flipdown"></div>
-            </div>
+            <?php if($tgl_mulai_diskon && $tgl_mulai_diskon) { ?>
+                <?php if((strtotime($tgl_mulai_diskon) <= strtotime(date('Y-m-d H:i:s'))) && (strtotime($tgl_akhir_diskon) >= strtotime(date('Y-m-d H:i:s')))) { ?>
+                    <div class="flipcountercss" align="center">
+                        <h1>Buruan Pesan Sekarang</h1>
+                        <div id="flipdown" class="flipdown"></div>
+                    </div>
+                <?php } ?>
+            <?php } ?>
+            
                 
             <div align="center" style="position:relative;top:30px;">
                 <div class="col-md-12 row no-gutters" align="center">

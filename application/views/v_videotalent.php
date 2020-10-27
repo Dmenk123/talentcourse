@@ -27,7 +27,7 @@
                 </div> -->  
 
                  <!-- Video Play Starts -->
-                <video width="720" height="480" controls>
+                <video width="720" height="480" poster="<?=base_url('assets/images/thumbnail_video/blog-post-small-3.jpg')?>" controls>
                     <source src="<?=base_url().$video[0]->path_video;?>" type=video/mp4>
                 </video>
                 <!-- Video Play Ends -->

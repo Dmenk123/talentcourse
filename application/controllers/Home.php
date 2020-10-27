@@ -43,28 +43,41 @@ class Home extends CI_Controller {
 		$join = [ 
 			['table' => 'm_diskon', 'on' => 't_harga.id_m_diskon = m_diskon.id']
 		];
-		
-		$harga = $this->m_global->multi_row($select,$where,$table, $join);
+		$orderby = "t_harga.jenis_harga";
+		$harga = $this->m_global->multi_row($select,$where,$table, $join, $orderby);
 		
 		foreach ($harga as $key => $value) {
 			if($value->is_diskon) {
 				// cek tanggal
-				$tgl_akhir_diskon = $obj_date->createFromFormat('Y-m-d H:i:s', $value->tgl_akhir_diskon.' 23:59:59')->format('Y-m-d H:i:s');
-				//jika harga normal
+				$tgl_mulai_diskon = $obj_date->createFromFormat('Y-m-d H:i:s', $value->tgl_mulai_diskon.' 00:00:00')->format('Y-m-d H:i:s');
+				$tgl_akhir_diskon = $obj_date->createFromFormat('Y-m-d H:i:s', $value->tgl_akhir_diskon.' 00:00:00')->format('Y-m-d H:i:s');
+				
+				//jika harga normal (timestamp > tgl_akhir diskon)
 				if(strtotime($timestamp) > strtotime($tgl_akhir_diskon)) {
 					$arr['harga'] = $value->nilai_harga;
 					$arr['harga_txt'] = "Rp " . number_format($value->nilai_harga,0,',','.');
 					$arr['jenis_harga'] = $value->jenis_harga;
 					$arr['sisa_waktu_diskon'] = null;
+					$arr['masa_berlaku_diskon'] = null;
 				}else{
-					$arr['harga'] = (float)$value->nilai_harga - ((float)$value->nilai_harga * (float)$value->besaran / 100);
-					$arr['harga_txt'] = "Rp " . number_format($value->nilai_harga,0,',','.');
-					$arr['jenis_harga'] = $value->jenis_harga;
-					
+					//cek apakah sudah masuk tgl diskon ?
+					if(strtotime($timestamp) >= strtotime($tgl_mulai_diskon)) {
+						$arr['harga'] = (float)$value->nilai_harga - ((float)$value->nilai_harga * (float)$value->besaran / 100);
+						$arr['harga_txt'] = "Rp " . number_format(((float)$value->nilai_harga - ((float)$value->nilai_harga * (float)$value->besaran / 100)),0,',','.');
+						$arr['jenis_harga'] = $value->jenis_harga;
+						$arr['masa_berlaku_diskon'] = $value->masa_berlaku_diskon;
+					}
+					// jika belum berarti harganya masih normal
+					else{
+						$arr['harga'] = $value->nilai_harga;
+						$arr['harga_txt'] = "Rp " . number_format($value->nilai_harga,0,',','.');
+						$arr['jenis_harga'] = $value->jenis_harga;
+						$arr['masa_berlaku_diskon'] = null;
+					}
+
 					$datetime_akhir = new DateTime($tgl_akhir_diskon);
 					$selisih = $obj_date->diff($datetime_akhir);
 					$sisa_interval_diskon = $obj_date->modify('+'.$selisih->d.' day'.' '.'+'.$selisih->h.' hour'.' '.'+'.$selisih->i.' minute'.' '.'+'.$selisih->s.' second');
-					
 					$arr['sisa_waktu_diskon'] = $sisa_interval_diskon->format('Y/m/d H:i:s');
 				}
 			}else{
@@ -72,19 +85,36 @@ class Home extends CI_Controller {
 				$arr['harga_txt'] = "Rp " . number_format($value->nilai_harga,0,',','.');
 				$arr['jenis_harga'] = $value->jenis_harga;
 				$arr['sisa_waktu_diskon'] = null;
+				$arr['masa_berlaku_diskon'] = null;
 			}
 
 			$arr_harga[] = $arr;
 		}
 
+		$counter_waktu = false;
+		$jml_hari = false;
+		//mencari sisa waktu diskon (untuk counter)
+		foreach ($arr_harga as $k => $v) {
+			if($v['sisa_waktu_diskon']) {
+				$counter_waktu = $v['sisa_waktu_diskon'];
+				$jml_hari = $v['masa_berlaku_diskon'];
+			}else{
+				continue;
+			}
+		}
+
+		$is_diskon = false;
+		$datetime_mulai_diskon = null;
+		$datetime_akhir_diskon = null;
 		//cek apakah diskon ?
 		foreach ($harga as $keys => $vals) {
-			if($value->is_diskon) {
+			if($vals->is_diskon) {
 				$is_diskon = true;
+				$datetime_mulai_diskon = $obj_date->createFromFormat('Y-m-d H:i:s', $vals->tgl_mulai_diskon.' 00:00:00')->format('Y-m-d H:i:s');
+				$datetime_akhir_diskon = $obj_date->createFromFormat('Y-m-d H:i:s', $vals->tgl_akhir_diskon.' 00:00:00')->format('Y-m-d H:i:s');
 			}else{
 				//jika tidak diskon set to false dan break
-				$is_diskon = false;
-				break;
+				continue;
 			}
 		}
 		
@@ -96,8 +126,18 @@ class Home extends CI_Controller {
 			'video' => $video,
 			'harga' => $harga,
 			'arr_harga' => $arr_harga,
-			'is_diskon' => $is_diskon
+			'is_diskon' => $is_diskon,
+			'tgl_mulai_diskon' => $datetime_mulai_diskon,
+			'tgl_akhir_diskon' => $datetime_akhir_diskon,
+			'counter_waktu' => $counter_waktu,
+			'jml_hari' => $jml_hari
 		];
+
+		
+		// echo "<pre>";
+		// print_r ($data);
+		// echo "</pre>";
+		// exit;
 
 		$this->load->view('v_template', $data, FALSE);
 	}

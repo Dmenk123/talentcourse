@@ -278,7 +278,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", () => {
         // Unix timestamp (in seconds) to count down to
-        var unixRemaining = Math.round(new Date("<?=$arr_harga[0]['sisa_waktu_diskon'];?>").getTime()/1000);
+        var unixRemaining = Math.round(new Date("<?php if(isset($counter_waktu)){ echo $counter_waktu; }?>").getTime()/1000);
         console.log(unixRemaining);
         // console.log(twoDaysFromNow);
         // Set up FlipDown
