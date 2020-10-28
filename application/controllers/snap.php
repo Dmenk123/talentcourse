@@ -1,24 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Snap extends CI_Controller {
-
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -  
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in 
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see http://codeigniter.com/user_guide/general/urls.html
-	 */
-
-
 	public function __construct()
     {
         parent::__construct();
@@ -66,31 +48,49 @@ class Snap extends CI_Controller {
 		$timestamp = $obj_date->format('Y-m-d H:i:s');
 		$datenow = $obj_date->format('Y-m-d');
 		
+		$arr_valid = $this->rule_validasi();
+		// var_dump($arr_valid);exit;
+		if ($arr_valid['status'] == FALSE) {
+			// $this->session->set_flashdata('feedback_failed','Gagal menyimpan Data, pastikan telah mengisi semua inputan yang wajib di isi.'); 
+			// return redirect('snap').'?type='.$price.'#checkout';
+			// echo json_encode(['status' => false]);
+			return;
+		}
 
 		if($price == 'reg') {
-			$harga = $this->m_global->single_row('*',['id_talent' => 1, 'jenis_harga' => 1], 't_harga', NULL);
+			$harga = $this->m_global->single_row('*',['id_talent' => 1, 'jenis_harga' => 1, 'deleted_at' => null], 't_harga', NULL);
 		}else{
-			$harga = $this->m_global->single_row('*',['id_talent' => 1, 'jenis_harga' => 2], 't_harga', NULL);
+			$harga = $this->m_global->single_row('*',['id_talent' => 1, 'jenis_harga' => 2, 'deleted_at' => null], 't_harga', NULL);
 		}
 		
 		if($harga->is_diskon) {
-			$tgl_akhir_diskon = $harga->tgl_akhir_diskon;
-			if(strtotime($datenow) > strtotime($tgl_akhir_diskon)) {
-				$diskon = $this->m_global->single_row('*', ['id' => $harga->id_m_diskon], 'm_diskon');
-				$harga_fix = (float)$harga->nilai_harga * (float)$diskon->besaran / 100;
+			// cek tanggal
+			$tgl_mulai_diskon = $obj_date->createFromFormat('Y-m-d H:i:s', $harga->tgl_mulai_diskon.' 00:00:00')->format('Y-m-d H:i:s');
+			$tgl_akhir_diskon = $obj_date->createFromFormat('Y-m-d H:i:s', $harga->tgl_akhir_diskon.' 00:00:00')->format('Y-m-d H:i:s');
+			$diskon = $this->m_global->single_row('*', ['id' => $harga->id_m_diskon], 'm_diskon');
+			//jika harga normal (timestamp > tgl_akhir diskon)
+			if(strtotime($timestamp) > strtotime($tgl_akhir_diskon)) {
+				$harga_fix = (float)$harga->nilai_harga;
 			}else{
-				$harga_fix = $harga->nilai_harga;
+				//cek apakah sudah masuk tgl diskon ?
+				if(strtotime($timestamp) >= strtotime($tgl_mulai_diskon)) {
+					$harga_fix = (float)$harga->nilai_harga - ((float)$harga->nilai_harga * (float)$diskon->besaran / 100);
+				}
+				// jika belum berarti harganya masih normal
+				else{
+					$harga_fix = (float)$harga->nilai_harga;
+				}
 			}
 		}else{
-			$harga_fix = $harga->nilai_harga;
+			$harga_fix = (float)$harga->nilai_harga;
 		}
 
 		if($price == 'reg') {
 			$txt_ket = 'reguler';
 		}else{
-			$harga_fix = $harga->nilai_harga;
 			$txt_ket = 'eksklusif';
 		}
+	
 		// Required
 		$order_id = rand();
 		$transaction_details = array(
@@ -262,6 +262,39 @@ class Snap extends CI_Controller {
 		// print_r($arr);
 
 		return $arr;
+	}
+	
+	private function rule_validasi()
+	{
+		$data = array();
+		$data['error_string'] = array();
+		$data['inputerror'] = array();
+		$data['status'] = TRUE;
 
-    }
+		if ($this->input->post('price') == '') {
+			$data['inputerror'][] = 'keterangan';
+            $data['error_string'][] = 'Wajib Memilih Nama keterangan';
+            $data['status'] = FALSE;
+		}
+
+		if ($this->input->post('first_name') == '') {
+			$data['inputerror'][] = 'nama_depan';
+            $data['error_string'][] = 'Wajib Mengisi Nama Depan';
+            $data['status'] = FALSE;
+		}
+
+		if ($this->input->post('email') == '') {
+			$data['inputerror'][] = 'email';
+            $data['error_string'][] = 'Wajib Mengisi Nama Email';
+            $data['status'] = FALSE;
+		}
+
+		if ($this->input->post('telp') == '') {
+			$data['inputerror'][] = 'telp';
+            $data['error_string'][] = 'Wajib Mengisi Nomor Telp';
+            $data['status'] = FALSE;
+		}
+
+        return $data;
+	}
 }
