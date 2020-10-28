@@ -1,10 +1,11 @@
 <!-- Intro Section Starts -->
-<section id="about" class="about">
+<section id="about" class="about" style="background-image: url('assets/images/pink6.jpg');background-repeat: no-repeat;
+  background-size: 100%;">
     <!-- Container Starts -->
     <div class="container">
         <!-- Main Heading Starts -->
         <div class="text-center top-text" style="margin-bottom:-80px;">
-            <p style="font-size:24px; font-family:arial; color:yellow; line-height:24px;"><strong>Akibat pandemi, orang terbiasa berjauhan, sehingga bisnis pun harus berjauhan, karena itu anda harus punya Bisnis Online, tidak bisa hanya Bisnis Offline.<br><br><span style="font-size:24px; font-family:arial; color:black; line-height:20px;">7 milyar umat manusia di dunia perlu mencari uang, karena itu sebaiknya anda secepatnya perlu punya Bisnis Online.</span></strong><br><br><span style="font-size:24px; font-family:arial; color:blue; line-height:24px;">Agar bisnis online anda bisa Meledak, <strong>maka membutuhkan Ilmu Algoritma Instagram</strong></span></p>
+            <p style="font-size:24px; font-family:arial; color:blue; line-height:24px;"><strong>Akibat pandemi, orang terbiasa berjauhan, sehingga bisnis pun harus berjauhan, karena itu anda harus punya Bisnis Online, tidak bisa hanya Bisnis Offline.<br><br><span style="font-size:24px; font-family:arial; color:black; line-height:20px;">7 milyar umat manusia di dunia perlu mencari uang, karena itu sebaiknya anda secepatnya perlu punya Bisnis Online.</span></strong><br><br><span style="font-size:24px; font-family:arial; color:indigo; line-height:24px;">Agar bisnis online anda bisa Meledak, <strong>maka membutuhkan Ilmu Algoritma Instagram</strong></span></p>
             <br><br>
             <p style="font-size:18px; font-family: arial; color: black; line-height:20px;"><strong>PENDERITAAN JIKA TIDAK MENGUASAI <br> ILMU ALGORITMA INSTAGRAM</p>
             <p style="font-size:14px; font-family: arial; color: yellow; line-height:20px;"><strong>Fakta-faktanya sudah sering kita lihat, antara lain:</strong></p>
