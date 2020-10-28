@@ -85,15 +85,16 @@ class Snap extends CI_Controller {
 			$harga_fix = $harga->nilai_harga;
 		}
 
-
 		if($price == 'reg') {
 			$txt_ket = 'reguler';
 		}else{
+			$harga_fix = $harga->nilai_harga;
 			$txt_ket = 'eksklusif';
 		}
 		// Required
+		$order_id = rand();
 		$transaction_details = array(
-		  'order_id' => rand(),
+		  'order_id' => $order_id,
 		  'gross_amount' => $harga_fix + 4000, // no decimal allowed for creditcard
 		);
 
