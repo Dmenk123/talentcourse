@@ -23,8 +23,12 @@
         <!-- end flashdata -->
 
         <form id="form_proses_checkout" method="post" enctype="multipart/form-data" class="ps-checkout__form">
+            
             <div class="row">
                 <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 ">
+                <div class="alert alert-warning">
+                    <strong>Peringatan!</strong> Harap isikan email anda dengan benar & Mohon periksa kembali !
+                </div>
                     <div class="ps-checkout__billing">
                         <!--<h3>Isi Form Data Diri Anda</h3>-->
                         <div class="form-group form-group--inline">
