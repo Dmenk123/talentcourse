@@ -15,6 +15,12 @@ class Snap extends CI_Controller {
     {
 		$type = $this->input->get('type');
         if(in_array($type, ['reg', 'vip'])){
+			if($type == 'reg') {
+				$harga = $this->m_global->single_row('*',['id_talent' => 1, 'jenis_harga' => 1, 'deleted_at' => null], 't_harga', NULL);
+			}else{
+				$harga = $this->m_global->single_row('*',['id_talent' => 1, 'jenis_harga' => 2, 'deleted_at' => null], 't_harga', NULL);
+			}
+
             $tahun = date('Y');
             $bulan = date('m');
             $hari = date('d');
@@ -24,7 +30,8 @@ class Snap extends CI_Controller {
              * data passing ke halaman view content
              */
             $data = [
-                'type' => $type
+				'type' => $type,
+				'harga' => $harga
             ];
 
             //cek disini 

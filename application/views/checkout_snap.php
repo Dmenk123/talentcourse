@@ -61,7 +61,7 @@
                             <h3>Pembayaran Langsung Transfer</h3>
                             <div class="form-group cheque">
                                 <div class="">
-                                    <p>Transfer Rp. 400.000 ke Rekening Di bawah Ini.</p>
+                                    <p>Transfer <?= "Rp ".number_format($harga->nilai_harga,0,',','.'); ?> ke Rekening Di bawah Ini.</p>
                                     <p>Rekening BCA : 464-5679-777 <br> a.n Evie Maria Diahwati</p>
                                 </div>
                             </div>
