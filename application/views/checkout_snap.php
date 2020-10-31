@@ -52,6 +52,12 @@
                             <input class="form-control numberinput" style="background-color: #e8f0fe;" type="text" name="telp" id="telp">
                             <span class="help-block"></span>
                         </div>
+                        <div class="form-group form-group--inline">
+                            <label>Alamat<span>*</span>
+                            </label>
+                            <textarea class="form-control" style="background-color: #e8f0fe;" type="text" name="address" id="address"></textarea>
+                            <span class="help-block"></span>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 ">

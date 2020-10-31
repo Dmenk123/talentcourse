@@ -358,6 +358,7 @@
         var first_name    = $("#nama_depan").val();
         var last_name     = $("#nama_belakang").val();
         var telp          = $("#telp").val();
+        var address       = $("#address").val();
 
         $.ajax({
             method : "POST",
@@ -368,7 +369,8 @@
                     last_name: last_name,
                     price: price, 
                     quantity: quantity, 
-                    telp: telp
+                    telp: telp,
+                    address: address
                     },
             cache: false,
 
