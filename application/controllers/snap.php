@@ -130,6 +130,7 @@ class Snap extends CI_Controller {
 			'telp'  => $telp,
 			'keterangan' => $txt_ket,
 			'harga'     => $harga_fix,
+			'harga_bruto' => $harga_fix + $item2_details['price'],
 			'order_id'  => $order_id,
 			'alamat'    => $address,
 			'created_at' => $timestamp
@@ -267,26 +268,27 @@ class Snap extends CI_Controller {
 
 		$return = $this->snapmodel->insert($data);
 		if ($return) {
-			if($data_trans->item_details[0]->name == 'Kelas reguler'){
-				$ket_txt = 'reguler';
-			}else{
-				$ket_txt = 'eksklusif';
-			}
+			// if($data_trans->item_details[0]->name == 'Kelas reguler'){
+			// 	$ket_txt = 'reguler';
+			// }else{
+			// 	$ket_txt = 'eksklusif';
+			// }
 
-			$checkout_data = [
-				'kode_ref' => $result->order_id,
-				'order_id' => $result->order_id,
-                'email' => $data_trans->customer_details->email,
-                'nama_dpn' => $data_trans->customer_details->first_name,
-                'nama_blkg' => $data_trans->customer_details->last_name,
-				'telp' => $data_trans->customer_details->phone,
-				'keterangan' => $ket_txt,
-				'harga' => (float)$data_trans->item_details[0]->price,
-				'harga_bruto' => (float)$result->gross_amount,
-                'created_at' => $timestamp
-            ];
+			// $checkout_data = [
+			// 	'kode_ref' => $result->order_id,
+			// 	'order_id' => $result->order_id,
+            //     'email' => $data_trans->customer_details->email,
+            //     'nama_dpn' => $data_trans->customer_details->first_name,
+            //     'nama_blkg' => $data_trans->customer_details->last_name,
+			// 	'telp' => $data_trans->customer_details->phone,
+			// 	'keterangan' => $ket_txt,
+			// 	'harga' => (float)$data_trans->item_details[0]->price,
+			// 	'harga_bruto' => (float)$result->gross_amount,
+            //     'created_at' => $timestamp
+            // ];
 
-            $simpan = $this->m_global->store($checkout_data, 't_checkout');
+			// $simpan = $this->m_global->store($checkout_data, 't_checkout');
+			
 			echo "request pembayaran berhasil dilakukan";
 		} else {
 			echo "request pembayana gagal dilakukan";
