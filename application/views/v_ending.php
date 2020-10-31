@@ -10,7 +10,11 @@
             <?php if($tgl_mulai_diskon && $tgl_mulai_diskon) { ?>
                 <?php if((strtotime($tgl_mulai_diskon) <= strtotime(date('Y-m-d H:i:s'))) && (strtotime($tgl_akhir_diskon) >= strtotime(date('Y-m-d H:i:s')))) { ?>
                     <p style="font-size:20px; font-family: arial; color:blue; line-height:22px;"><strong>Harga di bawah hanya untuk masa promosi.</strong> <br><span style="font-size:20px; font-family: arial; color:darkslategray; line-height:22px;">Tidak semua orang bisa diterima, ada kuota, yang cepat yang dapat, setelah timer kembali ke angka 0, maka harga akan kembali Normal.</span></p>
+                <?php }else{ ?>
+                        <p style="font-size:20px; font-family: arial; color:blue; line-height:22px;"><strong>Harga di bawah merupakan harga normal.</strong> <br><span style="font-size:20px; font-family: arial; color:darkslategray; line-height:22px;">Bla Bla Bla Bla Bla Bla Harga Normal.</span></p>
                 <?php } ?>
+            <?php }else{ ?>
+                    <p style="font-size:20px; font-family: arial; color:blue; line-height:22px;"><strong>Harga di bawah merupakan harga normal.</strong> <br><span style="font-size:20px; font-family: arial; color:darkslategray; line-height:22px;">Bla Bla Bla Bla Bla Bla Harga Normal.</span></p>
             <?php } ?>
         </div>
 
