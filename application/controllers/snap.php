@@ -50,6 +50,7 @@ class Snap extends CI_Controller {
 		$price    		= $this->input->post('price');
 		$quantity 		= $this->input->post('quantity');
 		$telp     		= $this->input->post('telp');
+		$address        = $this->input->post('address');
 
 		$obj_date = new DateTime();
 		$timestamp = $obj_date->format('Y-m-d H:i:s');
@@ -121,6 +122,19 @@ class Snap extends CI_Controller {
 		  'name' => "Biaya Admin"
 		);
 
+		//inserting data customer
+		$nama_lengkap = $first_name.' '.$last_name;
+		$data = array(
+			'nama'  => $nama_lengkap,
+			'email' => $email,
+			'telp'  => $telp,
+			'keterangan' => $txt_ket,
+			'harga'     => $harga_fix,
+			'order_id'  => $order_id,
+			'alamat'    => $address,
+			'created_at' => $timestamp
+		);
+		$simpan = $this->m_global->store($data, 't_checkout');
 		// Optional
 		$item_details = array ($item1_details, $item2_details);
 
@@ -128,7 +142,7 @@ class Snap extends CI_Controller {
 		$billing_address = array(
 		  'first_name'    => $first_name,
 		  'last_name'     => $last_name,
-		  'address'       => "Mangga 20",
+		  'address'       => $address,
 		  'city'          => "Jakarta",
 		  'postal_code'   => "16602",
 		  'phone'         => $telp,
@@ -139,7 +153,7 @@ class Snap extends CI_Controller {
 		$shipping_address = array(
 		  'first_name'    => "Obet",
 		  'last_name'     => "Supriadi",
-		  'address'       => "Manggis 90",
+		  'address'       => $address,
 		  'city'          => "Jakarta",
 		  'postal_code'   => "16601",
 		  'phone'         => "08113366345",
@@ -165,7 +179,7 @@ class Snap extends CI_Controller {
         $custom_expiry = array(
             'start_time' => date("Y-m-d H:i:s O",$time),
             'unit' => 'minute', 
-            'duration'  => 2
+            'duration'  => 60
         );
         
         $transaction_data = array(
