@@ -176,18 +176,26 @@ class Snap extends CI_Controller {
             'expiry'             => $custom_expiry
         );
 
-		error_log(json_encode($transaction_data));
+		// echo json_encode($transaction_data);
+		// exit;
 		$snapToken = $this->midtrans->getSnapToken($transaction_data);
-		error_log($snapToken);
-		echo $snapToken;
+		//error_log($snapToken);
+		
+		echo json_encode(['token'=>$snapToken, 'transData' => $transaction_data]);
     }
 
     public function finish()
     {
 
 		$this->load->model('snapmodel');
-    	$result = json_decode($this->input->post('result_data'));
-    	if (isset($result->va_number[0]->bank)) {
+		$result = json_decode($this->input->post('result_data'));
+		$data_trans = json_decode($this->input->post('formulir-data'));
+		
+		$obj_date = new DateTime();
+		$timestamp = $obj_date->format('Y-m-d H:i:s');
+		// var_dump([$result, $data_trans]);exit;
+		
+		if (isset($result->va_number[0]->bank)) {
 			$bank = $result->va_number[0]->bank;
 		} else {
 			$bank = '-';
@@ -245,6 +253,26 @@ class Snap extends CI_Controller {
 
 		$return = $this->snapmodel->insert($data);
 		if ($return) {
+			if($data_trans->item_details[0]->name == 'Kelas reguler'){
+				$ket_txt = 'reguler';
+			}else{
+				$ket_txt = 'eksklusif';
+			}
+
+			$checkout_data = [
+				'kode_ref' => $result->order_id,
+				'order_id' => $result->order_id,
+                'email' => $data_trans->customer_details->email,
+                'nama_dpn' => $data_trans->customer_details->first_name,
+                'nama_blkg' => $data_trans->customer_details->last_name,
+				'telp' => $data_trans->customer_details->phone,
+				'keterangan' => $ket_txt,
+				'harga' => (float)$data_trans->item_details[0]->price,
+				'harga_bruto' => (float)$result->gross_amount,
+                'created_at' => $timestamp
+            ];
+
+            $simpan = $this->m_global->store($checkout_data, 't_checkout');
 			echo "request pembayaran berhasil dilakukan";
 		} else {
 			echo "request pembayana gagal dilakukan";

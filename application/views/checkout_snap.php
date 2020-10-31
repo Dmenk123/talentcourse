@@ -3,6 +3,7 @@
         <form class="ps-checkout__form" id="payment-form" method="post" action="<?=site_url()?>snap/finish">
           <input type="hidden" name="result_type" id="result-type" value=""></div>
           <input type="hidden" name="result_data" id="result-data" value=""></div>
+          <input type="hidden" name="formulir-data" id="formulir-data" value=""></div>
         </form>
     <div class="container" style="margin-top:50px;">
          <!-- flashdata -->

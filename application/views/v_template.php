@@ -371,38 +371,39 @@
                     telp: telp
                     },
             cache: false,
+            dataType: "JSON",
 
             success: function(data) {
                 if(data.status == false){
                     return false;
                 }else{
-                    console.log('token = '+data);
-                
+                    console.log('token = '+data.token);
+
                     var resultType = document.getElementById('result-type');
                     var resultData = document.getElementById('result-data');
-
-                    function changeResult(type,data){
-                    $("#result-type").val(type);
-                    $("#result-data").val(JSON.stringify(data));
-                    //resultType.innerHTML = type;
-                    //resultData.innerHTML = JSON.stringify(data);
+                    var formulirData = document.getElementById('formulir-data');
+                    
+                    function changeResult(type,resultData,transData){
+                        $("#result-type").val(type);
+                        $("#result-data").val(JSON.stringify(resultData));
+                        $("#formulir-data").val(JSON.stringify(transData));
                     }
 
-                    snap.pay(data, {
+                    snap.pay(data.token, {
                     
                         onSuccess: function(result){
-                            changeResult('success', result);
+                            changeResult('success', result, data.transData);
                             console.log(result.status_message);
                             console.log(result);
                             $("#payment-form").submit();
                         },
                         onPending: function(result){
-                            changeResult('pending', result);
+                            changeResult('pending', result, data.transData);
                             console.log(result.status_message);
                             $("#payment-form").submit();
                         },
                         onError: function(result){
-                            changeResult('error', result);
+                            changeResult('error', result, data.transData);
                             console.log(result.status_message);
                             $("#payment-form").submit();
                         }
