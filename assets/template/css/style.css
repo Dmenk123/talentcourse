@@ -3331,6 +3331,10 @@ body.dark.blog-page .banner-blog-post .meta {
   content: "\f167";
 }
 
+.social-icons ul li a[title="globe"]:before {
+  content: "\f0ac";
+}
+
 /* Back To Top
 ---------------------------------------- */
 

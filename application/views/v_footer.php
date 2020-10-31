@@ -3,34 +3,22 @@
     <!-- Container Starts -->
     <div class="container">
         <!-- Copyright Text Starts -->
-        <p>Saras Davina - IVY THE WONDERS</p>
+        <p>SARAS DAVINA - Ivy The Wonders</p>
         <p>
-            &copy; Copyright 2017 Salimo & Designed with <span class="heart">&#10084;</span> by <a target="_blank" href="http://themeforest.net/user/celtano/">Celtano</a>
+            &copy; Copyright 2020 Saras Davina with <span class="heart">&#10084;</span> by Ivy The Wonders
         </p>
         <!-- Copyright Text Ends -->
         <!-- Social Media Links Starts -->
         <div class="social-icons">
             <ul class="social">
                 <li>
-                    <a class="twitter" href="#" title="twitter"></a>
+                    <a class="facebook" href="https://facebook.com/Saras-Davina-Ivy-The-Wonders-110257024151678/" title="facebook"></a>
                 </li>
                 <li>
-                    <a class="facebook" href="#" title="facebook"></a>
+                    <a class="instagram" href="https://www.instagram.com/sarasdavina/" title="instagram"></a>
                 </li>
                 <li>
-                    <a class="google" href="#" title="google"></a>
-                </li>
-                <li>
-                    <a class="skype" href="#" title="skype"></a>
-                </li>
-                <li>
-                    <a class="instagram" href="#" title="instagram"></a>
-                </li>
-                <li>
-                    <a class="linkedin" href="#" title="linkedin"></a>
-                </li>
-                <li>
-                    <a class="youtube" href="#" title="youtube"></a>
+                    <a class="globe" href="<?= base_url('/');?>" title="globe"></a>
                 </li>
             </ul>
         </div>
