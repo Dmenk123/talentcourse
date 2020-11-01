@@ -11,7 +11,7 @@
  Target Server Version : 100413
  File Encoding         : 65001
 
- Date: 27/10/2020 20:42:06
+ Date: 01/11/2020 23:19:29
 */
 
 SET NAMES utf8mb4;
@@ -72,9 +72,11 @@ INSERT INTO `m_menu` VALUES (10, 9, 'Setting Harga', 'Setting Harga', 'set_harga
 INSERT INTO `m_menu` VALUES (11, 6, 'Data Talent', 'Master Data Talent', 'master_talent', 'flaticon-customer', 1, 2, 3, 1, 1, 1);
 INSERT INTO `m_menu` VALUES (12, 9, 'Setting Aktif Talent', 'Setting Aktif Talent', 'set_aktif_talent', 'flaticon-user', 1, 2, 2, 1, 1, 1);
 INSERT INTO `m_menu` VALUES (13, 9, 'Set Galeri Konten', 'Set Galeri Konten', 'set_galeri_konten', 'flaticon-user-settings', 1, 2, 3, 1, 1, 1);
-INSERT INTO `m_menu` VALUES (14, 0, 'Laporan', 'Laporan', '', 'flaticon-graph', 1, 1, 4, 0, 0, 0);
+INSERT INTO `m_menu` VALUES (14, 0, 'Laporan', 'Laporan', '', 'flaticon-graph', 1, 1, 5, 0, 0, 0);
 INSERT INTO `m_menu` VALUES (15, 9, 'Setting Video Konten', 'Setting Video Konten', 'set_video_konten', 'flaticon-technology-2', 1, 2, 4, 1, 1, 1);
 INSERT INTO `m_menu` VALUES (16, 14, 'Laporan Penjualan', 'Laporan Penjualan', 'lap_penjualan', 'flaticon-statistics', 1, 2, 1, 1, 1, 1);
+INSERT INTO `m_menu` VALUES (17, 0, 'Transaksi', 'Transaksi', '', 'flaticon-list', 1, 1, 4, 0, 0, 0);
+INSERT INTO `m_menu` VALUES (18, 17, 'Konfirmasi Penjualan', 'Konfirmasi Penjualan', 'confirm_jual', 'flaticon-interface-10', 1, 2, 1, 1, 1, 1);
 
 -- ----------------------------
 -- Table structure for m_role
@@ -116,8 +118,8 @@ CREATE TABLE `m_talent`  (
 -- ----------------------------
 -- Records of m_talent
 -- ----------------------------
-INSERT INTO `m_talent` VALUES (1, 'via vallen', '<p>asahkshaksjhakshakshaksaksha</p>', '2020-10-19 22:08:44', '2020-10-19 23:07:34', NULL, '', '', '', 'files/img/talent_img/1/via-vallen-1603120124.jpg', 'files/img/talent_img/1/thumbs/via-vallen-1603120124_thumb.jpg');
-INSERT INTO `m_talent` VALUES (2, 'anton', '<p>askjdkasjdkasjd kasdjkas jdkasjd kasjdkajs kajsd</p>\n\n<p>anmsmansm</p>', '2020-10-19 22:14:23', '2020-10-19 22:22:19', NULL, 'asa', 'asasaaaaa', 'as', 'files/img/talent_img/2/anton-1603120939.jpg', 'files/img/talent_img/2/thumbs/anton-1603120939_thumb.jpg');
+INSERT INTO `m_talent` VALUES (1, 'Saras Davina', '<p>asasa</p>', '2020-10-19 22:08:44', '2020-10-27 23:15:12', NULL, '', '', '', 'files/img/talent_img/1/via-vallen-1603120124.jpg', 'files/img/talent_img/1/thumbs/via-vallen-1603120124_thumb.jpg');
+INSERT INTO `m_talent` VALUES (2, 'anton', '<p>askjdkasjdkasjd kasdjkas jdkasjd kasjdkajs kajsd</p>\n\n<p>anmsmansm</p>', '2020-10-19 22:14:23', '2020-10-19 22:22:19', '2020-10-27 23:14:51', 'asa', 'asasaaaaa', 'as', 'files/img/talent_img/2/anton-1603120939.jpg', 'files/img/talent_img/2/thumbs/anton-1603120939_thumb.jpg');
 
 -- ----------------------------
 -- Table structure for m_user
@@ -141,7 +143,7 @@ CREATE TABLE `m_user`  (
 -- ----------------------------
 -- Records of m_user
 -- ----------------------------
-INSERT INTO `m_user` VALUES (1, 1, 'admin', 'SnIvSVV6c2UwdWhKS1ZKMDluUlp4dz09', 1, '2020-10-27 00:38:10', 'USR-00001', NULL, NULL, NULL, NULL);
+INSERT INTO `m_user` VALUES (1, 1, 'admin', 'SnIvSVV6c2UwdWhKS1ZKMDluUlp4dz09', 1, '2020-11-01 23:11:05', 'USR-00001', NULL, NULL, NULL, NULL);
 INSERT INTO `m_user` VALUES (2, 1, 'coba', 'Tzg1eTllUlU2a2xNQk5yYktIM1pwUT09', NULL, NULL, 'USR-00002', 'coba-1602775328.jpg', '2020-10-15 22:22:08', '2020-10-15 22:43:54', '2020-10-15 22:58:50');
 
 -- ----------------------------
@@ -168,26 +170,44 @@ INSERT INTO `t_aktif_talent` VALUES (1, 1, '2020-10-22 21:51:45', NULL, NULL);
 DROP TABLE IF EXISTS `t_checkout`;
 CREATE TABLE `t_checkout`  (
   `id` int(64) NOT NULL AUTO_INCREMENT,
-  `kode_ref` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `nama` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `telp` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `keterangan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'reguler/eksklusif',
   `harga` double(20, 2) NULL DEFAULT NULL,
+  `harga_bruto` float(20, 2) NULL DEFAULT NULL COMMENT 'harga+ongkir',
+  `order_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `alamat` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `created_at` datetime(0) NULL DEFAULT NULL,
   `updated_at` datetime(0) NULL DEFAULT NULL,
   `deleted_at` datetime(0) NULL DEFAULT NULL,
+  `is_confirm` int(1) NULL DEFAULT NULL,
+  `status_confirm` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'diterima, pending, dibatalkan',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of t_checkout
 -- ----------------------------
-INSERT INTO `t_checkout` VALUES (1, 'oxqSwDoQ', 'masnur@ganteng.com', 'masnur', NULL, 'eksklusif', 1000000.00, '2020-10-24 19:03:49', NULL, NULL);
-INSERT INTO `t_checkout` VALUES (2, 'Sk1pheB7', 'masnur@ganteng.com', 'masnur', NULL, 'eksklusif', 1000000.00, '2020-10-24 19:05:24', NULL, NULL);
-INSERT INTO `t_checkout` VALUES (3, 'ms8rVtOz', 'masnur@ganteng.com', 'masnur', NULL, 'reguler', 400000.00, '2020-10-24 19:06:00', NULL, NULL);
-INSERT INTO `t_checkout` VALUES (4, 'JlAiSaZG', 'aksjak@alskal.com', 'ulala', NULL, 'eksklusif', 1000000.00, '2020-10-24 22:25:33', NULL, NULL);
-INSERT INTO `t_checkout` VALUES (5, 'VvCSuQfT', 'asa@gmail.com', 'masnur', NULL, 'reguler', 400000.00, '2020-10-24 22:27:49', NULL, NULL);
+INSERT INTO `t_checkout` VALUES (1, 'rizkiyuandaa@gmail.com', 'Riski Yuanda', '121212', 'reguler', 600000.00, 604000.00, '749680872', 'asjaksjkasjaksjaksja', '2020-10-31 19:41:24', NULL, NULL, NULL, NULL);
+
+-- ----------------------------
+-- Table structure for t_email
+-- ----------------------------
+DROP TABLE IF EXISTS `t_email`;
+CREATE TABLE `t_email`  (
+  `id` int(64) NOT NULL AUTO_INCREMENT,
+  `id_checkout` int(64) NULL DEFAULT NULL,
+  `isi_email` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
+  `created_at` datetime(0) NULL DEFAULT NULL,
+  `updated_at` datetime(0) NULL DEFAULT NULL,
+  `deleted_at` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of t_email
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for t_file_talent
@@ -258,8 +278,8 @@ INSERT INTO `t_galeri_konten` VALUES (8, '1', '15', 2, '2020-10-24 22:57:33', NU
 INSERT INTO `t_galeri_konten` VALUES (9, '1', '16', 3, '2020-10-24 22:57:40', NULL, NULL);
 INSERT INTO `t_galeri_konten` VALUES (10, '1', '17', 4, '2020-10-24 22:57:49', NULL, NULL);
 INSERT INTO `t_galeri_konten` VALUES (11, '1', '18', 5, '2020-10-24 22:57:59', NULL, NULL);
-INSERT INTO `t_galeri_konten` VALUES (12, '1', '19', 6, '2020-10-24 22:59:38', NULL, NULL);
-INSERT INTO `t_galeri_konten` VALUES (13, '1', '20', 7, '2020-10-24 23:00:30', NULL, NULL);
+INSERT INTO `t_galeri_konten` VALUES (12, '1', '19', 6, '2020-10-24 22:59:38', NULL, '2020-10-31 20:48:09');
+INSERT INTO `t_galeri_konten` VALUES (13, '1', '20', 7, '2020-10-24 23:00:30', NULL, '2020-10-31 20:48:19');
 INSERT INTO `t_galeri_konten` VALUES (14, '1', '21', 8, '2020-10-24 23:00:40', NULL, NULL);
 
 -- ----------------------------
@@ -297,8 +317,16 @@ INSERT INTO `t_harga` VALUES (9, 1, 1, 1, 1, 400000.00, '2020-10-24', '2020-10-2
 INSERT INTO `t_harga` VALUES (10, 2, 1, 1, 1, 1100000.00, '2020-10-24', '2020-10-27', 3, '2020-10-24 00:07:20', '2020-10-25 23:28:59', NULL);
 INSERT INTO `t_harga` VALUES (11, 1, NULL, NULL, 1, 400000.00, NULL, NULL, NULL, '2020-10-25 23:28:54', '2020-10-25 23:31:02', NULL);
 INSERT INTO `t_harga` VALUES (12, 2, NULL, NULL, 1, 1100000.00, NULL, NULL, NULL, '2020-10-25 23:28:59', '2020-10-25 23:31:31', NULL);
-INSERT INTO `t_harga` VALUES (13, 1, 1, 1, 1, 400000.00, '2020-10-25', '2020-10-28', 3, '2020-10-25 23:31:02', NULL, NULL);
-INSERT INTO `t_harga` VALUES (14, 2, 1, 1, 1, 1100000.00, '2020-10-25', '2020-10-28', 3, '2020-10-25 23:31:31', NULL, NULL);
+INSERT INTO `t_harga` VALUES (13, 1, 1, 1, 1, 400000.00, '2020-10-25', '2020-10-28', 3, '2020-10-25 23:31:02', '2020-10-27 23:14:26', NULL);
+INSERT INTO `t_harga` VALUES (14, 2, 1, 1, 1, 1100000.00, '2020-10-25', '2020-10-28', 3, '2020-10-25 23:31:31', '2020-10-27 23:14:32', NULL);
+INSERT INTO `t_harga` VALUES (15, 1, NULL, NULL, 1, 400000.00, NULL, NULL, NULL, '2020-10-27 23:14:26', '2020-10-27 23:16:00', NULL);
+INSERT INTO `t_harga` VALUES (16, 2, NULL, NULL, 1, 1100000.00, NULL, NULL, NULL, '2020-10-27 23:14:31', '2020-10-27 23:16:21', NULL);
+INSERT INTO `t_harga` VALUES (17, 1, 1, 1, 1, 600000.00, '2020-10-27', '2020-11-02', 6, '2020-10-27 23:16:00', '2020-10-27 23:51:47', NULL);
+INSERT INTO `t_harga` VALUES (18, 2, NULL, NULL, 1, 1100000.00, NULL, NULL, NULL, '2020-10-27 23:16:21', '2020-10-27 23:58:03', NULL);
+INSERT INTO `t_harga` VALUES (19, 1, NULL, NULL, 1, 600000.00, NULL, NULL, NULL, '2020-10-27 23:51:47', '2020-10-27 23:52:28', NULL);
+INSERT INTO `t_harga` VALUES (20, 1, 1, 1, 1, 600000.00, '2020-10-27', '2020-10-30', 3, '2020-10-27 23:52:28', '2020-10-27 23:57:26', NULL);
+INSERT INTO `t_harga` VALUES (21, 1, NULL, NULL, 1, 600000.00, NULL, NULL, NULL, '2020-10-27 23:57:26', NULL, NULL);
+INSERT INTO `t_harga` VALUES (22, 2, 1, 1, 1, 1100000.00, '2020-10-27', '2020-10-30', 3, '2020-10-27 23:58:03', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for t_role_menu
@@ -329,11 +357,13 @@ INSERT INTO `t_role_menu` VALUES (10, 1, 1, 1, 1);
 INSERT INTO `t_role_menu` VALUES (12, 1, 1, 1, 1);
 INSERT INTO `t_role_menu` VALUES (13, 1, 1, 1, 1);
 INSERT INTO `t_role_menu` VALUES (15, 1, 1, 1, 1);
-INSERT INTO `t_role_menu` VALUES (14, 1, 0, 0, 0);
-INSERT INTO `t_role_menu` VALUES (16, 1, 1, 1, 1);
+INSERT INTO `t_role_menu` VALUES (17, 1, 0, 0, 0);
+INSERT INTO `t_role_menu` VALUES (18, 1, 1, 1, 1);
 INSERT INTO `t_role_menu` VALUES (2, 1, 0, 0, 0);
 INSERT INTO `t_role_menu` VALUES (4, 1, 1, 1, 1);
 INSERT INTO `t_role_menu` VALUES (3, 1, 1, 1, 1);
+INSERT INTO `t_role_menu` VALUES (14, 1, 0, 0, 0);
+INSERT INTO `t_role_menu` VALUES (16, 1, 1, 1, 1);
 
 -- ----------------------------
 -- Table structure for t_video_konten
@@ -403,12 +433,22 @@ CREATE TABLE `tbl_requesttransaksi`  (
   `biller_code` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `opened` tinyint(4) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tbl_requesttransaksi
 -- ----------------------------
 INSERT INTO `tbl_requesttransaksi` VALUES (1, '201', 'Transaksi sedang diproses', '7ca417b3-e336-4469-804c-ab5b0aed7c74', '1046922258', 1004000.00, 'bank_transfer', '2020-10-25 10:57:14', 'pending', '-', '-', 'accept', '02497307799', '-', 'https://app.sandbox.midtrans.com/snap/v1/transactions/27fbcd87-ef50-44e2-ae82-424c80cb79fb/pdf', 'http://example.com?order_id=1046922258&status_code=201&transaction_status=pending', '-', '-', NULL);
 INSERT INTO `tbl_requesttransaksi` VALUES (2, '201', 'Transaksi sedang diproses', '1bae300b-ab85-4e99-9333-46418c3f064f', '1809334', 404000.00, 'cstore', '2020-10-25 22:04:38', 'pending', '-', '-', NULL, '-', '-', 'https://app.sandbox.midtrans.com/snap/v1/transactions/b4ef0617-ab9b-44c4-9c5d-9e7ecd11dafb/pdf', 'http://example.com?order_id=1809334&status_code=201&transaction_status=pending', '-', '-', NULL);
+INSERT INTO `tbl_requesttransaksi` VALUES (4, '201', 'Transaksi sedang diproses', '3a364975-3a55-42d9-813a-534e6a7da421', '1245134508', 604000.00, 'bank_transfer', '2020-10-28 23:51:21', 'pending', '-', '-', 'accept', '02497207027', '-', 'https://app.sandbox.midtrans.com/snap/v1/transactions/9e4d92dc-f936-4c09-8045-906b20c18ead/pdf', 'http://example.com?order_id=1245134508&status_code=201&transaction_status=pending', '-', '-', NULL);
+INSERT INTO `tbl_requesttransaksi` VALUES (5, '201', 'Transaksi sedang diproses', 'f266305d-5561-49e9-b904-60b878c06d00', '139773554', 604000.00, 'cstore', '2020-10-28 23:54:42', 'pending', '-', '-', NULL, '-', '-', 'https://app.sandbox.midtrans.com/snap/v1/transactions/f64ebb15-c4c6-4b04-a36b-310b814521b6/pdf', 'http://example.com?order_id=139773554&status_code=201&transaction_status=pending', '-', '-', NULL);
+INSERT INTO `tbl_requesttransaksi` VALUES (6, '201', 'Transaksi sedang diproses', 'aa6a3d4a-3435-441c-ab34-5b4f0fac5299', '1913473620', 604000.00, 'cstore', '2020-10-29 22:47:52', 'pending', '-', '-', NULL, '-', '-', 'https://app.sandbox.midtrans.com/snap/v1/transactions/3921524b-03e6-4a21-baaa-d352e716bf6e/pdf', 'http://example.com?order_id=1913473620&status_code=201&transaction_status=pending', '-', '-', NULL);
+INSERT INTO `tbl_requesttransaksi` VALUES (8, '201', 'Transaksi sedang diproses', '9b054612-c0d5-450e-92f4-e0c72bef1801', '1781535064', 604000.00, 'echannel', '2020-10-29 23:06:08', 'pending', '-', '-', 'accept', '-', '-', 'https://app.sandbox.midtrans.com/snap/v1/transactions/7ef8f64d-324b-44b5-ab85-c9b6e9e45dc0/pdf', 'http://example.com?order_id=1781535064&status_code=201&transaction_status=pending', '225007030224', '70012', NULL);
+INSERT INTO `tbl_requesttransaksi` VALUES (9, '201', 'Transaksi sedang diproses', '4b2f58a0-906f-4878-ab39-dc4f1afa503b', '515326662', 604000.00, 'cstore', '2020-10-29 23:13:03', 'pending', '-', '-', NULL, '-', '-', 'https://app.sandbox.midtrans.com/snap/v1/transactions/86502c03-a40c-458d-9231-049927b35290/pdf', 'http://example.com?order_id=515326662&status_code=201&transaction_status=pending', '-', '-', NULL);
+INSERT INTO `tbl_requesttransaksi` VALUES (10, '201', 'Transaksi sedang diproses', 'a3451b95-ffcf-4424-97c2-735ab8fedcc8', '1916672375', 604000.00, 'bank_transfer', '2020-10-31 09:51:54', 'pending', '-', '-', 'accept', '02497088101', '-', 'https://app.sandbox.midtrans.com/snap/v1/transactions/7b4d7faf-6681-440f-8c85-17cb7b10dacf/pdf', 'http://example.com?order_id=1916672375&status_code=201&transaction_status=pending', '-', '-', NULL);
+INSERT INTO `tbl_requesttransaksi` VALUES (11, '201', 'Transaksi sedang diproses', '28c20139-490c-4ceb-9fca-0b6951a98805', '2065083646', 604000.00, 'echannel', '2020-10-31 12:59:27', 'pending', '-', '-', 'accept', '-', '-', 'https://app.sandbox.midtrans.com/snap/v1/transactions/6606f4d8-a078-4ed8-a524-a7c4dc78d648/pdf', 'http://example.com?order_id=2065083646&status_code=201&transaction_status=pending', '227956431160', '70012', NULL);
+INSERT INTO `tbl_requesttransaksi` VALUES (12, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '-', '-', NULL, '-', '-', NULL, NULL, '-', '-', NULL);
+INSERT INTO `tbl_requesttransaksi` VALUES (14, '201', 'Transaksi sedang diproses', '69fce2d7-abac-4d7d-b528-9556d5170380', '825838364', 604000.00, 'echannel', '2020-10-31 13:58:03', 'pending', '-', '-', 'accept', '-', '-', 'https://app.sandbox.midtrans.com/snap/v1/transactions/be8fd814-414b-45cc-9325-008ecdf34df3/pdf', 'http://example.com?order_id=825838364&status_code=201&transaction_status=pending', '663768008177', '70012', NULL);
+INSERT INTO `tbl_requesttransaksi` VALUES (15, '201', 'Transaksi sedang diproses', '5812915d-1c8c-4381-a1e7-5e747bf47df0', '749680872', 604000.00, 'echannel', '2020-10-31 19:42:15', 'capture', '-', '-', 'accept', '-', '-', 'https://app.sandbox.midtrans.com/snap/v1/transactions/fbe61708-c940-4a94-abbf-127dda6b92ef/pdf', 'http://example.com?order_id=749680872&status_code=201&transaction_status=pending', '267750708151', '70012', NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;

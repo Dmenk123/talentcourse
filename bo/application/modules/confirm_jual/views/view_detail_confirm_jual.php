@@ -44,7 +44,7 @@
 
       <div class="kt-portlet__body">
 
-        <form class="form-edit-role kt-form" id="form-edit-role" action="<?=base_url()."".$this->uri->segment(1)."/".$this->uri->segment(2);?>_data" method="post">
+        <form class="form-edit-role kt-form" id="form-konfirmasi">
               <div class="box-header">
               <input type="hidden" value="<?php echo $data_detail->id;?>" name="id_checkout">
                 <div class="form-group row">
@@ -83,7 +83,7 @@
               <div class="box-body">
                 <div class="form-group">
                   <div class="col-sm-offset-3 col-sm-9">
-                    <button type="submit" class="btn btn-primary tombol-simpan"> Konfirmasi</button>
+                    <button type="button" class="btn btn-primary tombol-simpan" id="btn_confirm" onclick="konfirmasi_penjualan()"> Konfirmasi</button>
                     <a href="<?=base_url()."".$this->uri->segment(1);?>">
                       <span class="btn btn-warning"><i class="glyphicon glyphicon-remove"></i> Batal</span>
                     </a>

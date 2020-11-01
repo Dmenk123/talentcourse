@@ -139,6 +139,56 @@ function reload_table()
     table.ajax.reload(null,false); //reload datatable ajax 
 }
 
+function konfirmasi_penjualan(){
+    var form = $('#form-konfirmasi')[0];
+    var data = new FormData(form);
+    var value = CKEDITOR.instances['pesan_email'].getData()
+    data.append('pesan_email', value);
+
+    $("#btn_confirm").prop("disabled", true);
+    $('#btn_confirm').text('Menyimpan Data'); //change button text
+    $.ajax({
+        type: "POST",
+        enctype: 'multipart/form-data',
+        url: base_url + 'confirm_jual/konfirmasi_penjualan',
+        data: data,
+        dataType: "JSON",
+        processData: false, // false, it prevent jQuery form transforming the data into a query string
+        contentType: false, 
+        cache: false,
+        timeout: 600000,
+        success: function (data) {
+            if(data.status) {
+                swal.fire("Sukses!!", "Konfirmasi Berhasil", "success");
+                $("#btn_confirm").prop("disabled", false);
+                $('#btn_confirm').text('Konfirmasi');                
+                window.location = base_url+"confirm_jual";
+            }else {
+                if(data.err){
+                    swal.fire("Gagal!!", "Terjadi Kesalahan", "warning");
+                }else{
+                    for (var i = 0; i < data.inputerror.length; i++) 
+                    {
+                        //ikut style global
+                        $('[name="'+data.inputerror[i]+'"]').next().next().text(data.error_string[i]).addClass('invalid-feedback-select');
+                    }
+                }
+                
+                $("#btn_confirm").prop("disabled", false);
+                $('#btn_confirm').text('Konfirmasi');
+            }
+        },
+        error: function (e) {
+            console.log("ERROR : ", e);
+            $("#btn_confirm").prop("disabled", false);
+            $('#btn_confirm').text('Konfirmasi');
+
+            reset_modal_form();
+            $(".modal").modal('hide');
+        }
+    });
+}
+
 function save()
 {
     var url;

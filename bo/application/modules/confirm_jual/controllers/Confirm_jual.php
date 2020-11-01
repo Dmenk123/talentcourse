@@ -71,7 +71,7 @@ class Confirm_jual extends CI_Controller {
 		 * data passing ke halaman view content
 		 */
 		$data = array(
-			'title' => 'Detail Penjualan',
+			'title' => 'Konfirmasi Penjualan',
 			'data_user' => $data_user,
 			'data_detail' => $data_detail,
 			'txt_email' => $txt_email
@@ -149,23 +149,16 @@ class Confirm_jual extends CI_Controller {
 		echo json_encode($output);
 	}
 
-	public function add_data()
+	/////////////////////////////////////////////
+
+	public function konfirmasi_penjualan()
 	{
 		$obj_date = new DateTime();
 		$timestamp = $obj_date->format('Y-m-d H:i:s');
 		$arr_valid = $this->rule_validasi();
 		
-		$id_talent = $this->input->post('talent');
-		$jenis_harga = $this->input->post('jenis_harga');
-		$harga = trim($this->input->post('harga'));
-		$is_diskon = $this->input->post('is_diskon');
-		$id_diskon = $this->input->post('diskon');
-		$masa_berlaku = $this->input->post('masa_berlaku');
-		
-		if($is_diskon == '1') {
-			$tgl_mulai_disc = $obj_date->createFromFormat('d/m/Y', $this->input->post('tgl_mulai_disc'))->format('Y-m-d');
-			$tgl_akhir_disc = $obj_date->createFromFormat('d/m/Y', $this->input->post('tgl_mulai_disc'))->modify('+' . $masa_berlaku . ' day')->format('Y-m-d');
-		}
+		$id_checkout = $this->input->post('id_checkout');
+		$pesan_email = $this->input->post('pesan_email');
 		
 		if ($arr_valid['status'] == FALSE) {
 			echo json_encode($arr_valid);
@@ -174,42 +167,80 @@ class Confirm_jual extends CI_Controller {
 
 		$this->db->trans_begin();
 
-		//ambil data existing
-		$cek = $this->t_harga->get_by_condition("jenis_harga = '$jenis_harga' and id_talent = '$id_talent' and deleted_at is null", true);
-		if($cek) {	
-			//set deleted_at is null
-			$this->t_harga->update(['id' => $cek->id], ['deleted_at' => $timestamp]);
+		//cek data existing
+		$cek = $this->t_checkout->get_by_condition("is_confirm is null and id = '$id_checkout' and deleted_at is null", true);
+		if(!$cek) {
+			$dataret['inputerror'][] = '';
+            $dataret['error_string'][] = '';
+			$dataret['status'] = FALSE;
+			$dataret['err'] = TRUE;
+			echo json_encode($dataret);
+			return;
+		}else{
+			$send_email = $this->send_email(trim($cek->email), 'Undangan Meeting Zoom', $pesan_email);
+			if($send_email){
+				$update_checkout = $this->t_checkout->update(['id' => $cek->id], ['is_confirm' => 1, 'status_confirm' => 'diterima']);
+				if($update_checkout) {
+					$data_mail['id_checkout'] = $cek->id;
+					$data_mail['isi_email'] = $pesan_email;
+					$data_mail['created_at'] = $timestamp;
+					$insert = $this->m_global->store($data_mail, 't_email');
+				}
+			}
 		}
-
-		$id = $this->t_harga->get_max_id();
-		
-		$datanya['id'] = $id;
-		$datanya['jenis_harga'] = $jenis_harga;
-		$datanya['nilai_harga'] = $harga;
-		$datanya['id_talent'] = $id_talent;
-		$datanya['created_at'] = $timestamp;
-
-		if($is_diskon == '1') {
-			$datanya['is_diskon'] = 1;
-			$datanya['id_m_diskon'] = $id_diskon;
-			$datanya['tgl_mulai_diskon'] = $tgl_mulai_disc;
-			$datanya['tgl_akhir_diskon'] = $tgl_akhir_disc;
-			$datanya['masa_berlaku_diskon'] = $masa_berlaku;
-		}
-		
-		$insert = $this->t_harga->save($datanya);
 		
 		if ($this->db->trans_status() === FALSE){
 			$this->db->trans_rollback();
 			$retval['status'] = false;
-			$retval['pesan'] = 'Gagal setting harga';
+			$retval['pesan'] = 'Gagal Konfirmasi';
+			$dataret['err'] = TRUE;
 		}else{
 			$this->db->trans_commit();
 			$retval['status'] = true;
-			$retval['pesan'] = 'Sukses setting harga';
+			$retval['pesan'] = 'Sukses Konfirmasi';
+			$dataret['err'] = FALSE;
 		}
 
 		echo json_encode($retval);
+	}
+
+	public function send_email($receiver_email, $subject, $message)
+	{
+		 // Storing submitted values
+		 $sender_email = 'admin@majangdapatuang.com';
+		 $user_password = '@admin12329A';
+		 $username = 'lg94gl03ooq2';
+
+		// Configure email library
+		$config['protocol'] = 'http';
+		$config['smtp_host'] = 'mx1.hostinger.in';
+		$config['smtp_timeout'] = '7';
+		$config['smtp_port'] = 110;
+		$config['charset']    = 'utf-8';
+		$config['newline']    = "\r\n";
+		$config['mailtype'] = 'text'; // or html
+		//$config['validation'] = TRUE; // bool whether to validate email or not
+		$config['smtp_user'] = $sender_email;
+		$config['smtp_pass'] = $user_password;
+
+		// Load email library and passing configured values to email library
+		$this->load->library('email', $config);
+		$this->email->set_newline("\r\n");
+
+		// Sender email address
+		$this->email->from($sender_email, $username);
+		// Receiver email address
+		$this->email->to($receiver_email);
+		// Subject of email
+		$this->email->subject($subject);
+		// Message in email
+		$this->email->message($message);
+
+		if ($this->email->send()) {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
 	}
 
 	/**
@@ -258,36 +289,11 @@ class Confirm_jual extends CI_Controller {
 		$data['inputerror'] = array();
 		$data['status'] = TRUE;
 
-		if ($this->input->post('talent') == '') {
-			$data['inputerror'][] = 'talent';
-            $data['error_string'][] = 'Wajib Memilih Nama Talent';
-            $data['status'] = FALSE;
-		}
-
-		if ($this->input->post('harga') == '') {
-			$data['inputerror'][] = 'harga';
-            $data['error_string'][] = 'Wajib Mengisi Harga';
-            $data['status'] = FALSE;
-		}
-
-		if($this->input->post('is_diskon') == '1') {
-			if ($this->input->post('diskon') == '') {
-				$data['inputerror'][] = 'diskon';
-				$data['error_string'][] = 'Wajib Memilih Diskon';
-				$data['status'] = FALSE;
-			}
-	
-			if ($this->input->post('masa_berlaku') == '') {
-				$data['inputerror'][] = 'masa_berlaku';
-				$data['error_string'][] = 'Wajib Memilih Masa Berlaku';
-				$data['status'] = FALSE;
-			}
-	
-			if ($this->input->post('tgl_mulai_disc') == '') {
-				$data['inputerror'][] = 'tgl_mulai_disc';
-				$data['error_string'][] = 'Wajib Memilih Tgl Mulai Diskon';
-				$data['status'] = FALSE;
-			}
+		if ($this->input->post('pesan_email') == '') {
+			$data['inputerror'][] = 'pesan_email';
+            $data['error_string'][] = 'Wajib Mengisi Email';
+			$data['status'] = FALSE;
+			$data['err'] = FALSE;
 		}
 
         return $data;
