@@ -47,17 +47,35 @@
         <form class="form-edit-role kt-form" id="form-edit-role" action="<?=base_url()."".$this->uri->segment(1)."/".$this->uri->segment(2);?>_data" method="post">
               <div class="box-header">
               <input type="hidden" value="<?php echo $data_detail->id;?>" name="id_checkout">
-                <div class="form-group">
-                  <label class="control-label col-sm-12">Role User :</label>
-                  <div class="col-sm-12">
-                    <input type="input" class="form-control required" id="nama_role" value="" name="nama_role">
-                  </div>
+                <div class="form-group row">
+                    <label class="control-label col-sm-1">Order ID</label>
+                    <label class="control-label col-sm-11">: <?= $data_detail->order_id; ?></label>
+                </div>
+                <div class="form-group row">
+                  <label class="control-label col-sm-1">Nama</label>
+                  <label class="control-label col-sm-11">: <?= $data_detail->nama; ?></label>
+                </div>
+                <div class="form-group row">
+                  <label class="control-label col-sm-1">Email</label>
+                  <label class="control-label col-sm-11">: <?= $data_detail->email; ?></label>
+                </div>
+                <div class="form-group row">
+                  <label class="control-label col-sm-1">Telp/Hp</label>
+                  <label class="control-label col-sm-11">: <?= $data_detail->telp; ?></label>
+                </div>
+                <div class="form-group row">
+                  <label class="control-label col-sm-1">Harga</label>
+                  <label class="control-label col-sm-11">: <?=  "Rp " . number_format($data_detail->harga,0,',','.'); ?></label>
+                </div>
+                <div class="form-group row">
+                  <label class="control-label col-sm-1">Tgl Bayar</label>
+                  <label class="control-label col-sm-11">: <?= $data_detail->created_at; ?></label>
                 </div>
                 <br>
                 <div class="form-group">
                   <label class="control-label col-sm-12">Email : </label>
                   <div class="col-sm-12">
-                    <textarea class="form-control" id="pesan_email" name="pesan_email"></textarea>
+                    <textarea class="form-control" id="pesan_email" rows="50" name="pesan_email"><?=$txt_email;?></textarea>
                   </div>
                 </div>
               </div>

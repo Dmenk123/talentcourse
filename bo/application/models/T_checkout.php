@@ -26,12 +26,19 @@ class T_checkout extends CI_Model
 		$this->load->database();
 	}
 
-	private function _get_datatables_query($term='')
+	private function _get_datatables_query($arr_data, $term='')
 	{
 		$this->db->select("ckt.*, req.status_message, req.transaction_id, req.gross_amount, req.payment_type, req.transaction_time, req.transaction_status, req.fraud_status");
 		
 		$this->db->from($this->table.' ckt');
 		$this->db->join('tbl_requesttransaksi req', 'ckt.order_id  = req.order_id', 'left');
+		$this->db->where("ckt.created_at >=", $arr_data['tgl_awal']);
+		$this->db->where("ckt.created_at <=", $arr_data['tgl_akhir']);
+		
+		if($arr_data['status'] != 'all'){
+			$this->db->where("req.transaction_status", $arr_data['status']);
+		}
+		
 		$this->db->where("ckt.is_confirm is null");
 		$i = 0;
 
@@ -79,10 +86,12 @@ class T_checkout extends CI_Model
 		}
 	}
 
-	function get_datatable()
+	function get_datatable($tgl_awal="", $tgl_akhir="", $status="")
 	{
 		$term = $_REQUEST['search']['value'];
-		$this->_get_datatables_query($term);
+		$arr_data = ['tgl_awal' => $tgl_awal, 'tgl_akhir' => $tgl_akhir, 'status' => $status];
+		$this->_get_datatables_query($arr_data, $term);
+		
 		if($_REQUEST['length'] != -1)
 		$this->db->limit($_REQUEST['length'], $_REQUEST['start']);
 
@@ -90,9 +99,10 @@ class T_checkout extends CI_Model
 		return $query->result();
 	}
 
-	function count_filtered()
+	function count_filtered($tgl_awal="", $tgl_akhir="", $status="")
 	{
-		$this->_get_datatables_query();
+		$arr_data = ['tgl_awal' => $tgl_awal, 'tgl_akhir' => $tgl_akhir, 'status' => $status];
+		$this->_get_datatables_query($arr_data);
 		$query = $this->db->get();
 		return $query->num_rows();
 	}

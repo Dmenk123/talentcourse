@@ -50,15 +50,37 @@ class Confirm_jual extends CI_Controller {
 		$id_user = $this->session->userdata('id_user');
 		$data_user = $this->m_user->get_by_id($id_user);
 		$data_detail = $this->t_checkout->get_detail_by_id($id);
-		
+
+		if($data_detail){
+			$txt_email = "<p>Kepada Yth.</p>";
+			$txt_email .= "<ul>";
+			$txt_email .= "<li>Nama :&nbsp;$data_detail->nama</li>";
+			$txt_email .= "<li>Email :&nbsp;$data_detail->email</li>";
+			$txt_email .= "<li>Order id :&nbsp;$data_detail->order_id</li>";
+			$txt_email .= "</ul>";
+			$txt_email .= "<p>Terima kasih telah melakukan pendaftaran kelas $data_detail->keterangan. Berikut link Zoom beserta jadwal kursus.</p>";
+			$txt_email .= "<ul>";
+			$txt_email .= "<li><strong>Jadwal : Hari / DD-MM-YYYY Pukul HH:MM</strong></li>";
+			$txt_email .= "<li><strong>Link: www.zoom.com/asoy</strong></li>";
+			$txt_email .= "</ul>";
+			$txt_email .= "<p>&nbsp;Salam Sukses.</p>";
+		}else{
+			$txt_email = "";
+		}
 		/**
 		 * data passing ke halaman view content
 		 */
 		$data = array(
 			'title' => 'Detail Penjualan',
 			'data_user' => $data_user,
-			'data_detail' => $data_detail
+			'data_detail' => $data_detail,
+			'txt_email' => $txt_email
 		);
+		
+		// echo "<pre>";
+		// print_r ($data);
+		// echo "</pre>";
+		// exit;
 
 		/**
 		 * content data untuk template
@@ -79,7 +101,11 @@ class Confirm_jual extends CI_Controller {
 	public function list_penjualan()
 	{
 		$obj_date = new DateTime();
-		$list = $this->t_checkout->get_datatable();
+		$tgl_awal = $obj_date->createFromFormat('d/m/Y', $this->input->post('tgl_awal'))->format('Y-m-d');
+		$tgl_akhir = $obj_date->createFromFormat('d/m/Y', $this->input->post('tgl_akhir'))->format('Y-m-d');
+		$status = $this->input->post('status');
+
+		$list = $this->t_checkout->get_datatable($tgl_awal, $tgl_akhir, $status);
 		$data = array();
 		// $no =$_POST['start'];
 		foreach ($list as $val) {

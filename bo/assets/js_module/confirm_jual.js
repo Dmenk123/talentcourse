@@ -2,7 +2,7 @@ var save_method;
 var table;
 
 $(document).ready(function() {
-
+    filter_tabel();
     $('#pesan_email').ckeditor();
 
     //force integer input in textfield
@@ -10,26 +10,7 @@ $(document).ready(function() {
         return (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57) && e.which != 46) ? false : true;
     });
 
-	//datatables
-	table = $('#tabel_confirm_jual').DataTable({
-		responsive: true,
-        searchDelay: 500,
-        processing: true,
-        serverSide: true,
-		ajax: {
-			url  : base_url + "confirm_jual/list_penjualan",
-			type : "POST" 
-		},
-
-		//set column definition initialisation properties
-		columnDefs: [
-			{
-				targets: [-1], //last column
-				orderable: false, //set not orderable
-			},
-		],
-    });
-    
+   	
     $("#foto").change(function() {
         readURL(this);
     });
@@ -81,6 +62,34 @@ $(document).ready(function() {
         reset_modal_form_import();
     });
 });	
+
+ //datatables
+ function filter_tabel() {
+    var tgl_awal = $('#tgl_filter_mulai').val();
+    var tgl_akhir = $('#tgl_filter_akhir').val();
+    var status = $('#status_filter').val();
+    
+    table = $('#tabel_confirm_jual').DataTable({
+        destroy: true,
+        responsive: true,
+        searchDelay: 500,
+        processing: true,
+        serverSide: true,
+        ajax: {
+            url  : base_url + "confirm_jual/list_penjualan",
+            type : "POST",
+            data : {tgl_awal:tgl_awal, tgl_akhir:tgl_akhir, status:status},
+            dataType : 'JSON',
+        },
+        //set column definition initialisation properties
+        columnDefs: [
+            {
+                targets: [-1], //last column
+                orderable: false, //set not orderable
+            },
+        ],
+    });    
+}
 
 function add_menu()
 {
