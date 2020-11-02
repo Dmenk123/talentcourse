@@ -159,7 +159,8 @@ class Confirm_jual extends CI_Controller {
 		
 		$id_checkout = $this->input->post('id_checkout');
 		$pesan_email = $this->input->post('pesan_email');
-		
+		$txt_email = strip_tags($pesan_email);
+
 		if ($arr_valid['status'] == FALSE) {
 			echo json_encode($arr_valid);
 			return;
@@ -177,7 +178,7 @@ class Confirm_jual extends CI_Controller {
 			echo json_encode($dataret);
 			return;
 		}else{
-			$send_email = $this->send_email(trim($cek->email), 'Undangan Meeting Zoom', $pesan_email);
+			$send_email = $this->send_email(trim($cek->email), 'Undangan Meeting Zoom', $txt_email);
 			if($send_email){
 				$update_checkout = $this->t_checkout->update(['id' => $cek->id], ['is_confirm' => 1, 'status_confirm' => 'diterima']);
 				if($update_checkout) {
@@ -206,10 +207,10 @@ class Confirm_jual extends CI_Controller {
 
 	public function send_email($receiver_email, $subject, $message)
 	{
-		 // Storing submitted values
-		 $sender_email = 'admin@majangdapatuang.com';
-		 $user_password = '@admin12329A';
-		 $username = 'lg94gl03ooq2';
+		// Storing submitted values
+		$sender_email = 'admin@majangdapatuang.com';
+		$user_password = '@admin12329A';
+		$username = 'admin@majangdapatuang.com';
 
 		// Configure email library
 		$config['protocol'] = 'http';

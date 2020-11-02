@@ -49,6 +49,7 @@
               <select name="status_filter" id="status_filter" class="form-control">
                 <option value="all">All</option>
                 <option value="capture">Capture</option>
+                <option value="manual">Manual</option>
                 <option value="pending">pending</option>
                 <option value="deny">Deny</option>
                 <option value="cancel">Cancel</option>

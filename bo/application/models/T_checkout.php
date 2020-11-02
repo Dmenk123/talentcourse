@@ -32,9 +32,14 @@ class T_checkout extends CI_Model
 		
 		$this->db->from($this->table.' ckt');
 		$this->db->join('tbl_requesttransaksi req', 'ckt.order_id  = req.order_id', 'left');
-		$this->db->where("ckt.created_at >=", $arr_data['tgl_awal']);
-		$this->db->where("ckt.created_at <=", $arr_data['tgl_akhir']);
-		
+		if($arr_data['tgl_awal'] != ''){
+			$this->db->where("ckt.created_at >=", $arr_data['tgl_awal']);
+		}
+
+		if($arr_data['tgl_akhir'] != ''){
+			$this->db->where("ckt.created_at <=", $arr_data['tgl_akhir']);
+		}
+				
 		if($arr_data['status'] != 'all'){
 			$this->db->where("req.transaction_status", $arr_data['status']);
 		}
@@ -111,6 +116,15 @@ class T_checkout extends CI_Model
 	{
 		$this->db->from($this->table);
 		return $this->db->count_all_results();
+	}
+
+	public function get_datatable_trans_manual()
+	{
+		$this->db->select("ckt.*");
+		$this->db->from($this->table.' ckt');
+		$this->db->where("ckt.is_confirm is null and is_manual = '1'");
+		$query = $this->db->get();
+		return $query->result();
 	}
 
 	public function get_detail_by_id($id)
