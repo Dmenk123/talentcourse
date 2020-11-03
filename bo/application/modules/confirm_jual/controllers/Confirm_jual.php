@@ -119,7 +119,14 @@ class Confirm_jual extends CI_Controller {
 			$row[] = $val->telp;
 			$row[] = $val->keterangan;
 			$row[] = "Rp " . number_format($val->harga,0,',','.');
-			$row[] = $val->transaction_status;
+			if($val->transaction_status == 'settlement'){
+				$row[] = '<span class="tag-success">'.$val->transaction_status.'</span>';
+			}else if($val->transaction_status == 'failure'){
+				$row[] = '<span class="tag-danger">'.$val->transaction_status.'</span>';
+			}else{
+				$row[] = $val->transaction_status;
+			}
+			
 			
 			$str_aksi = '
 				<div class="btn-group">
