@@ -107,6 +107,7 @@ class Confirm_jual extends CI_Controller {
 
 		$list = $this->t_checkout->get_datatable($tgl_awal, $tgl_akhir, $status);
 		$data = array();
+		echo $this->db->last_query(); die();
 		// $no =$_POST['start'];
 		foreach ($list as $val) {
 			// $no++;

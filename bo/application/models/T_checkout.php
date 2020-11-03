@@ -37,7 +37,7 @@ class T_checkout extends CI_Model
 		}
 
 		if($arr_data['tgl_akhir'] != ''){
-			$this->db->where("ckt.created_at <=", $arr_data['tgl_akhir']. '23:59:59');
+			$this->db->where("ckt.created_at <=", $arr_data['tgl_akhir'].' 23:59:59');
 		}
 				
 		if($arr_data['status'] != 'all'){
