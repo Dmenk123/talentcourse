@@ -33,11 +33,11 @@ class T_checkout extends CI_Model
 		$this->db->from($this->table.' ckt');
 		$this->db->join('tbl_requesttransaksi req', 'ckt.order_id  = req.order_id', 'left');
 		if($arr_data['tgl_awal'] != ''){
-			$this->db->where("ckt.created_at >=", $arr_data['tgl_awal']);
+			$this->db->where("ckt.created_at >=", $arr_data['tgl_awal'].' 00:00:00');
 		}
 
 		if($arr_data['tgl_akhir'] != ''){
-			$this->db->where("ckt.created_at <=", $arr_data['tgl_akhir']);
+			$this->db->where("ckt.created_at <=", $arr_data['tgl_akhir']. '23:59:59');
 		}
 				
 		if($arr_data['status'] != 'all'){
@@ -122,9 +122,33 @@ class T_checkout extends CI_Model
 	{
 		$this->db->select("ckt.*");
 		$this->db->from($this->table.' ckt');
-		$this->db->where("ckt.is_confirm is null and is_manual = '1'");
+		$this->db->where("ckt.is_confirm is null and is_manual = '1' and deleted_at is null");
 		$query = $this->db->get();
 		return $query->result();
+	}
+
+	public function get_data_laporan($tgl_awal, $tgl_akhir)
+	{
+		$this->db->select('*');
+		$this->db->from($this->table);
+		$this->db->where('is_confirm', 1);
+		$this->db->where('status_confirm', 'diterima');
+		$this->db->where("created_at >=", $tgl_awal.' 00:00:00');
+		$this->db->where("created_at <=", $tgl_akhir.' 23:59:59');
+		$this->db->where('deleted_at is null');
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	public function get_saldo_awal_lap($datetime)
+	{
+		$q = $this->db->query("SELECT (sum(harga)) as saldo_awal FROM t_checkout where deleted_at is null and is_confirm = 1 and status_confirm = 'diterima' and created_at <= '".$datetime."'")->row();
+
+		if ($q->saldo_awal != null) {
+			return $q->saldo_awal;
+		}else{
+			return 0;
+		}
 	}
 
 	public function get_detail_by_id($id)
