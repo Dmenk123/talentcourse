@@ -131,6 +131,9 @@ class Confirm_jual extends CI_Controller {
 						<a class="dropdown-item" href="'.base_url('confirm_jual/detail/').$val->id.'">
 							<i class="la la-paste"></i> Detail
 						</a>
+						<button class="dropdown-item" onclick="update_trans(\'' . $val->order_id . '\')">
+							<i class="la la-trash"></i> Update Transaksi
+						</button>
 			';
 			
 			

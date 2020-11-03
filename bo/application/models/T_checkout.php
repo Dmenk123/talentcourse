@@ -44,7 +44,7 @@ class T_checkout extends CI_Model
 			$this->db->where("req.transaction_status", $arr_data['status']);
 		}
 		
-		$this->db->where("ckt.is_confirm is null");
+		$this->db->where("ckt.is_confirm is NULL");
 		$i = 0;
 
 		// loop column 

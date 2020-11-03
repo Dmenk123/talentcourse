@@ -26,6 +26,7 @@ class Transaction extends CI_Controller {
 		$this->load->library('veritrans');
 		$this->veritrans->config($params);
 		$this->load->helper('url');
+		$this->load->model('m_global');
 		
     }
 
@@ -55,10 +56,52 @@ class Transaction extends CI_Controller {
 
     }
 
-	public function status($order_id)
+	public function status()
 	{
-		echo 'test get status </br>';
-		print_r ($this->veritrans->status($order_id) );
+		$order_id = $this->input->post('order_id');
+		$result = ($this->veritrans->status($order_id) );
+
+		$bank  		= (isset($result->va_numbers[0]->bank))?$result->va_numbers[0]->bank:"";
+		$va_number 	= (isset($result->va_numbers[0]->va_number))?$result->va_numbers[0]->va_number:"";
+
+		$data = [
+			'status_code' => $result->status_code,
+			'status_message' => $result->status_message,
+			'transaction_id' => $result->transaction_id,
+			'order_id' => $result->order_id,
+			'gross_amount' => $result->gross_amount,
+			'payment_type' => $result->payment_type,
+			'transaction_time' => $result->transaction_time,
+			'transaction_status' => $result->transaction_status,
+			'bank' => $bank,
+			'va_number' => $va_number,
+			'fraud_status' => $result->fraud_status,
+		];
+
+		$transaksi = $this->m_global->single_row('*', array('order_id'=>$order_id), 'tbl_requesttransaksi');
+		$i = 0;
+		if(empty($transaksi)){
+			$this->m_global->store_id($data, 'tbl_requesttransaksi');
+			$i = $i + 1;
+		}else{
+			$this->m_global->update('tbl_requesttransaksi', $data, array('order_id'=>$order_id));
+			$i = $i + 2;
+		}
+
+		if($i > 0){
+			$data = array(
+				'status' => TRUE,
+				'pesan' => "Status Pegawai berhasil di ubah.",
+			);
+		}else{
+			$data = array(
+				'status' => FALSE,
+				'pesan' => "Data Transaksi tidak ditemukan di Midtrans !.",
+			);
+		}
+
+		echo json_encode($data);
+
 	}
 
 	public function cancel($order_id)
