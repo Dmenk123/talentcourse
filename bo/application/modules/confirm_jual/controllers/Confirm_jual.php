@@ -123,6 +123,10 @@ class Confirm_jual extends CI_Controller {
 				$row[] = '<span class="tag-success">'.$val->transaction_status.'</span>';
 			}else if($val->transaction_status == 'failure'){
 				$row[] = '<span class="tag-danger">'.$val->transaction_status.'</span>';
+			}else if($val->transaction_status == ''){
+				$row[] = '<span class="tag-danger">failure</span>';
+			}else if($val->transaction_status == 'capture'){
+				$row[] = '<span class="tag-primary">'.$val->transaction_status.'</span>';
 			}else{
 				$row[] = $val->transaction_status;
 			}
