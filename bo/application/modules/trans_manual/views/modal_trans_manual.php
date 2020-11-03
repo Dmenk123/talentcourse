@@ -25,6 +25,11 @@
             <span class="help-block"></span>
           </div>
           <div class="form-group">
+            <label for="lbl_alamat" class="form-control-label">Alamat:</label>
+            <input type="text" class="form-control" id="alamat" name="alamat" autocomplete="off">
+            <span class="help-block"></span>
+          </div>
+          <div class="form-group">
             <label for="lbl_type" class="form-control-label">Jenis Kelas:</label>
             <select name="jenis" id="jenis" class="form-control">
               <option value="">Pilih Jenis Kelas</option>

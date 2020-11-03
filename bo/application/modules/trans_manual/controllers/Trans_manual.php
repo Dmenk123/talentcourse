@@ -52,7 +52,7 @@ class Trans_manual extends CI_Controller {
 			// $no++;
 			$row = array();
 			//loop value tabel db
-			$row[] = '<div class="kt-widget__media"><img src="'.'../'.$val->path_file.'"/></div>';
+			$row[] = '<div class="kt-widget__media"><img src="'.'../'.$val->path_thumb.'"/></div>';
 			$row[] = $val->created_at;
 			$row[] = $val->order_id;
 			$row[] = $val->email;
@@ -137,6 +137,7 @@ class Trans_manual extends CI_Controller {
 		$telp = trim($this->input->post('telp'));
 		$jenis = trim($this->input->post('jenis'));
 		$bayar = trim($this->input->post('bayar'));
+		$alamat = trim($this->input->post('alamat'));
 
 		$id = $this->t_checkout->get_max_id();
 		$namafileseo = $this->seoUrl($nama.' '.time());
@@ -165,6 +166,7 @@ class Trans_manual extends CI_Controller {
 			{
 				$gbrBukti = $this->file_obj->data();
 				$nama_file_foto = $gbrBukti['file_name'];
+				$resize = $this->konfigurasi_image_resize($nama_file_foto);
 				$output_thumb = $this->konfigurasi_image_thumb($nama_file_foto, $gbrBukti);
 				$this->image_lib->clear();
 				## replace nama file + ext
@@ -180,31 +182,63 @@ class Trans_manual extends CI_Controller {
 			return;
 		}
 
-		$data_talent = [
+		if($jenis == 'reg'){
+			$keterangan = 'reguler';
+		}else{
+			$keterangan = 'eksklusif';
+		}
+		
+		$data_trans = [
 			'id' => $id,
 			'nama' => $nama,
-			'deskripsi' => $txt_deskripsi,
-			'akun_fb' => $akun_fb,
-			'akun_ig' => $akun_ig,
-			'akun_tw' => $akun_tw,
+			'email' => $email,
+			'telp' => $telp,
+			'keterangan' => $keterangan,
+			'harga' => (float)$bayar,
+			'harga_bruto' => (float)$bayar,
+			'order_id' => $this->generate_order_id_manual(),
+			'alamat' => $alamat,
 			'created_at' => $timestamp,
-			'foto'	=> 'files/img/talent_img/'.$id.'/'.$namafileseo,
-			'foto_thumb' => 'files/img/talent_img/'.$id.'/'.'thumbs'.'/'.$output_thumb
+			'path_file'	=> 'files/img/bukti_bayar/'.$namafileseo,
+			'path_thumb' => 'files/img/bukti_bayar/thumbs/'.$output_thumb,
+			'is_manual' => 1,
 		];
 		
-		$insert = $this->m_talent->save($data_talent);
+		$insert = $this->t_checkout->save($data_trans);
 		
 		if ($this->db->trans_status() === FALSE){
 			$this->db->trans_rollback();
 			$retval['status'] = false;
-			$retval['pesan'] = 'Gagal menambahkan talent';
+			$retval['pesan'] = 'Gagal menambahkan transaksi';
 		}else{
 			$this->db->trans_commit();
 			$retval['status'] = true;
-			$retval['pesan'] = 'Sukses menambahkan talent';
+			$retval['pesan'] = 'Sukses menambahkan transaksi';
 		}
 
 		echo json_encode($retval);
+	}
+
+	private function generate_order_id_manual() {
+
+		$chars = array(
+			'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+			'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+			'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+			'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+			'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+		);
+	
+		shuffle($chars);
+	
+		$num_chars = count($chars) - 1;
+		$token = '';
+	
+		for ($i = 0; $i < 8; $i++){ // <-- $num_chars instead of $len
+			$token .= $chars[mt_rand(0, $num_chars)];
+		}
+	
+		return 'MT-'.$token;
 	}
 	//////////////////////////////////////////////////////////////
 
@@ -244,8 +278,6 @@ class Trans_manual extends CI_Controller {
 		
 		echo json_encode($data);
 	}
-
-	
 
 	public function update_data_talent()
 	{
@@ -638,12 +670,6 @@ class Trans_manual extends CI_Controller {
             $data['status'] = FALSE;
 		}
 		
-		if ($this->input->post('foto') == '') {
-			$data['inputerror'][] = 'foto';
-            $data['error_string'][] = 'Wajib Mengisi Foto';
-            $data['status'] = FALSE;
-		}
-
         return $data;
 	}
 
@@ -662,14 +688,14 @@ class Trans_manual extends CI_Controller {
 		$this->file_obj->initialize($config);
 	}
 
-	private function konfigurasi_image_resize($nmfile,$gbr, $folder)
+	private function konfigurasi_image_resize($nmfile)
 	{
 		//konfigurasi image lib
 	    $config['image_library'] = 'gd2';
-	    $config['source_image'] = '../files/img/talent_img/'.$folder.'/'.$nmfile;
+	    $config['source_image'] = '../files/img/bukti_bayar/'.$nmfile;
 	    $config['create_thumb'] = FALSE;
 	    $config['maintain_ratio'] = FALSE;
-	    $config['new_image'] = '../files/img/talent_img/'.$folder.'/'.$nmfile;
+	    $config['new_image'] = '../files/img/bukti_bayar/'.$nmfile;
 	    $config['overwrite'] = TRUE;
 	    $config['width'] = 480; //resize
 	    $config['height'] = 600; //resize

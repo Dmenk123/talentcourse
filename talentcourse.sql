@@ -11,7 +11,7 @@
  Target Server Version : 100413
  File Encoding         : 65001
 
- Date: 01/11/2020 23:19:29
+ Date: 03/11/2020 08:27:29
 */
 
 SET NAMES utf8mb4;
@@ -77,6 +77,7 @@ INSERT INTO `m_menu` VALUES (15, 9, 'Setting Video Konten', 'Setting Video Konte
 INSERT INTO `m_menu` VALUES (16, 14, 'Laporan Penjualan', 'Laporan Penjualan', 'lap_penjualan', 'flaticon-statistics', 1, 2, 1, 1, 1, 1);
 INSERT INTO `m_menu` VALUES (17, 0, 'Transaksi', 'Transaksi', '', 'flaticon-list', 1, 1, 4, 0, 0, 0);
 INSERT INTO `m_menu` VALUES (18, 17, 'Konfirmasi Penjualan', 'Konfirmasi Penjualan', 'confirm_jual', 'flaticon-interface-10', 1, 2, 1, 1, 1, 1);
+INSERT INTO `m_menu` VALUES (19, 17, 'Input Transaksi Manual', 'Input Transaksi Manual', 'trans_manual', 'flaticon-notes', 1, 2, 2, 1, 1, 1);
 
 -- ----------------------------
 -- Table structure for m_role
@@ -143,7 +144,7 @@ CREATE TABLE `m_user`  (
 -- ----------------------------
 -- Records of m_user
 -- ----------------------------
-INSERT INTO `m_user` VALUES (1, 1, 'admin', 'SnIvSVV6c2UwdWhKS1ZKMDluUlp4dz09', 1, '2020-11-01 23:11:05', 'USR-00001', NULL, NULL, NULL, NULL);
+INSERT INTO `m_user` VALUES (1, 1, 'admin', 'SnIvSVV6c2UwdWhKS1ZKMDluUlp4dz09', 1, '2020-11-03 07:58:41', 'USR-00001', NULL, NULL, NULL, NULL);
 INSERT INTO `m_user` VALUES (2, 1, 'coba', 'Tzg1eTllUlU2a2xNQk5yYktIM1pwUT09', NULL, NULL, 'USR-00002', 'coba-1602775328.jpg', '2020-10-15 22:22:08', '2020-10-15 22:43:54', '2020-10-15 22:58:50');
 
 -- ----------------------------
@@ -183,13 +184,17 @@ CREATE TABLE `t_checkout`  (
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   `is_confirm` int(1) NULL DEFAULT NULL,
   `status_confirm` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'diterima, pending, dibatalkan',
+  `path_file` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `path_thumb` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `is_manual` int(1) NULL DEFAULT NULL COMMENT '1 : manual, null : payment gateway',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of t_checkout
 -- ----------------------------
-INSERT INTO `t_checkout` VALUES (1, 'rizkiyuandaa@gmail.com', 'Riski Yuanda', '121212', 'reguler', 600000.00, 604000.00, '749680872', 'asjaksjkasjaksjaksja', '2020-10-31 19:41:24', NULL, NULL, NULL, NULL);
+INSERT INTO `t_checkout` VALUES (1, 'rizkiyuandaa@gmail.com', 'Riski Yuanda', '121212', 'reguler', 600000.00, 604000.00, '749680872', 'asjaksjkasjaksjaksja', '2020-10-31 19:41:24', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `t_checkout` VALUES (2, 'rizkiyuandaa@gmail.com', 'yoyok', '172817281728', 'eksklusif', 1100000.00, 1100000.00, 'MT-mnmJ15WP', 'jasauiausi', '2020-11-03 08:25:57', NULL, NULL, NULL, NULL, 'files/img/bukti_bayar/yoyok-1604366757.jpg', 'files/img/bukti_bayar/thumbs/yoyok-1604366757_thumb.jpg', 1);
 
 -- ----------------------------
 -- Table structure for t_email
@@ -359,6 +364,7 @@ INSERT INTO `t_role_menu` VALUES (13, 1, 1, 1, 1);
 INSERT INTO `t_role_menu` VALUES (15, 1, 1, 1, 1);
 INSERT INTO `t_role_menu` VALUES (17, 1, 0, 0, 0);
 INSERT INTO `t_role_menu` VALUES (18, 1, 1, 1, 1);
+INSERT INTO `t_role_menu` VALUES (19, 1, 1, 1, 1);
 INSERT INTO `t_role_menu` VALUES (2, 1, 0, 0, 0);
 INSERT INTO `t_role_menu` VALUES (4, 1, 1, 1, 1);
 INSERT INTO `t_role_menu` VALUES (3, 1, 1, 1, 1);
