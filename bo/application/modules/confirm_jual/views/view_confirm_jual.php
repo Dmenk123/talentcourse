@@ -134,7 +134,7 @@
         </div>
         <div class="kt-separator kt-separator--border-dashed kt-separator--space-lg kt-separator--portlet-fit"></div>
         <!--begin: Datatable -->
-        <table class="table table-striped- table-bordered table-hover table-checkable" id="tabel_confirm_jual">
+        <table class="table table-striped- table-bordered table-hover table-checkable" id="tabel_confirm_jual" style="width: 100%;">
           <thead>
             <tr>
               <th>Tanggal</th>
