@@ -371,3 +371,42 @@ function readURL(input) {
         $('#preview_img').attr('src', '');
     }
 }
+
+function update_trans(order_id){
+    swalConfirmDelete.fire({
+        title: 'Ubah Ingin Mengupdate Data ?',
+        text: "Apakah Anda Yakin ?",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Ya, !',
+        cancelButtonText: 'Tidak, !',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                url : base_url + '../transaction/status',
+                type: "POST",
+                dataType: "JSON",
+                data : {order_id : order_id},
+                success: function(data)
+                {
+                    swalConfirm.fire('Berhasil !', data.pesan, 'success');
+                    table.ajax.reload();
+                },
+                error: function (jqXHR, textStatus, errorThrown)
+                {
+                    Swal.fire('Terjadi Kesalahan');
+                }
+            });
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalConfirm.fire(
+            'Dibatalkan',
+            'Aksi Dibatalakan',
+            'error'
+          )
+        }
+    });
+}

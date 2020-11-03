@@ -1,3 +1,71 @@
+<style>
+.tag-primary {
+  color: #fff;
+  background-color: #007bff;
+  border-radius: 35px;
+  padding-left:5px;
+  padding-right:5px;
+  border: 2px solid rgba(0, 70, 147, 0.75);
+}
+.tag-success {
+  color: #fff;
+  background-color: #28a745;
+  border-radius: 35px;
+  padding-left:5px;
+  padding-right:5px;
+  border: 1px solid rgba(21, 87, 36, 0.75);
+}
+.tag-secondary {
+  color: #fff;
+  background-color: #868e96;
+  border-radius: 35px;
+  padding-left:5px;
+  padding-right:5px;
+  border: 1px solid rgba(134, 142, 150, 0.75);
+}
+.tag-info {
+  color: #fff;
+  background-color: #17a2b8;
+  border-radius: 35px;
+  padding-left:5px;
+  padding-right:5px;
+  border: 1px solid rgba(23, 162, 184, 0.75);  
+}
+.tag-dark {
+  color: #fff;
+  background-color: #343a40;
+  border-color: #343a40;
+  border-radius: 35px;
+  padding-left:5px;
+  padding-right:5px;
+  border: 1px solid rgba(52, 58, 64, 0.75);    
+}
+.tag-danger {
+  color: #fff;
+  background-color: #dc3545;
+  border-radius: 35px;
+  padding-left:5px;
+  padding-right:5px;
+  border: 1px solid rgba(220, 53, 69, 0.75);      
+}
+.tag-warning {
+  color: #212529;
+  background-color: #ffc107;
+  border-radius: 35px;
+  padding-left:5px;
+  padding-right:5px;
+  border: 1px solid rgba(255, 193, 7, 0.75);    
+}
+.tag-light {
+  color: #212529;
+  background-color: #f8f9fa;
+  border-color: #f8f9fa;
+  border-radius: 35px;
+  padding-left:5px;
+  padding-right:5px;
+  border: 1px solid rgba(248, 249, 250, 0.75);     
+}
+</style>
 <!-- begin:: Content -->
 <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
 

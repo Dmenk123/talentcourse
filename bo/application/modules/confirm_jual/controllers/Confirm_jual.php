@@ -119,7 +119,18 @@ class Confirm_jual extends CI_Controller {
 			$row[] = $val->telp;
 			$row[] = $val->keterangan;
 			$row[] = "Rp " . number_format($val->harga,0,',','.');
-			$row[] = $val->transaction_status;
+			if($val->transaction_status == 'settlement'){
+				$row[] = '<span class="tag-success">'.$val->transaction_status.'</span>';
+			}else if($val->transaction_status == 'failure'){
+				$row[] = '<span class="tag-danger">'.$val->transaction_status.'</span>';
+			}else if($val->transaction_status == ''){
+				$row[] = '<span class="tag-danger">failure</span>';
+			}else if($val->transaction_status == 'capture'){
+				$row[] = '<span class="tag-primary">'.$val->transaction_status.'</span>';
+			}else{
+				$row[] = $val->transaction_status;
+			}
+			
 			
 			$str_aksi = '
 				<div class="btn-group">
@@ -131,6 +142,9 @@ class Confirm_jual extends CI_Controller {
 						<a class="dropdown-item" href="'.base_url('confirm_jual/detail/').$val->id.'">
 							<i class="la la-paste"></i> Detail
 						</a>
+						<button class="dropdown-item" onclick="update_trans(\'' . $val->order_id . '\')">
+							<i class="la la-trash"></i> Update Transaksi
+						</button>
 			';
 			
 			
