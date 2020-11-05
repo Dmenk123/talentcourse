@@ -150,6 +150,21 @@ class M_global extends CI_Model
     public function save($data, $table)
 	{
 		return $this->db->insert($table, $data);	
-	}
+    }
+    
+    public function get_transaksi($order_id){
+        $queri = $this->db->query("
+                    SELECT 
+                        r.order_id,
+                        c.nama,
+                        c.email,
+                        c.keterangan,
+                        r.transaction_status
+                    FROM tbl_requesttransaksi r
+                    JOIN t_checkout c ON r.order_id=c.order_id
+                    WHERE r.order_id = $order_id
+                ");
+        return $queri;
+    }
 		
 }
