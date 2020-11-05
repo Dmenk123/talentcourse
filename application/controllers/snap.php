@@ -267,36 +267,16 @@ class Snap extends CI_Controller {
 		];
 
 		$return = $this->snapmodel->insert($data);
-		if ($return) {
-			// if($data_trans->item_details[0]->name == 'Kelas reguler'){
-			// 	$ket_txt = 'reguler';
-			// }else{
-			// 	$ket_txt = 'eksklusif';
-			// }
-
-			// $checkout_data = [
-			// 	'kode_ref' => $result->order_id,
-			// 	'order_id' => $result->order_id,
-            //     'email' => $data_trans->customer_details->email,
-            //     'nama_dpn' => $data_trans->customer_details->first_name,
-            //     'nama_blkg' => $data_trans->customer_details->last_name,
-			// 	'telp' => $data_trans->customer_details->phone,
-			// 	'keterangan' => $ket_txt,
-			// 	'harga' => (float)$data_trans->item_details[0]->price,
-			// 	'harga_bruto' => (float)$result->gross_amount,
-            //     'created_at' => $timestamp
-            // ];
-
-			// $simpan = $this->m_global->store($checkout_data, 't_checkout');
-			
-			echo "request pembayaran berhasil dilakukan";
-		} else {
-			echo "request pembayana gagal dilakukan";
+		$this->data['finish'] = json_decode($this->input->post('result_data'));
+		if ($result->transaction_status == 'pending' || $result->transaction_status == 'settlement') {
+			redirect('confirm/confirm_success/'.$result->order_id);
+		}else{
+			redirect('home/oops/');
 		}
 
-		$this->data['finish'] = json_decode($this->input->post('result_data'));
+		
 		// $this->load->view('konfirmasi', $data);
-		var_dump('terimkasih sudah menjadi agen perubahan bisnis anda yang lebih baik !!');
+		
 		// redirect('thankyou');
 	}
 
