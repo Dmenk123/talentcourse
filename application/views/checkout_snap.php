@@ -1,4 +1,31 @@
+<style>
+    .divider .outer-line {
+        width: 40%;
+        border-bottom: 2px solid #a99b9b;
+    }
 
+    .custom-file-input {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        height: calc(1.5em + 1.3rem + 2px);
+        margin: 0;
+        opacity: 0;
+    }
+
+    .custom-file {
+        width: 100%;
+    }
+
+    .custom-file {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        height: calc(1.5em + 1.3rem + 2px);
+        margin-bottom: 0;
+    }
+
+</style>
 <section class="checkout" id="checkout" style="padding-top:40px;">
         <form class="ps-checkout__form" id="payment-form" method="post" action="<?=site_url()?>snap/finish">
           <input type="hidden" name="result_type" id="result-type" value=""></div>
@@ -21,85 +48,46 @@
           </div>
         <?php } ?>
         <!-- end flashdata -->
+        <div class="text-center top-text">
+            <h1><span>Metode</span> Pembayaran</h1>
+            <h4>Silahkan Pilih Metode Pembayaran</h4>
+        </div>
 
-        <form id="form_proses_checkout" method="post" enctype="multipart/form-data" class="ps-checkout__form">
-            
-            <div class="row">
-                <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 ">
-                <div class="alert alert-warning">
-                    <strong>Peringatan!</strong> Harap isikan email anda dengan benar & Mohon periksa kembali !
-                </div>
-                    <div class="ps-checkout__billing">
-                        <!--<h3>Isi Form Data Diri Anda</h3>-->
-                        <div class="form-group form-group--inline">
-                            <label>Nama Depan<span></span>
-                            </label>
-                            <input type="hidden" id="id" name="id" value="a1">
-                            <input class="form-control" style="background-color: #e8f0fe;" type="text" name="nama_depan" id="nama_depan">
-                            <input type="hidden" name="keterangan" id="keterangan" value="<?= $type; ?>">
-                            <span class="help-block"></span>
+        <div class="row latest-posts-content">
+            <div class="col-sm-12 col-md-6 col-xs-12">
+                <div class="latest-post">
+                    <a class="img-thumb tombol_method_bayar" href="transfer"><img class="img-fluid" src="http://via.placeholder.com/720x477" alt="img"></a>
+                    <div class="post-body">
+                        <h4 class="post-title">
+                            <a href="transfer" class="tombol_method_bayar">Metode Transfer</a>
+                        </h4>
+                        <div class="post-text">
+                            <p>Pembayaran langsung dengan cara transfer (BCA). Klik Gambar diatas untuk mulai transfer</p>
                         </div>
-                        <div class="form-group form-group--inline">
-                            <label>Nama Belakang<span></span>
-                            </label>
-                            <input class="form-control" style="background-color: #e8f0fe;" type="text" name="nama_belakang" id="nama_belakang">
-                            <span class="help-block"></span>
-                        </div>
-                        <div class="form-group form-group--inline">
-                            <label>Email<span></span>
-                            </label>
-                            <input class="form-control" style="background-color: #e8f0fe;" type="email" name="email" id="email" placeholder="">
-                            <span class="help-block"></span>
-                        </div>
-                        <div class="form-group form-group--inline">
-                            <label>No. Telepon<span></span>
-                            </label>
-                            <input class="form-control numberinput" style="background-color: #e8f0fe;" type="text" name="telp" id="telp">
-                            <span class="help-block"></span>
-                        </div>
-                        <div class="form-group form-group--inline">
-                            <label>Alamat<span>*</span>
-                            </label>
-                            <textarea class="form-control" style="background-color: #e8f0fe;" type="text" name="address" id="address"></textarea>
-                            <span class="help-block"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 ">
-                    <div class="ps-checkout__order">
-                        <!-- <header></header> -->
-                        <footer>
-                            <h3>Pembayaran Langsung Transfer</h3>
-                            <div class="form-group cheque">
-                                <div class="">
-                                    <p>Transfer <?= "Rp ".number_format($harga->nilai_harga,0,',','.'); ?> ke Rekening Di bawah Ini.</p>
-                                    <p>Rekening BCA : 464-5679-777 <br> a.n Evie Maria Diahwati</p>
-                                </div>
-                            </div>
-                            <div class="ps-shipping">
-                        <!--<h3>PERLU ANDA KETAHUI</h3>-->
-                        <p style="font-size:18px; font-family:arial; color:blue; line-height:24px;"><strong>Setelah transfer, lalu fotokan bukti transfer untuk memulai LIVE dgn Saras Davina.</strong></p>
-                        <p>Kirim bukti transfer dg <strong>klik tombol Kirim Pesan</strong> di bawah ini</p>
-                        <div class="form-group paypal">
-                            <a href="https://m.me/110257024151678" target="_blank">
-                                <img src="<?php echo base_url();?>assets/images/Tombol psn.png" class="img-tombol">
-                            </a>
-                            <br>
-                            <br>
-                    </div>
-                            <div class="form-group paypal">
-                                <button type="button" class="btn btn-md btn-success" id="pay-button">Pilih Metode Pembayaran Lain<i class="ps-icon-next"></button>
-                                <!-- <button type="button" class="btn btn-md btn-primary" id="btn_bayar" onclick="proses_checkout()">Kirim &amp; Segera Mulai<i class="ps-icon-next"></i></button> -->
-                            </div>
-                        </footer>
-                    </div>
-                    <div class="ps-shipping">
-                        <!--<h3>PERLU ANDA KETAHUI</h3>-->
-                        <p>Kuota Terbatas. Yang duluan transfer, dilayani duluan.</p>
                     </div>
                 </div>
             </div>
-        </form>
+            <div class="col-sm-12 col-md-6 col-xs-12">
+                <div class="latest-post">
+                    <a class="img-thumb tombol_method_bayar" href="payment"><img class="img-fluid" src="http://via.placeholder.com/720x477" alt="img"></a>
+                    <div class="post-body">
+                        <h4 class="post-title">
+                            <a href="payment" class="tombol_method_bayar">Metode Payment Gateway</a>
+                        </h4>
+                        <div class="post-text">
+                            <p>Proses Pembayaran yang praktis dan mudah. Tanpa Biaya Administrasi.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+
+        <div class="col-12" id="main-form-bayar">
+        
+        </div>
+
     </div>
 </section>
   
