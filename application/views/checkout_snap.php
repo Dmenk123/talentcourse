@@ -56,7 +56,7 @@
         <div class="row latest-posts-content">
             <div class="col-sm-12 col-md-6 col-xs-12">
                 <div class="latest-post">
-                    <a class="img-thumb tombol_method_bayar" href="transfer"><img class="img-fluid" src="http://via.placeholder.com/720x477" alt="img"></a>
+                    <a class="img-thumb tombol_method_bayar" href="transfer"><img class="img-fluid" src="<?= base_url('assets/images/transfer-img.png')?>" alt="img"></a>
                     <div class="post-body">
                         <h4 class="post-title">
                             <a href="transfer" class="tombol_method_bayar">Metode Transfer</a>
@@ -69,7 +69,7 @@
             </div>
             <div class="col-sm-12 col-md-6 col-xs-12">
                 <div class="latest-post">
-                    <a class="img-thumb tombol_method_bayar" href="payment"><img class="img-fluid" src="http://via.placeholder.com/720x477" alt="img"></a>
+                    <a class="img-thumb tombol_method_bayar" href="payment"><img class="img-fluid" src="<?= base_url('assets/images/payment-img.png')?>" alt="img"></a>
                     <div class="post-body">
                         <h4 class="post-title">
                             <a href="payment" class="tombol_method_bayar">Metode Payment Gateway</a>

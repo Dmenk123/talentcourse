@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class T_checkout extends CI_Model
 {
 	var $table = 't_checkout';
-	var $column_search = ['ckt.created_at', 'ckt.order_id', 'ckt.email', 'ckt.nama', 'ckt.telp', 'ckt.keterangan', 'ckt.harga', 'req.transaction_status'];
+	var $column_search = ['ckt.created_at', 'ckt.order_id', 'ckt.email', 'ckt.nama', 'ckt.telp', 'ckt.keterangan', 'ckt.harga', 'status_trans'];
 	
 	var $column_order = [
 		'ckt.created_at',
@@ -13,7 +13,7 @@ class T_checkout extends CI_Model
 		'ckt.telp',
 		'ckt.keterangan',
 		'ckt.harga',
-		'req.transaction_status',
+		'status_trans',
 		null
 	];
 
@@ -28,7 +28,7 @@ class T_checkout extends CI_Model
 
 	private function _get_datatables_query($arr_data, $term='')
 	{
-		$this->db->select("ckt.*, req.status_message, req.transaction_id, req.gross_amount, req.payment_type, req.transaction_time, req.transaction_status, req.fraud_status");
+		$this->db->select("ckt.*, req.status_message, req.transaction_id, req.gross_amount, req.payment_type, req.transaction_time, req.transaction_status, req.fraud_status, CASE WHEN ckt.is_manual = 1 THEN 'transfer' WHEN req.transaction_status is null THEN 'failure' ELSE req.transaction_status END as status_trans");
 		
 		$this->db->from($this->table.' ckt');
 		$this->db->join('tbl_requesttransaksi req', 'ckt.order_id  = req.order_id', 'left');
@@ -41,10 +41,14 @@ class T_checkout extends CI_Model
 		}
 				
 		if($arr_data['status'] != 'all'){
-			$this->db->where("req.transaction_status", $arr_data['status']);
+			if($arr_data['is_manual'] == '1') {
+				$this->db->where("ckt.is_manual", $arr_data['is_manual']);
+			}else{
+				$this->db->where("req.transaction_status", $arr_data['status']);
+			}
 		}
 		
-		$this->db->where("ckt.is_confirm is NULL");
+		$this->db->where("ckt.is_confirm is NULL and ckt.status_confirm is null");
 		$i = 0;
 
 		// loop column 
@@ -62,12 +66,12 @@ class T_checkout extends CI_Model
 				}
 				else
 				{
-					if($item == 'tipe_harga') {
+					if($item == 'status_trans') {
 						/**
 						 * param both untuk wildcard pada awal dan akhir kata
 						 * param false untuk disable escaping (karena pake subquery)
 						 */
-						$this->db->or_like('(CASE WHEN h.jenis_harga = 1 THEN \'Reguler\' ELSE \'Eksklusif\' END)', $_POST['search']['value'],'both',false);
+						$this->db->or_like('(CASE WHEN ckt.is_manual = 1 THEN \'transfer\' WHEN req.transaction_status is null THEN \'failure\' ELSE req.transaction_status END)', $_POST['search']['value'],'both',false);
 					}
 					else{
 						$this->db->or_like($item, $_POST['search']['value']);
@@ -91,10 +95,10 @@ class T_checkout extends CI_Model
 		}
 	}
 
-	function get_datatable($tgl_awal="", $tgl_akhir="", $status="")
+	function get_datatable($tgl_awal="", $tgl_akhir="", $status="", $is_manual="")
 	{
 		$term = $_REQUEST['search']['value'];
-		$arr_data = ['tgl_awal' => $tgl_awal, 'tgl_akhir' => $tgl_akhir, 'status' => $status];
+		$arr_data = ['tgl_awal' => $tgl_awal, 'tgl_akhir' => $tgl_akhir, 'status' => $status, 'is_manual' => $is_manual];
 		$this->_get_datatables_query($arr_data, $term);
 		
 		if($_REQUEST['length'] != -1)
@@ -104,9 +108,9 @@ class T_checkout extends CI_Model
 		return $query->result();
 	}
 
-	function count_filtered($tgl_awal="", $tgl_akhir="", $status="")
+	function count_filtered($tgl_awal="", $tgl_akhir="", $status="", $is_manual="")
 	{
-		$arr_data = ['tgl_awal' => $tgl_awal, 'tgl_akhir' => $tgl_akhir, 'status' => $status];
+		$arr_data = ['tgl_awal' => $tgl_awal, 'tgl_akhir' => $tgl_akhir, 'status' => $status, 'is_manual' => $is_manual];
 		$this->_get_datatables_query($arr_data);
 		$query = $this->db->get();
 		return $query->num_rows();

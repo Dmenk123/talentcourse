@@ -71,6 +71,12 @@
                   <label class="control-label col-sm-1">Tgl Bayar</label>
                   <label class="control-label col-sm-11">: <?= $data_detail->created_at; ?></label>
                 </div>
+                <?php if($foto_encode != false) { ?> 
+                <div class="form-group row">
+                  <img id="preview_img" src="<?= 'data:image/jpeg;base64,'.$foto_encode; ?>" alt="Preview Foto" height="400" width="300"/>
+                  <span class="help-block"></span>
+                </div>
+                <?php } ?>
                 <br>
                 <div class="form-group">
                   <label class="control-label col-sm-12">Email : </label>

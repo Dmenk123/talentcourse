@@ -51,6 +51,15 @@ class Confirm_jual extends CI_Controller {
 		$data_user = $this->m_user->get_by_id($id_user);
 		$data_detail = $this->t_checkout->get_detail_by_id($id);
 
+		$is_manual = ($data_detail->is_manual == '1') ? true : false ;
+		
+		if($is_manual) {
+			$url_foto = '../'.$data_detail->path_file;
+			$bukti = base64_encode(file_get_contents($url_foto));   
+		}else{
+			$bukti = false;
+		}
+
 		if($data_detail){
 			$txt_email = "<p>Kepada Yth.</p>";
 			$txt_email .= "<ul>";
@@ -74,7 +83,8 @@ class Confirm_jual extends CI_Controller {
 			'title' => 'Konfirmasi Penjualan',
 			'data_user' => $data_user,
 			'data_detail' => $data_detail,
-			'txt_email' => $txt_email
+			'txt_email' => $txt_email,
+			'foto_encode' => $bukti
 		);
 		
 		// echo "<pre>";
@@ -104,11 +114,15 @@ class Confirm_jual extends CI_Controller {
 		$tgl_awal = $obj_date->createFromFormat('d/m/Y', $this->input->post('tgl_awal'))->format('Y-m-d');
 		$tgl_akhir = $obj_date->createFromFormat('d/m/Y', $this->input->post('tgl_akhir'))->format('Y-m-d');
 		$status = $this->input->post('status');
-
-		$list = $this->t_checkout->get_datatable($tgl_awal, $tgl_akhir, $status);
+		$is_manual = ($this->input->post('status') == 'manual') ? '1' : '';
+		
+		$list = $this->t_checkout->get_datatable($tgl_awal, $tgl_akhir, $status, $is_manual);
+		//echo $this->db->last_query();exit;
+		
 		$data = array();
 		// $no =$_POST['start'];
 		foreach ($list as $val) {
+			$row_manual = false;
 			// $no++;
 			$row = array();
 			//loop value tabel db
@@ -124,29 +138,37 @@ class Confirm_jual extends CI_Controller {
 			}else if($val->transaction_status == 'failure'){
 				$row[] = '<span class="tag-danger">'.$val->transaction_status.'</span>';
 			}else if($val->transaction_status == ''){
-				$row[] = '<span class="tag-danger">failure</span>';
+				if($val->is_manual == '1' && $val->is_confirm == '') {
+					$row_manual = true;
+					$row[] = '<span class="tag-warning">transfer</span>';
+				}else{
+					$row[] = '<span class="tag-danger">failure</span>';
+				}
 			}else if($val->transaction_status == 'capture'){
 				$row[] = '<span class="tag-primary">'.$val->transaction_status.'</span>';
 			}else{
 				$row[] = $val->transaction_status;
 			}
-			
-			
+
 			$str_aksi = '
 				<div class="btn-group">
 					<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Opsi</button>
 					<div class="dropdown-menu">
-						<button class="dropdown-item" onclick="stop_diskon(\'' . $val->id . '\')">
-							<i class="la la-trash"></i> Stop Diskon
-						</button>
 						<a class="dropdown-item" href="'.base_url('confirm_jual/detail/').$val->id.'">
 							<i class="la la-paste"></i> Detail
 						</a>
-						<button class="dropdown-item" onclick="update_trans(\'' . $val->order_id . '\')">
-							<i class="la la-trash"></i> Update Transaksi
-						</button>
+						
 			';
 			
+			if($row_manual) {
+				$str_aksi .= '<button class="dropdown-item" onclick="set_failure(\'' . $val->id . '\')">
+							<i class="la la-ban"></i> Flag Ke Failure
+						</button>';
+			}else{
+				$str_aksi .= '<button class="dropdown-item" onclick="update_trans(\'' . $val->order_id . '\')">
+							<i class="la la-trash"></i> Update Transaksi
+						</button>';
+			}
 			
 			$str_aksi .= '</div></div>';
 			$row[] = $str_aksi;
@@ -156,7 +178,7 @@ class Confirm_jual extends CI_Controller {
 		$output = [
 			"draw" => $_POST['draw'],
 			"recordsTotal" => $this->t_checkout->count_all(),
-			"recordsFiltered" => $this->t_checkout->count_filtered(),
+			"recordsFiltered" => $this->t_checkout->count_filtered($tgl_awal, $tgl_akhir, $status, $is_manual),
 			"data" => $data
 		];
 		
@@ -258,39 +280,26 @@ class Confirm_jual extends CI_Controller {
 		}
 	}
 
-	/**
-	 * isi kolom deleted at dengan datetime now()
-	 * dan isi data baru sama persis tanpa diskon
-	 */
-	public function stop_diskon()
+	public function set_failure()
 	{
 		$id = $this->input->post('id');
 		$obj_date = new DateTime();
 		$timestamp = $obj_date->format('Y-m-d H:i:s');
 		
 		//get old data
-		$oldData = $this->t_harga->get_by_id($id);
+		$oldData = $this->t_checkout->get_by_id($id);
 		
-		//sofdelete dulu yg lama
-		$del = $this->t_harga->softdelete_by_id($id);
-
-		//insert data baru
-		$new_id = $this->t_harga->get_max_id();
-
-		$datanew['id'] = $new_id;
-		$datanew['jenis_harga'] = $oldData->jenis_harga;
-		$datanew['nilai_harga'] = $oldData->nilai_harga;
-		$datanew['id_talent'] = $oldData->id_talent;
-		$datanew['created_at'] =  $timestamp;
-
-		$insert = $this->t_harga->save($datanew);
-
-		if ($insert) {
+		$data['is_confirm'] = 1;
+		$data['status_confirm'] = 'dibatalkan';
+		$data['updated_at'] =  $timestamp;
+		$upd = $this->t_checkout->update(['id' => $id], $data);
+		
+		if ($upd) {
 			$retval['status'] = TRUE;
-			$retval['pesan'] = 'Data Diskon sukses distop';
+			$retval['pesan'] = 'Data Transaksi sukses Flag';
 		} else {
 			$retval['status'] = FALSE;
-			$retval['pesan'] = 'Data Diskon gagal distop';
+			$retval['pesan'] = 'Data Transaksi gagal Flag';
 		}
 
 		echo json_encode($retval);
